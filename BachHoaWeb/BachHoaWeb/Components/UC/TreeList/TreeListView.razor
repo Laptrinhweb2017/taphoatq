@@ -1,0 +1,708 @@
+﻿@typeparam TItem
+@using System.Reflection
+@using System.Collections
+@using System.Runtime.CompilerServices
+@using MyControl
+@implements IDisposable
+
+<div class="treelist-level">
+    @if (Items != null)
+    {
+        @foreach (var item in Items)
+        {
+            var isSelected = IsSelected(item);
+            var key = GetKey(item, Level);
+
+            <div @key="key">
+
+                <!-- desktop -->
+                <div class="treelist-row @(isSelected ? "selected" : "") d-none d-md-grid align-items-center"
+                     style="grid-template-columns:@GetGridTemplate();
+                    padding-left:@(Level * IndentPx)px;
+                    @GetConditionalRowStyle(item)"
+                     @onclick="() => OnTouch(item)">
+
+                    @RenderExpander(item)
+
+                    @for (int i = 0; i < _normalProps.Count; i++)
+                    {
+                        <div class="treelist-cell">
+                            @RenderCell(item, _normalProps[i], i, isMobile: false)
+                        </div>
+                    }
+
+                    @RenderButtons(item)
+                </div>
+
+                <!-- mobile -->
+                <div class="treelist-row @(isSelected ? "selected" : "") d-flex d-md-none align-items-center"
+                     style="padding-left:@(Level * IndentPx)px;
+                    @GetConditionalRowStyle(item)"
+                     @onclick="() => OnTouch(item)">
+
+                    @RenderExpander(item)
+
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                        <div class="flex-grow-1">
+                            @for (int i = 0; i < _normalProps.Count; i++)
+                            {
+                                <div class="treelist-mobile-cell @(i > 0 ? "mobile-indent" : "")">
+                                    @RenderCell(item, _normalProps[i], i, isMobile: true)
+                                </div>
+                            }
+                        </div>
+
+                        <div class="d-flex ms-2">
+                            @RenderButtons(item, isMobile: true)
+                        </div>
+                    </div>
+                </div>
+                @if (IsExpanded(item) && HasChild(item))
+                {
+                    var childProp = item.GetType().GetProperty(ChildPropertyNames![Level]);
+                    var childData = childProp?.GetValue(item) as IEnumerable;
+
+                    if (childData != null)
+                    {
+                        @DynamicChild(GetElementType(childProp.PropertyType)!, childData, Level + 1)
+                    }
+                }
+            </div>
+        }
+    }
+</div>
+
+@code {
+    [Parameter] public List<List<string>>? DisplayProperties { get; set; }
+    [Parameter] public IReadOnlyList<TItem>? Items { get; set; }
+    [Parameter] public int Level { get; set; }
+    [Parameter] public int IndentPx { get; set; }
+    [Parameter] public int ExpanderWidth { get; set; }
+    [Parameter] public List<List<int>>? ColumnWidths { get; set; }
+    [Parameter] public string? SelectedRowBg { get; set; }
+    [Parameter] public List<List<string>> TextCSS { get; set; } = [];
+    [Parameter] public List<List<string>> Styles { get; set; } = [];
+    [Parameter] public Dictionary<string, Dictionary<string, string>> ConditionalFormats { get; set; } = [];
+
+    [Parameter] public List<string>? SetToFields { get; set; }
+
+    [Parameter] public bool ApplyOnlyLeafLevel { get; set; } = true;
+
+    [Parameter] public Dictionary<string, string>? ColumnFormats { get; set; }
+
+    [Parameter] public List<bool> ShowEdit { get; set; } = [];
+    [Parameter] public List<bool> ShowDelete { get; set; } = [];
+
+    [Parameter] public List<string>? Headers { get; set; }
+    [Parameter] public List<string>? ChildPropertyNames { get; set; }
+    // Khởi tạo mặc định để tránh null reference nếu parent quên truyền
+    [Parameter] public TreeSelectionState SelectionState { get; set; } = new TreeSelectionState();
+    [Parameter] public List<string>? KeyFieldNames { get; set; }
+    // Nhận vào danh sách tên các Property muốn hiển thị dạng Link (Ví dụ: ["GPSLink"])
+    [Parameter] public List<string> LinkFields { get; set; } = [];
+
+    [Parameter] public EventCallback<object> OnSelectionChanged { get; set; }
+    [Parameter] public EventCallback<object> OnRowClicked { get; set; }
+    [Parameter] public EventCallback<object> OnRowDbleClicked { get; set; }
+    [Parameter] public EventCallback<object> OnEditClicked { get; set; }
+    [Parameter] public EventCallback<object> OnDeleteClicked { get; set; }
+
+    private readonly HashSet<string> _expandedKeys = new();
+    private List<PropertyInfo> _normalProps = new();
+    private List<PropertyInfo> _childProps = new();
+
+    // để quản lý subscribe/unsubscribe chính xác
+    private Action? _selectionUpdatedHandler;
+    private TreeSelectionState? _prevSelectionState;
+
+    RenderFragment RenderExpander(object item) => builder =>
+    {
+        builder.OpenElement(0, "div");
+        builder.AddAttribute(1, "class", "tl-cell tl-expander");
+
+        if (HasChild(item))
+        {
+            builder.OpenElement(2, "i");
+            builder.AddAttribute(3, "class",
+                $"fa {(IsExpanded(item) ? "fa-minus-square" : "fa-plus-square")} tl-expander-icon pe-2");
+            builder.AddAttribute(4, "onclick",
+                EventCallback.Factory.Create(this, () => ToggleExpand(item)));
+            builder.AddEventStopPropagationAttribute(5, "onclick", true);
+            builder.CloseElement();
+        }
+
+        builder.CloseElement();
+    };
+
+    private string GetFormat(PropertyInfo prop)
+    {
+        if (ColumnFormats != null && ColumnFormats.TryGetValue(prop.Name, out var format))
+            return format;
+
+        return "";
+    }
+
+
+    private string GetConditionalStyle(object item, string fieldName)
+    {
+        if (ConditionalFormats == null || ConditionalFormats.Count == 0)
+            return "";
+
+        // chỉ áp dụng level cuối
+        if (ApplyOnlyLeafLevel && HasChild(item))
+            return "";
+
+        foreach (var formatField in ConditionalFormats)
+        {
+            var prop = item.GetType().GetProperty(formatField.Key);
+
+            if (prop == null)
+                continue;
+
+            var value = prop.GetValue(item)?.ToString();
+
+            if (string.IsNullOrWhiteSpace(value))
+                continue;
+
+            if (!formatField.Value.TryGetValue(value, out var style))
+                continue;
+
+            // set full row
+            if (SetToFields == null || SetToFields.Count == 0)
+                return style;
+
+            // set riêng field
+            if (SetToFields.Contains(fieldName))
+                return style;
+        }
+
+        return "";
+    }
+
+    private string GetConditionalRowStyle(object item)
+    {
+        if (SetToFields != null && SetToFields.Count > 0)
+            return "";
+
+        return GetConditionalStyle(item, "");
+    }
+
+
+    private string GetCellCss(int index)
+    {
+        if (TextCSS.Count > Level && TextCSS[Level] != null)
+        {
+            var levelCss = TextCSS[Level];
+            if (levelCss.Count > index && !string.IsNullOrWhiteSpace(levelCss[index]))
+                return levelCss[index];
+        }
+        return "";
+    }
+    private string GetCellStyle(int index)
+    {
+        if (Styles.Count > Level && Styles[Level] != null)
+        {
+            var levelStyle = Styles[Level];
+            if (levelStyle.Count > index && !string.IsNullOrWhiteSpace(levelStyle[index]))
+                return levelStyle[index];
+        }
+        return "";
+    }
+    RenderFragment RenderCell(object item, PropertyInfo prop, int index, bool isMobile) => builder =>
+    {
+        var value = prop.GetValue(item);
+        var css = GetCellCss(index);
+
+        // ===== BOOL =====
+        if (value is bool b)
+        {
+            // ===== DESKTOP =====
+            if (!isMobile)
+            {
+                builder.OpenElement(0, "div");
+                builder.AddAttribute(1, "class", $"tl-cell px-2 d-flex justify-content-center align-items-center {css}");
+
+                builder.OpenElement(2, "i");
+                builder.AddAttribute(3, "class",
+                    b ? "bi bi-check-square-fill text-success" : "bi bi-square");
+                builder.AddAttribute(4, "style", "font-size:16px;");
+                builder.CloseElement();
+
+                builder.CloseElement();
+                return;
+            }
+
+            // ===== MOBILE =====
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class",
+                $"tl-cell px-2 tl-mobile-line {(index == 0 ? "mobile-main" : "mobile-sub")}");
+
+            if (index != 0 && Headers != null && index < Headers.Count)
+            {
+                builder.OpenElement(3, "span");
+                builder.AddAttribute(4, "class", "mobile-header");
+                builder.AddContent(5, $"{Headers[index]}: ");
+                builder.CloseElement();
+            }
+
+            builder.OpenElement(6, "span");
+            builder.AddAttribute(7, "class", $"mobile-value d-inline-flex align-items-center {css}");
+
+            builder.OpenElement(8, "i");
+            builder.AddAttribute(9, "class",
+                b ? "bi bi-check-square-fill text-success" : "bi bi-square");
+            builder.AddAttribute(10, "style", "font-size:16px;");
+            builder.CloseElement();
+
+            builder.CloseElement();
+            builder.CloseElement();
+            return;
+        }
+        var (text, formatCss) = FormatCell(value, prop);
+        var finalCss = $"{formatCss} {css}".Trim();
+        var style = GetCellStyle(index);
+        var conditionalStyle = GetConditionalStyle(item, prop.Name);        
+        var linkConfig = LinkFields?.FirstOrDefault(f => f == prop.Name || f.StartsWith(prop.Name + "|"));
+        bool isLink = !string.IsNullOrEmpty(linkConfig) && !string.IsNullOrEmpty(text);
+
+        string? iconClass = null;
+        if (isLink && linkConfig!.Contains('|'))
+        {
+            // Tách lấy phần class icon sau dấu |
+            iconClass = linkConfig.Split('|').ElementAtOrDefault(1);
+        }
+
+        // ===== DESKTOP =====
+        if (!isMobile)
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", $"tl-cell px-2 {finalCss}");
+            builder.AddAttribute(2, "style", $"{style};{conditionalStyle}");
+
+            if (isLink)
+            {
+                builder.OpenElement(3, "a");
+                builder.AddAttribute(4, "href", text);
+                builder.AddAttribute(5, "target", "_blank");
+                builder.AddEventStopPropagationAttribute(6, "onclick", true); // Chặn click chọn dòng
+
+                if (!string.IsNullOrEmpty(iconClass))
+                {
+                    // Nếu có icon: Render thẻ <i> thay vì text URL
+                    builder.OpenElement(7, "i");
+                    builder.AddAttribute(8, "class", iconClass);
+                    builder.CloseElement();
+                }
+                else
+                {
+                    // Không có icon: Render text URL bình thường
+                    builder.AddContent(9, text);
+                }
+
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.AddContent(3, text);
+            }
+
+            builder.CloseElement();
+            return;
+        }
+
+        // ===== MOBILE =====
+        builder.OpenElement(0, "div");
+        builder.AddAttribute(1, "class", $"tl-cell px-2 tl-mobile-line {(index == 0 ? "mobile-main" : "mobile-sub")}");
+        builder.AddAttribute(2, "style", $"{style};{conditionalStyle}");
+
+        if (index == 0)
+        {
+            if (isLink)
+            {
+                builder.OpenElement(3, "a");
+                builder.AddAttribute(4, "href", text);
+                builder.AddAttribute(5, "target", "_blank");
+                builder.AddEventStopPropagationAttribute(6, "onclick", true);
+
+                if (!string.IsNullOrEmpty(iconClass))
+                {
+                    builder.OpenElement(7, "i");
+                    builder.AddAttribute(8, "class", iconClass);
+                    builder.CloseElement();
+                }
+                else
+                {
+                    builder.AddContent(9, text);
+                }
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.AddContent(3, text);
+            }
+            builder.CloseElement();
+            return;
+        }
+
+        if (Headers != null && index < Headers.Count)
+        {
+            builder.OpenElement(4, "span");
+            builder.AddAttribute(5, "class", "mobile-header");
+            builder.AddContent(6, $"{Headers[index]}: ");
+            builder.CloseElement();
+        }
+
+        builder.OpenElement(7, "span");
+        builder.AddAttribute(8, "class", $"mobile-value {finalCss}");
+
+        if (isLink)
+        {
+            builder.OpenElement(9, "a");
+            builder.AddAttribute(10, "href", text);
+            builder.AddAttribute(11, "target", "_blank");
+            builder.AddEventStopPropagationAttribute(12, "onclick", true);
+
+            if (!string.IsNullOrEmpty(iconClass))
+            {
+                builder.OpenElement(13, "i");
+                builder.AddAttribute(14, "class", iconClass);
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.AddContent(15, text);
+            }
+            builder.CloseElement();
+        }
+        else
+        {
+            builder.AddContent(9, text);
+        }
+
+        builder.CloseElement();
+        builder.CloseElement();
+    }; 
+
+    private (string Text, string Css) FormatCell(object? value, PropertyInfo prop)
+    {
+        if (value == null)
+            return ("", "");
+
+        var format = GetFormat(prop);
+
+        // ===== BOOL xử lý riêng ở ngoài rồi =====
+
+        // ===== DATE =====
+        if (value is DateTime dt)
+        {
+            if (!string.IsNullOrEmpty(format))
+                return (dt.ToString(format), "");
+
+            return (dt.ToString("dd/MM/yyyy"), "");
+        }
+
+        // ===== NUMBER (chuẩn nhất) =====
+        if (value is IFormattable f)
+        {
+            var text = string.IsNullOrEmpty(format)
+                ? f.ToString(null, null)
+                : f.ToString(format, null);
+
+            return (text, "text-end");
+        }
+
+        // ===== STRING =====
+        return (value.ToString() ?? "", Level == 0 ? "top-level" : "");
+    }
+    RenderFragment RenderButtons(TItem item, bool isMobile = false) => builder =>
+    {
+        if (ShowEdit[Level])
+        {
+            builder.OpenElement(0, "button");
+            builder.AddAttribute(1, "class",
+                "btn btn-primary p-0 d-flex align-items-center justify-content-center ms-2");
+            builder.AddAttribute(2, "style", "width:32px;height:32px;");
+            builder.AddAttribute(3, "onclick",
+                EventCallback.Factory.Create(this, () => OnEditClick(item)));
+
+            if (isMobile)
+                builder.AddEventStopPropagationAttribute(4, "onclick", true);
+
+            builder.OpenElement(5, "i");
+            builder.AddAttribute(6, "class", "bi bi-pencil");
+            builder.CloseElement();
+
+            builder.CloseElement();
+        }
+
+
+        if (ShowDelete[Level])
+        {
+            builder.OpenElement(10, "button");
+            builder.AddAttribute(11, "class",
+                "btn btn-danger p-0 d-flex align-items-center justify-content-center ms-2");
+            builder.AddAttribute(12, "style", "width:32px;height:32px;");
+            builder.AddAttribute(13, "onclick",
+                EventCallback.Factory.Create(this, () => OnDeleteClick(item)));
+
+            if (isMobile)
+                builder.AddEventStopPropagationAttribute(14, "onclick", true);
+
+            builder.OpenElement(15, "i");
+            builder.AddAttribute(16, "class", "bi bi-trash3-fill");
+            builder.CloseElement();
+
+            builder.CloseElement();
+        }
+    };
+
+
+    protected override void OnParametersSet()
+    {
+        SelectionState ??= new TreeSelectionState();
+        
+        if (!ReferenceEquals(_prevSelectionState, SelectionState))
+        {
+            if (_prevSelectionState != null && _selectionUpdatedHandler != null)
+                _prevSelectionState.SelectionUpdated -= _selectionUpdatedHandler;
+
+            _selectionUpdatedHandler ??= () => InvokeAsync(StateHasChanged);
+            SelectionState.SelectionUpdated += _selectionUpdatedHandler;
+            _prevSelectionState = SelectionState;
+        }
+
+        var allProps = typeof(TItem).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        // Xác định cột hiển thị (normal props)
+        if (DisplayProperties != null && Level < DisplayProperties.Count)
+        {
+            var levelProps = DisplayProperties[Level];
+            _normalProps = levelProps
+                .Select(name => allProps.FirstOrDefault(p => p.Name == name))
+                .Where(p => p != null && (!typeof(IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string)))
+                .ToList()!;
+        }
+        else
+        {
+            _normalProps = allProps
+                .Where(p => !typeof(IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string))
+                .ToList();
+        }
+
+        // child props: tất cả collection props trừ TypeList
+        _childProps = allProps
+            .Where(p => typeof(IEnumerable).IsAssignableFrom(p.PropertyType)
+                     && p.PropertyType != typeof(string))
+            .ToList();
+
+
+        SelectionState.OnSelectionChanged = OnSelectionChanged;
+        if (Items != null)
+        {
+            _expandedKeys.Clear(); // 🔥 luôn clear
+            ExpandAll(Items, Level);
+        }
+    }
+    private bool _initialized = false;
+    private IReadOnlyList<TItem>? _prevItems;
+    private void ExpandAll(IEnumerable items, int level = 0)
+    {
+        foreach (var item in items.Cast<object>())
+        {
+            var key = GetKey(item, level);
+            _expandedKeys.Add(key);
+
+            if (ChildPropertyNames != null && level < ChildPropertyNames.Count)
+            {
+                var propName = ChildPropertyNames[level];
+                var prop = item.GetType().GetProperty(propName);
+
+                if (prop?.GetValue(item) is IEnumerable child && child.Cast<object>().Any())
+                {
+                    ExpandAll(child, level + 1);
+                }
+            }
+        }
+    }
+   
+    private async Task OnRowDbleClick(TItem item)
+    {
+        await SelectionState.SelectAsync(item);
+        await OnRowDbleClicked.InvokeAsync(item);
+        await InvokeAsync(StateHasChanged);
+    }
+    //xử lý double tap trên di động
+    #region Xử lý double tap trên di động
+    private DateTime _lastTap = DateTime.MinValue;
+    private const int TapDelay = 300; // ms
+    private async Task OnTouch(TItem item)
+    {
+        await SelectionState.SelectAsync(item);
+        await OnRowClicked.InvokeAsync(item);
+        var now = DateTime.Now;
+        if ((now - _lastTap).TotalMilliseconds <= TapDelay)
+        {
+            // Đây là double tap trên mobile
+            await OnRowDbleClick(item);
+        }
+        _lastTap = now;
+        await InvokeAsync(StateHasChanged);
+    }
+    #endregion
+    private async Task OnEditClick(TItem item)
+    {
+        await OnEditClicked.InvokeAsync(item);
+        await InvokeAsync(StateHasChanged);
+    }
+    private async Task OnDeleteClick(TItem item)
+    {
+        await OnDeleteClicked.InvokeAsync(item);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void ToggleExpand(object item)
+    {
+        var key = GetKey(item, Level);
+
+        if (!_expandedKeys.Add(key))
+            _expandedKeys.Remove(key);
+
+        InvokeAsync(StateHasChanged); // 👈 BẮT BUỘC
+    }
+
+    private bool IsExpanded(object item)
+    {
+        var key = GetKey(item, Level);
+        return _expandedKeys.Contains(key);
+    }
+
+    private bool HasChild(object item)
+    {
+        if (ChildPropertyNames == null || Level >= ChildPropertyNames.Count)
+            return false;
+
+        var propName = ChildPropertyNames[Level];
+        var prop = item.GetType().GetProperty(propName);
+
+        if (prop == null)
+            return false;
+
+        var val = prop.GetValue(item) as IEnumerable;
+        return val != null && val.Cast<object>().Any();
+    }
+
+
+    private IEnumerable<PropertyInfo> GetNormalProperties() =>
+        typeof(TItem).GetProperties()
+            .Where(p => !typeof(IEnumerable).IsAssignableFrom(p.PropertyType) || p.PropertyType == typeof(string));
+
+    private IEnumerable<PropertyInfo> GetChildProperties() =>
+        typeof(TItem).GetProperties()
+            .Where(p => typeof(IEnumerable).IsAssignableFrom(p.PropertyType) && p.PropertyType != typeof(string));
+
+    private static Type? GetElementType(Type t)
+    {
+        if (t.IsArray)
+            return t.GetElementType();
+        if (t.IsGenericType)
+            return t.GetGenericArguments().FirstOrDefault();
+        return typeof(object);
+    }
+
+    private static string Format(object? v) =>
+        v switch
+        {
+            null => "",
+            DateTime dt => dt.ToString("dd/MM/yyyy"),
+            bool b => b ? "True" : "False",
+            _ => v?.ToString() ?? ""
+        };
+
+    private string GetGridTemplate()
+    {
+        var cols = new List<string>();
+
+        // 1. Expander
+        var expander = ExpanderWidth > 30 ? ExpanderWidth : 30;
+        cols.Add($"{expander}px");
+
+        // 2. Columns theo tỷ lệ
+        if (ColumnWidths != null && Level < ColumnWidths.Count)
+        {
+            var widths = ColumnWidths[Level]
+                         .Take(_normalProps.Count)
+                         .ToList();
+
+            foreach (var w in widths)
+            {
+                cols.Add($"{w}fr");
+            }
+        }
+        else
+        {
+            // auto chia đều
+            int count = _normalProps.Count;
+            for (int i = 0; i < count; i++)
+                cols.Add("1fr");
+        }
+        if(ShowEdit[Level])
+            cols.Add("40px");
+        if(ShowDelete[Level])
+            cols.Add("40px");
+
+        return string.Join(" ", cols);
+    }
+
+    private bool IsSelected(object item)
+    {
+        return ReferenceEquals(SelectionState.SelectedItem, item);
+    }
+
+    RenderFragment DynamicChild(Type childType, IEnumerable data, int childLevel) => builder =>
+    {
+        var seq = 0;
+        var generic = typeof(TreeListView<>).MakeGenericType(childType);
+        builder.OpenComponent(seq++, generic);
+
+        builder.AddAttribute(seq++, "Items", data);
+        builder.AddAttribute(seq++, "Level", childLevel);
+        builder.AddAttribute(seq++, "IndentPx", IndentPx);
+        builder.AddAttribute(seq++, "ColumnWidths", ColumnWidths);
+        builder.AddAttribute(seq++, "ExpanderWidth", ExpanderWidth);
+        builder.AddAttribute(seq++, "SelectedRowBg", SelectedRowBg);
+        builder.AddAttribute(seq++, "SelectionState", SelectionState);
+        builder.AddAttribute(seq++, "KeyFieldNames", KeyFieldNames);
+        builder.AddAttribute(seq++, "OnSelectionChanged", OnSelectionChanged);
+        builder.AddAttribute(seq++, "OnRowClicked", OnRowClicked);
+        builder.AddAttribute(seq++, "OnRowDbleClicked", OnRowDbleClicked);
+        builder.AddAttribute(seq++, "DisplayProperties", DisplayProperties);
+        builder.AddAttribute(seq++, "Headers", Headers);
+        builder.AddAttribute(seq++, "ShowDelete", ShowDelete);
+        builder.AddAttribute(seq++, "ShowEdit", ShowEdit);
+        builder.AddAttribute(seq++, "OnEditClicked", OnEditClicked);
+        builder.AddAttribute(seq++, "OnDeleteClicked", OnDeleteClicked);
+        builder.AddAttribute(seq++, "ChildPropertyNames", ChildPropertyNames);
+        builder.AddAttribute(seq++, "TextCSS", TextCSS);
+        builder.AddAttribute(seq++, "Styles", Styles);
+        builder.AddAttribute(seq++, "ColumnFormats", ColumnFormats);
+        builder.AddAttribute(seq++, "ConditionalFormats", ConditionalFormats);
+        builder.AddAttribute(seq++, "SetToFields", SetToFields);
+        builder.AddAttribute(seq++, "ApplyOnlyLeafLevel", ApplyOnlyLeafLevel);
+        builder.AddAttribute(seq++, "LinkFields", LinkFields);
+
+        builder.CloseComponent();
+    };
+    private string GetKey(object item, int level)
+    {
+        return $"{level}_{RuntimeHelpers.GetHashCode(item)}";
+    }
+
+    public void Dispose()
+    {
+        if (_prevSelectionState != null && _selectionUpdatedHandler != null)
+        {
+            _prevSelectionState.SelectionUpdated -= _selectionUpdatedHandler;
+        }
+    }
+}
+

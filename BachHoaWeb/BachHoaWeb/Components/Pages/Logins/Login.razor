@@ -1,0 +1,128 @@
+﻿@page "/login"
+
+@inject LoginViewModel vm
+@inject NavigationManager NavMan
+@layout LoginLayout
+
+@inject IJSRuntime JS
+
+
+<div class="login-container">
+    <div class="login-box py-4">
+        <EditForm Model="@Model" OnValidSubmit="Authenticate" FormName="LoginForm">
+            <DataAnnotationsValidator />
+            <div class="mb-3 text-center flex-column">
+                <h2>ĐĂNG NHẬP</h2>
+            </div>
+            <div class="mb-3">
+                <label for="taikhoan"><i class="bi bi-person"></i> Tài khoản</label>
+                <InputText @bind-Value="Model.UserID" class="form-control" placeholder="Tài khoản" />
+                <ValidationMessage For="() => Model.UserID" />
+            </div>
+            <div class="mb-3">
+                <label><i class="bi bi-key-fill"></i>Mật khẩu</label>
+                <InputText @bind-Value="Model.Password" class="form-control" placeholder="Mật khẩu" type="password" id="passwordField" />
+                <ValidationMessage For="() => Model.Password" />
+            </div>
+            <div class="mb-1">
+                <input type="checkbox" onchange="togglePassword()" id="pass" />
+                <label for="pass">Hiện mật khẩu</label>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" name="RememberMe" value="true" id="remember" />
+                <label for="remember">Nhớ mật khẩu</label>
+            </div>
+            <div class="mb-3 text-center">
+                <span class="text-danger">@errMess</span>
+            </div>
+            <div class="mb-3 d-grid gap-2">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-unlock2-fill"></i>Đăng Nhập</button>
+                <NavLink href="/" class="btn btn-success">
+                    Thoát
+                </NavLink>
+            </div>
+        </EditForm>
+    </div>
+
+</div>
+
+@code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+    [SupplyParameterFromForm]
+    public FullLogin Model { get; set; } = new();
+    private string? errMess;
+    private string? returnUrl;
+    //private ElementReference txtTaiKhoan;
+    bool rememberMe { get; set; }
+    protected override void OnInitialized()
+    {
+        var uri = NavMan.ToAbsoluteUri(NavMan.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+        returnUrl = query["returnUrl"];
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await vm.InitializeAsync();
+        await Task.Delay(100);
+        await JS.InvokeVoidAsync("focusElementById", "taikhoan");
+
+    }
+    private async Task Authenticate()
+    {
+        vm.LoggedIn = await vm.Login(Model);
+        if (!string.IsNullOrEmpty(vm.ErrMess))
+        {
+            errMess = vm.ErrMess;
+            return;
+        }
+        if (!vm.LoggedIn)
+        {
+            errMess = "Sai tài khoản hoặc sai mật khẩu";
+            await Task.Delay(100);
+            await JS.InvokeVoidAsync("focusElementById", "taikhoan");
+            return;
+        }
+        if (vm.LoggedUser != null)
+        {
+            // string permission = vm.LoggedUser.UType != null && vm.LoggedUser.UType == "0" ? "10|11|" :
+            //             vm.LoggedUser.UType != null && vm.LoggedUser.UType == "1" ? "10|11|12|" : "";
+            string permission = "|01|02|03|04|05|06|10|11|12|13|14|15|16||17|18|19|20|21|22|";
+            var claims = new List<Claim>
+            {
+                new Claim("UID", vm.LoggedUser.UID!.ToString()!),
+                new Claim("UserID", vm.LoggedUser.UserID!),
+                new Claim("UType", vm.LoggedUser.UType!),
+                new Claim("Permit", permission)
+            };
+            var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(claimIdentity);
+
+            if (HttpContext != null && HttpContext.Request.Form.TryGetValue("RememberMe", out var rememberVal))
+            {
+                rememberMe = string.Equals(rememberVal.ToString(), "true", StringComparison.OrdinalIgnoreCase);
+            }
+            else
+            {
+                rememberMe = false;
+            }
+
+            var expire = rememberMe ? TimeSpan.FromDays(7) : TimeSpan.FromMinutes(30);
+
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.Add(expire),
+                AllowRefresh = !rememberMe
+            };
+            if (HttpContext != null)
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    principal,
+                    authProperties);
+            await Task.Delay(200);
+            //kiểm tra UType để trả về đúng layout
+            HttpContext.Response.Redirect(returnUrl ?? "/");
+        }
+    }
+}

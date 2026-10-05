@@ -1,0 +1,24 @@
+﻿@rendermode InteractiveServer
+@inject LayoutService LayoutService
+
+<div>
+    @if (LayoutService.FormTemplate is not null)
+    {
+        <div @key="LayoutService.Key">
+            @LayoutService.FormTemplate
+        </div>
+    }
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        LayoutService.OnChange += ChangeContent;
+    }
+    void ChangeContent() => InvokeAsync(StateHasChanged);
+
+    public void Dispose()
+    {
+        LayoutService.OnChange -= ChangeContent;
+    }
+}

@@ -1,0 +1,134 @@
+.employee-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.page-title h1 {
+    margin: 0;
+    color: #222;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.page-title p {
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 14px;
+}
+
+
+.page-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.employee-total{
+    color: #666;
+    font-size: 14px;
+}
+
+
+.employee-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+}
+
+    .employee-table th {
+        height: 48px;
+        padding: 0 12px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e5e5e5;
+        color: #333;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* dữ liệu tự xuống dòng */
+    .employee-table td {
+        min-height: 52px;
+        padding: 12px;
+        border-bottom: 1px solid #eeeeee;
+        color: #444;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+        vertical-align: middle;
+    }
+
+    .employee-table tbody tr:hover {
+        background: #fafafa;
+    }
+
+    /* cột ID */
+    .employee-table th:nth-child(1),
+    .employee-table td:nth-child(1) {
+        width: 100px;
+    }
+
+    /* cột tên nhân viên */
+    .employee-table th:nth-child(2),
+    .employee-table td:nth-child(2) {
+        width: 240px;
+    }
+
+    /* cột email */
+    .employee-table th:nth-child(3),
+    .employee-table td:nth-child(3) {
+        width: 300px;
+    }
+
+    /* cột mã nhân viên */
+    .employee-table th:nth-child(4),
+    .employee-table td:nth-child(4) {
+        width: 180px;
+    }
+
+    /* cột thao tác */
+    .employee-table th:nth-child(5),
+    .employee-table td:nth-child(5) {
+        width: 150px;
+    }
+
+.employee-action-column {
+    width: 150px;
+    text-align: center !important;
+}
+
+.employee-actions {
+    text-align: center;
+    white-space: nowrap !important;
+}
+
+    .employee-actions .edit-button,
+    .employee-actions .delete-button {
+        margin: 0 2px;
+    }
+
+.empty-row {
+    height: 180px;
+    text-align: center !important;
+    color: #999 !important;
+    font-style: italic;
+}

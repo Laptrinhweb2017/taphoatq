@@ -1,0 +1,94 @@
+﻿@page "/admin/danhmuc"
+@using UXUIAPP.Components.Common
+@using UXUIAPP.Components.Common.Actions
+@rendermode InteractiveServer
+
+@layout AdminLayout
+
+<PageTitle>Danh mục</PageTitle>
+
+<div class="category-page">
+
+    <div class="page-header">
+
+        <div class="page-title">
+            <h1>Danh mục</h1>
+            <p>Quản lý danh mục sản phẩm cửa hàng</p>
+        </div>
+
+        <SearchBox />
+
+    </div>
+
+
+    <div class="page-toolbar">
+
+        <div class="category-total">
+            Tổng: @categoryCount danh mục
+        </div>
+
+        <AddButton OnClick="OpenAddModal" />
+
+    </div>
+
+
+    <div class="category-table-wrapper">
+
+        <table class="category-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên danh mục</th>
+                    <th class="category-action-column">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @* dữ liệu sẽ render từ ViewModel *@
+
+                <tr>
+                    <td colspan="3" class="empty-row">
+                        Chưa có dữ liệu danh mục
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <Pagination />
+
+
+    @* Modal thêm danh mục *@
+    <DanhMucModal
+        IsVisible="showCategoryModal"
+        OnClose="CloseCategoryModal" />
+
+</div>
+
+
+@code
+{
+    private bool showCategoryModal = false;
+
+    private int categoryCount = 0;
+
+
+    private void OpenAddModal()
+    {
+        showCategoryModal = true;
+    }
+
+
+    private void CloseCategoryModal()
+    {
+        showCategoryModal = false;
+    }
+}

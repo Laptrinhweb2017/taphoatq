@@ -1,0 +1,398 @@
+﻿@using System.Globalization
+@inject IJSRuntime JS
+
+<div id="@(string.IsNullOrEmpty(Id) ? null : Id)"
+     class="viet-date-container form-control @(State.IsInvalid ? "is-invalid" : "") @Bootstrap"
+     style="@CSS">
+
+    @if (DateType == VietDateInputType.Date || DateType == VietDateInputType.DateTime)
+    {
+        <input @ref="_dayInput"
+               id="@(string.IsNullOrEmpty(Id) ? null : Id)"
+               class="date-cell day-month-cell" type="text" placeholder="dd"
+               readonly="@ReadOnly"
+               value="@GetDisplayValue(State.Day, "Day")"
+               @onfocus='() => HandleFocus(_dayInput)'
+               @onblur='() => HandleElementBlur("Day")'
+               @oninput='(e) => HandleDateInput(e, "Day")'
+               @onkeydown='(e) => HandleKeyDown(e, "Day", _dayInput, null, _monthInput)' />
+        <span class="date-separator">@Delimiter</span>
+
+        <input @ref="_monthInput"
+               class="date-cell day-month-cell" type="text" placeholder="mm"
+               readonly="@ReadOnly"
+               value="@GetDisplayValue(State.Month, "Month")"
+               @onfocus='() => HandleFocus(_monthInput)'
+               @onblur='() => HandleElementBlur("Month")'
+               @oninput='(e) => HandleDateInput(e, "Month")'
+               @onkeydown='(e) => HandleKeyDown(e, "Month", _monthInput, _dayInput, _yearInput)' />
+        <span class="date-separator">@Delimiter</span>
+
+        <input @ref="_yearInput"
+               class="date-cell year-cell" type="text" placeholder="yyyy"
+               readonly="@ReadOnly"
+               value="@(State.Year?.ToString() ?? "")"
+               @onfocus='() => HandleFocus(_yearInput)'
+               @onblur='() => HandleElementBlur("Year")'
+               @oninput='(e) => HandleDateInput(e, "Year")'
+               @onkeydown='(e) => HandleKeyDown(e, "Year", _yearInput, _monthInput, DateType == VietDateInputType.DateTime ? _hourInput : null)' />
+    }
+
+    @if (DateType == VietDateInputType.DateTime)
+    {
+        <span class="date-space">&nbsp;</span>
+    }
+
+    @if (DateType == VietDateInputType.Time || DateType == VietDateInputType.DateTime)
+    {
+        <input @ref="_hourInput"
+               class="date-cell time-cell" type="text" placeholder="HH"
+               readonly="@ReadOnly"
+               value="@GetDisplayValue(State.Hour, "Hour")"
+               @onfocus='() => HandleFocus(_hourInput)'
+               @onblur='() => HandleElementBlur("Hour")'
+               @oninput='(e) => HandleDateInput(e, "Hour")'
+               @onkeydown='(e) => HandleKeyDown(e, "Hour", _hourInput, DateType == VietDateInputType.DateTime ? _yearInput : null, _minuteInput)' />
+        <span class="time-separator">:</span>
+
+        <input @ref="_minuteInput"
+               class="date-cell time-cell" type="text" placeholder="mm"
+               readonly="@ReadOnly"
+               value="@GetDisplayValue(State.Minute, "Minute")"
+               @onfocus='() => HandleFocus(_minuteInput)'
+               @onblur='() => HandleElementBlur("Minute")'
+               @oninput='(e) => HandleDateInput(e, "Minute")'
+               @onkeydown='(e) => HandleKeyDown(e, "Minute", _minuteInput, _hourInput, _secondInput)' />
+        <span class="time-separator">:</span>
+
+        <input @ref="_secondInput"
+               class="date-cell time-cell" type="text" placeholder="ss"
+               readonly="@ReadOnly"
+               value="@GetDisplayValue(State.Second, "Second")"
+               @onfocus='() => HandleFocus(_secondInput)'
+               @onblur='() => HandleElementBlur("Second")'
+               @oninput='(e) => HandleDateInput(e, "Second")'
+               @onkeydown='(e) => HandleKeyDown(e, "Second", _secondInput, _minuteInput, null)' />
+    }
+
+    @if (State.IsInvalid || !string.IsNullOrEmpty(State.Hint))
+    {
+        <div class="date-hint-zone" title="@State.Hint">
+            <span class="badge @(State.IsInvalid ? "bg-danger" : "bg-warning text-dark")">!</span>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public DateTime? Value { get; set; }
+    [Parameter] public EventCallback<DateTime?> ValueChanged { get; set; }
+
+    // Hỗ trợ TimeSpan cho chế độ chọn giờ độc lập
+    [Parameter] public TimeSpan? TimeValue { get; set; }
+    [Parameter] public EventCallback<TimeSpan?> TimeValueChanged { get; set; }
+
+    [Parameter] public VietDateInputType DateType { get; set; } = VietDateInputType.Date;
+    [Parameter] public char Delimiter { get; set; } = '/';
+    [Parameter] public string CSS { get; set; } = "";
+    [Parameter] public string Bootstrap { get; set; } = "";
+    [Parameter] public bool ReadOnly { get; set; } = false;
+    [Parameter] public string Id { get; set; }
+
+    private DateInputState State { get; set; } = new();
+
+    private Dictionary<string, string> _typingBuffers = new()
+    {
+        { "Day", "" }, { "Month", "" }, { "Year", "" }, { "Hour", "" }, { "Minute", "" }, { "Second", "" }
+    };
+
+    private ElementReference _dayInput;
+    private ElementReference _monthInput;
+    private ElementReference _yearInput;
+    private ElementReference _hourInput;
+    private ElementReference _minuteInput;
+    private ElementReference _secondInput;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (DateType == VietDateInputType.Date || DateType == VietDateInputType.DateTime)
+            {
+                await JS.InvokeVoidAsync("vnDateInput.setupMask", _dayInput);
+                await JS.InvokeVoidAsync("vnDateInput.setupMask", _monthInput);
+                await JS.InvokeVoidAsync("vnDateInput.setupMask", _yearInput);
+            }
+            if (DateType == VietDateInputType.Time || DateType == VietDateInputType.DateTime)
+            {
+                await JS.InvokeVoidAsync("vnDateInput.setupMask", _hourInput);
+                await JS.InvokeVoidAsync("vnDateInput.setupMask", _minuteInput);
+                await JS.InvokeVoidAsync("vnDateInput.setupMask", _secondInput);
+            }
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        // Phân tách logic nhận giá trị ban đầu dựa vào DateType
+        if (DateType == VietDateInputType.Time)
+        {
+            if (TimeValue.HasValue)
+            {
+                State.Hour = TimeValue.Value.Hours;
+                State.Minute = TimeValue.Value.Minutes;
+                State.Second = TimeValue.Value.Seconds;
+
+                // Xóa trắng dữ liệu ngày để tránh lỗi logic IsCompleteDate
+                State.Day = State.Month = State.Year = null;
+            }
+        }
+        else if (Value.HasValue)
+        {
+            State.Day = Value.Value.Day;
+            State.Month = Value.Value.Month;
+            State.Year = Value.Value.Year;
+            State.Hour = Value.Value.Hour;
+            State.Minute = Value.Value.Minute;
+            State.Second = Value.Value.Second;
+        }
+    }
+
+    private string GetDisplayValue(int? value, string field)
+    {
+        if (!string.IsNullOrEmpty(_typingBuffers[field]))
+        {
+            return _typingBuffers[field];
+        }
+        return value?.ToString("D2") ?? "";
+    }
+
+    private async Task HandleFocus(ElementReference el)
+    {
+        if (ReadOnly)
+            return;
+        await JS.InvokeVoidAsync("vnDateInput.selectAll", el);
+    }
+
+    private async Task HandleDateInput(ChangeEventArgs e, string field)
+    {
+        if (ReadOnly)
+            return;
+
+        string raw = FilterDigits(e.Value?.ToString() ?? "");
+        int maxLen = field == "Year" ? 4 : 2;
+
+        if (raw.Length > maxLen)
+            raw = raw[..maxLen];
+        _typingBuffers[field] = raw;
+
+        if (int.TryParse(raw, out int val))
+        {
+            SetStateValue(field, val);
+
+            if (raw.Length == maxLen)
+            {
+                _typingBuffers[field] = "";
+                await AutoTabNext(field);
+            }
+        }
+        else if (string.IsNullOrEmpty(raw))
+        {
+            SetStateValue(field, null);
+        }
+    }
+
+    private async Task HandleElementBlur(string field)
+    {
+        if (ReadOnly)
+            return;
+
+        _typingBuffers[field] = "";
+        State.NormalizeSmartDate();
+        ValidateState();
+        await UpdateBindingValue();
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e, string field, ElementReference currentEl, ElementReference? leftEl, ElementReference? rightEl)
+    {
+        if (ReadOnly)
+            return;
+
+        // Xử lý phím phân cách để nhảy ô nhanh
+        if (e.Key == "/" || e.Key == "-" || e.Key == "." || e.Key == ":")
+        {
+            _typingBuffers[field] = "";
+
+            if (rightEl.HasValue)
+            {
+                await rightEl.Value.FocusAsync();
+            }
+            return;
+        }
+
+        // Điều hướng mũi tên trái / phải
+        if (e.Key == "ArrowLeft" && leftEl.HasValue)
+        {
+            _typingBuffers[field] = "";
+            await leftEl.Value.FocusAsync();
+            return;
+        }
+        if (e.Key == "ArrowRight" && rightEl.HasValue)
+        {
+            _typingBuffers[field] = "";
+            await rightEl.Value.FocusAsync();
+            return;
+        }
+
+        // Tăng giảm số bằng mũi tên lên / xuống
+        int step = 0;
+        if (e.Key == "ArrowUp")
+            step = 1;
+        if (e.Key == "ArrowDown")
+            step = -1;
+
+        if (step != 0)
+        {
+            _typingBuffers[field] = "";
+            int currentVal = GetStateValue(field) ?? (field == "Year" ? DateTime.Today.Year : 0);
+            SetStateValue(field, currentVal + step);
+
+            State.NormalizeSmartDate();
+            ValidateState();
+            await UpdateBindingValue();
+        }
+    }
+
+    private async Task AutoTabNext(string currentField)
+    {
+        if (ReadOnly)
+            return;
+
+        if (currentField == "Day")
+            await _monthInput.FocusAsync();
+        else if (currentField == "Month")
+            await _yearInput.FocusAsync();
+        else if (currentField == "Year" && DateType == VietDateInputType.DateTime)
+            await _hourInput.FocusAsync();
+        else if (currentField == "Hour")
+            await _minuteInput.FocusAsync();
+        else if (currentField == "Minute")
+            await _secondInput.FocusAsync();
+    }
+
+    private void SetStateValue(string field, int? val)
+    {
+        switch (field)
+        {
+            case "Day":
+                State.Day = val;
+                break;
+            case "Month":
+                State.Month = val;
+                break;
+            case "Year":
+                State.Year = val;
+                break;
+            case "Hour":
+                State.Hour = val;
+                break;
+            case "Minute":
+                State.Minute = val;
+                break;
+            case "Second":
+                State.Second = val;
+                break;
+        }
+    }
+
+    private int? GetStateValue(string field) => field switch
+    {
+        "Day" => State.Day,
+        "Month" => State.Month,
+        "Year" => State.Year,
+        "Hour" => State.Hour,
+        "Minute" => State.Minute,
+        "Second" => State.Second,
+        _ => null
+    };
+
+    private void ValidateState()
+    {
+        State.IsInvalid = false;
+        State.Hint = "";
+
+        // Chỉ validate tháng khi cần nhập ngày tháng
+        if (DateType != VietDateInputType.Time)
+        {
+            if (State.Month.HasValue && (State.Month < 1 || State.Month > 12))
+            {
+                State.IsInvalid = true;
+                State.Hint = "Tháng không hợp lệ (1 - 12).";
+                return;
+            }
+        }
+
+        // Validate các trường giờ, phút, giây thông thường
+        if (State.Hour.HasValue && (State.Hour < 0 || State.Hour > 23))
+        {
+            State.IsInvalid = true;
+            State.Hint = "Giờ không hợp lệ (0 - 23).";
+            return;
+        }
+        if (State.Minute.HasValue && (State.Minute < 0 || State.Minute > 59))
+        {
+            State.IsInvalid = true;
+            State.Hint = "Phút không hợp lệ (0 - 59).";
+            return;
+        }
+        if (State.Second.HasValue && (State.Second < 0 || State.Second > 59))
+        {
+            State.IsInvalid = true;
+            State.Hint = "Giây không hợp lệ (0 - 59).";
+            return;
+        }
+    }
+
+    private async Task UpdateBindingValue()
+    {
+        if (State.IsInvalid)
+            return;
+
+        // Trường hợp 1: Chế độ chỉ chọn Giờ -> Gửi dữ liệu qua TimeValue (TimeSpan?)
+        if (DateType == VietDateInputType.Time)
+        {
+            if (State.Hour.HasValue && State.Minute.HasValue)
+            {
+                var tSpan = new TimeSpan(State.Hour.Value, State.Minute.Value, State.Second ?? 0);
+                await TimeValueChanged.InvokeAsync(tSpan);
+            }
+            return;
+        }
+
+        // Trường hợp 2: Chế độ chọn Ngày / Ngày-Giờ -> Gửi dữ liệu qua Value (DateTime?)
+        if (State.IsCompleteDate)
+        {
+            try
+            {
+                var dt = new DateTime(
+                    State.Year!.Value,
+                    State.Month!.Value,
+                    State.Day!.Value,
+                    State.Hour ?? 0,
+                    State.Minute ?? 0,
+                    State.Second ?? 0
+                );
+                await ValueChanged.InvokeAsync(dt);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                State.IsInvalid = true;
+                State.Hint = "Ngày không tồn tại trong thực tế.";
+            }
+        }
+    }
+
+    private static string FilterDigits(string input) =>
+        new string(input.Where(char.IsDigit).ToArray());
+
+    public enum VietDateInputType { Date, Time, DateTime }
+}

@@ -1,0 +1,24 @@
+﻿@page "/logout"
+
+@inject LoginViewModel vm
+@inject NavigationManager navMan
+
+<p>Đang đăng xuất...</p>
+
+@code {
+    [CascadingParameter]
+    public HttpContext? httpContext { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (httpContext!.User.Identity!.IsAuthenticated)
+        {
+            await httpContext.SignOutAsync();
+            vm.Logout();
+            await InvokeAsync(() =>
+            {
+                navMan.NavigateTo("/", forceLoad: true);
+            });
+        }
+    }
+}

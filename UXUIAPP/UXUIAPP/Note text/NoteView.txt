@@ -1,0 +1,84 @@
+﻿
+## wwwroot: 
+thư mục Static Files.(tập tin tĩnh) 
+là các tài nguyên cố định không được tạo động, bao gồm các tệp tin HTML, CSS, hình ảnh và JavaScript được gửi thẳng tới người dùng. Những file trình duyệt (Chrome, Edge...) tải trực tiếp.
+
+	# css
+		wwwroot
+		└── css:	Chứa toàn bộ CSS của dự án.
+
+	# fonts
+		wwwroot
+		└── fonts:	Chứa font.
+	
+	# images
+		wwwroot
+		└── images:	Chứa tất cả ảnh của UI/UX như logo, banner,...
+
+	# lib
+	wwwroot
+		└── lib:	Microsoft tạo sẵn chứa bootstrap
+
+	# app.css
+	wwwroot
+		└── app.css:  Đây là CSS gốc dùng để import các file css riêng nếu có. Không viết CSS trực tiếp vào đây nữa.
+
+	# favicon
+	wwwroot
+		└── favicon:	Icon trình duyệt.
+
+====================================================================================================================
+
+## Components:	Là nơi quan trọng nhất.Tất cả giao diện đều nằm đây.
+
+	# Common
+	Components
+	   └──Common: Các Component cực nhỏ:
+			 Dùng chung Admin và Store : { text, Avatar, Logo, Spinner, EmptyState, Breadcrumb, Title }
+
+	# Layout
+	Components
+	   └──Layout:	Đây là khung của Website.
+
+		  * Layout/Admin:	Chỉ dành cho Admin.
+
+		  * Layout/Store:	Chỉ dành cho Website bán hàng.
+
+		  * Layout/Shared:	Những Layout dùng chung.
+
+		  * MainLayout.razor:	Đây là Layout gốc. Sau này nó sẽ quyết định tất cả admin hay store
+
+		  * ReconnectModal: 	Blazor tự dùng.
+
+
+	# Pages:	Đây là nơi chứa các trang
+
+		* Pages/Admin: 	All trang quản lý cửa hàng 
+		* Pages/Store: 	All trang cửa hàng để khách hàng mua sản phẩm
+	   ## NotFound.razor: 	Đây là trang 404 không tồn tại trang đó.
+
+	# Các file gốc
+
+		## _Imports: Giống using nhưng dùng cho Razor.
+				Ví dụ:	@using UXUIAPP.Components.Common thì tất cả Razor đều dùng được.
+
+	    ## App.razor:	Gốc của Blazor.
+
+		## Routes.razor:	Quản lý Route.
+				Ví dụ:	/ ; /admin ; /cart
+
+====================================================================================================================
+
+## appsettings: 	Chuỗi kết nối.
+		Ví dụ: SQL Server; JWT; Mail; ....
+
+## Program.cs:  	Đây là Main() của C#. Mọi Service đều đăng ký ở đây.
+
+====================================================================================================================
+
+	**	DataTable.razor      :	Bảng danh sách khách hàng, nhân viên, sản phẩm, kho... 
+	**	SearchBox.razor      :	Ô tìm kiếm dùng lại ở nhiều trang                      
+	**	Pagination.razor     :	Phân trang                                             
+	**	ConfirmDialog.razor  :	Hộp xác nhận Xóa / thao tác quan trọng                 
+	**	Modal.razor          :	Khung popup dùng cho Thêm / Sửa / xem chi tiết         
+	**	Loading.razor        :	Hiển thị trạng thái đang tải dữ liệu                   

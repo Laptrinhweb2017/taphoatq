@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Application.Assets/Application.Assets.csproj" Id="140d44a3-c5ba-4b2d-9837-ed331ebb74d3" />
+  <Project Path="BachHoaWeb/BachHoaWeb.csproj" />
+  <Project Path="Business/Business.csproj" Id="27e3799c-7997-4a35-bab1-9dfe02634eaa" />
+  <Project Path="DataLayer/DataLayer.csproj" Id="03b3993b-62cd-4b89-9223-36f9b9f4fcb4" />
+  <Project Path="Services/Services.csproj" Id="ae4cf874-b0fd-42cb-8e01-023ff0180e6f" />
+  <Project Path="ViewModal/ViewModal.csproj" Id="e5268030-a274-4d5a-896a-56dbfa8aed42" />
+</Solution>

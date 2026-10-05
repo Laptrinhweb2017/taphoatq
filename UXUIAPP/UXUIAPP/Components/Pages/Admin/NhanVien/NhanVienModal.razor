@@ -1,0 +1,107 @@
+﻿@if (IsVisible)
+{
+    <div class="employee-modal-overlay">
+
+        <div class=" employee-modal">
+
+            <div class="employee-modal-header">
+
+                <h2>Thêm Nhân Viên</h2>
+
+                <button class="employee-modal-close"
+                @onclick="CloseModal">
+
+                    <i class="bi bi-x-lg"></i>
+
+                </button>
+
+            </div>
+
+            <div class="employee-modal-body">
+
+                <div class="employee-form">
+
+                    <div class="form-group">
+
+                        <label>
+                          Tên nhân viên
+                        </label>
+
+                        <input type="text"
+                        class="form-control"
+                        placeholder="Nhập họ tên nhân viên" />
+
+                    </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input type="email"
+                            class="form-control"
+                            placeholder="Nhập email nhân viên" />
+
+                        </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Mã nhân viên 
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Nhập mã nhân viên" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="employee-modal-footer">
+
+                <button class="form-button cancel"
+                @onclick="CloseModal">
+
+                    Hủy
+
+                </button>
+
+
+                <button class="form-button save">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Lưu
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+@code
+{
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+
+    private async Task CloseModal()
+    {
+        await OnClose.InvokeAsync();
+    }
+}

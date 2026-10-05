@@ -1,0 +1,57 @@
+﻿@using System.Linq
+@typeparam TItem
+
+<div class="d-block">
+    @foreach (var item in PagedData)
+    {
+        @RowTemplate(item)
+    }
+</div>
+
+<nav>
+    <ul class="pagination my-3">
+        <li class="page-item @(CurrentPage == 1 ? "disabled" : "")">
+            <button class="page-link" @onclick="PreviousPage">«</button>
+        </li>
+
+        @for (int i = 1; i <= TotalPages; i++)
+        {
+            var vpage = i;
+            <li class="page-item @(CurrentPage == vpage ? "active" : "")">
+                <button class="page-link" @onclick="() => ChangePage(vpage)">@vpage</button>
+            </li>
+        }
+
+        <li class="page-item @(CurrentPage == TotalPages ? "disabled" : "")">
+            <button class="page-link" @onclick="NextPage">»</button>
+        </li>
+    </ul>
+</nav>
+@code {
+    [Parameter] public List<TItem> Data { get; set; } = new();
+    [Parameter] public RenderFragment<TItem> RowTemplate { get; set; } = default!;
+    [Parameter] public int PageSize { get; set; } = 5;
+
+    private int CurrentPage = 1;
+
+    private int TotalPages => (int)Math.Ceiling((double)Data.Count / PageSize);
+
+    private IEnumerable<TItem> PagedData => Data
+        .Skip((CurrentPage - 1) * PageSize)
+        .Take(PageSize);
+
+    private void ChangePage(int page) => CurrentPage = page;
+
+    private void PreviousPage()
+    {
+        if (CurrentPage > 1)
+            CurrentPage--;
+    }
+
+    private void NextPage()
+    {
+        if (CurrentPage < TotalPages)
+            CurrentPage++;
+    }
+}
+

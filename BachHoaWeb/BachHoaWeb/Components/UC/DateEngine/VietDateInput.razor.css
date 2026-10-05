@@ -1,0 +1,51 @@
+﻿.viet-date-container {
+    display: inline-flex;
+    align-items: center;
+    cursor: text;
+    padding: 0.375rem 0.75rem;
+    overflow: hidden; /* Giảm thiểu khoảng cách tràn */
+}
+
+/* Ẩn các thuộc tính input cơ bản */
+.date-cell {
+    border: none;
+    background: transparent;
+    padding: 0;
+    text-align: center;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Đặt chiều rộng chính xác cho từng loại ô */
+.day-month-cell,
+.time-cell {
+    width: 2ch; /* 2 ký tự */
+}
+
+.year-cell {
+    width: 4.5ch; /* 4.5 ký tự */
+}
+
+/* Style dấu phân cách */
+.date-separator,
+.time-separator {
+    color: #6c757d;
+    user-select: none;
+    padding: 0; /* Xóa padding để gọn */
+}
+
+.date-space {
+    width: 1ch; /* Khoảng cách giữa date và time */
+}
+
+/* Zone cảnh báo (Căn phải) */
+.date-hint-zone {
+    margin-left: auto;
+    cursor: help;
+}
+
+/* Style cho container khi lỗi */
+.is-invalid.viet-date-container {
+    border-color: #dc3545;
+}

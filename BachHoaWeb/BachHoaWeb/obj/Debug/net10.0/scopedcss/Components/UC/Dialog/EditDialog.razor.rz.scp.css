@@ -1,0 +1,12 @@
+body[b-fs3gairoaf] {
+}
+.res-size[b-fs3gairoaf]{
+    min-width:500px;
+    width:fit-content;
+}
+@media(max-width: 767.98px)
+{
+    .res-size[b-fs3gairoaf]{
+        min-width: 300px;
+    }
+}

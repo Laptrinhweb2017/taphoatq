@@ -1,0 +1,38 @@
+.treelist-header[b-svdq20ayfk] {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: grid;
+    align-items: center;
+    font-weight: bold;
+    background-color: lightblue;
+    border-bottom: 1px solid #ccc;
+    padding: 4px 0;
+}
+
+    .treelist-header .header-cell[b-svdq20ayfk] {
+        padding: 4px 8px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+.tl-cell[b-svdq20ayfk] {
+    padding: 2px 6px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tl-expander[b-svdq20ayfk] {
+    width: 30px; /* khớp ExpanderWidth */
+    text-align: center;
+}
+
+.tl-expander-icon[b-svdq20ayfk] {
+    cursor: pointer;
+    color: #555;
+}
+
+    .tl-expander-icon:hover[b-svdq20ayfk] {
+        color: #000;
+    }
