@@ -1,2 +1,0 @@
-# taphoatq
-demo trang web 
