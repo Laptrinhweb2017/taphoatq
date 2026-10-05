@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+
+@inject LayoutService layoutService
+
+
+<div class="page">
+    <div class="sidebar">
+        <AdminNavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <p>Cái này tui tự làm</p>
+        </div>
+
+        <article class="content px-4 content-bg">
+            @Body
+        </article>
+    </main>
+</div>
+<ModalForm/>
+
+@code {
+    protected override Task OnInitializedAsync()
+    {
+        layoutService.OnChange += StateHasChanged;
+        return base.OnInitializedAsync();
+    }
+}

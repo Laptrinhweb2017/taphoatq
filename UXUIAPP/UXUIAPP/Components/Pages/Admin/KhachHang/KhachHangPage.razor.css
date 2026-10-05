@@ -1,0 +1,147 @@
+.customer-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.page-title h1 {
+    margin: 0;
+    color: #222;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.page-title p {
+    margin: 6px 0 0;
+    color: #777;
+    font-size: 14px;
+}
+
+
+.page-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+
+
+.customer-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.customer-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+}
+
+    .customer-table th {
+        height: 48px;
+        padding: 0 12px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e5e5e5;
+        color: #333;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* dữ liệu tự xuống dòng */
+    .customer-table td {
+        min-height: 52px;
+        padding: 12px;
+        border-bottom: 1px solid #eeeeee;
+        color: #444;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+        vertical-align: middle;
+    }
+
+    .customer-table tbody tr:hover {
+        background: #fafafa;
+    }
+
+    /* cột khách hàng */
+    .customer-table th:nth-child(1),
+    .customer-table td:nth-child(1) {
+        width: 120px;
+    }
+
+    /* cột Khách hàng*/
+    .customer-table th:nth-child(2),
+    .customer-table td:nth-child(2) {
+        width: 160px;
+    }
+
+    /* cột SĐT*/
+    .customer-table th:nth-child(3),
+    .customer-table td:nth-child(3) {
+        width: 125px;
+    }
+
+    /* cột email */
+    .customer-table th:nth-child(4),
+    .customer-table td:nth-child(4) {
+        width: 210px;
+    }
+
+    /* cột địa chỉ */
+    .customer-table th:nth-child(5),
+    .customer-table td:nth-child(5) {
+        width: 220px;
+    }
+
+    /* cột ghi chú */
+    .customer-table th:nth-child(6),
+    .customer-table td:nth-child(6) {
+        width: 180px;
+    }
+
+    /* cột trạng thái */
+    .customer-table th:nth-child(7),
+    .customer-table td:nth-child(7) {
+        width: 105px;
+        white-space: nowrap;
+    }
+
+    /* cột thao tác */
+    .customer-table th:nth-child(8),
+    .customer-table td:nth-child(8) {
+        width: 150px;
+    }
+
+.customer-action-column {
+    width: 150px;
+    text-align: center !important;
+}
+
+.customer-actions {
+    text-align: center;
+    white-space: nowrap !important;
+}
+
+    .customer-actions .edit-button,
+    .customer-actions .delete-button {
+        margin: 0 2px;
+    }
+
+.empty-row {
+    height: 180px;
+    text-align: center !important;
+    color: #999 !important;
+    font-style: italic;
+}

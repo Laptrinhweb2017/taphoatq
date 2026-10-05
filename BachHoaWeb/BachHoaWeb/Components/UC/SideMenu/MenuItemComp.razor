@@ -1,0 +1,244 @@
+﻿@using MyControl
+@inject NavigationManager NavMan
+@implements IDisposable
+
+<div class="menu-item-wrapper">
+    <input type="checkbox" @bind="Item.Checked" hidden id="@UniqueId" />
+    @if(Item.Enabled)
+    {
+        <div class="@CssClass" @onclick="OnLabelClicked">
+            <div class="row align-items-center w-100">
+                <!-- Icon -->
+                <div class="col-auto icon">
+                    @if (!string.IsNullOrEmpty(Item.Icon))
+                    {
+                        <i class="@Item.Icon" aria-hidden="true"></i>
+                    }
+                </div>
+
+                <!-- Text -->
+                <div class="col px-0">
+                    @if (!string.IsNullOrEmpty(Item.LinkToPage))
+                    {
+                        <!-- Prevent default navigation so we can handle nav & closing centrally -->
+                        <a href="@Item.LinkToPage"
+                           class="menu-link"
+                           @onclick="OnLinkClicked"
+                           @onclick:preventDefault="true"
+                           @onclick:stopPropagation="true">
+                            @Item.MenuText
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="menu-link">@Item.MenuText</span>
+                    }
+                </div>
+
+                <!-- Chevron (toggle zone) -->
+                @if (HasSub)
+                {
+                    <div class="col-auto chev ms-auto">
+                        <span class="chev-icon">@((Item.Checked) ? "▾" : "▸")</span>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="@CssClass disabled-link" @onclick="OnLabelClicked">
+            <div class="row align-items-center w-100">
+                <!-- Icon -->
+                <div class="col-auto icon">
+                    @if (!string.IsNullOrEmpty(Item.Icon))
+                    {
+                        <i class="@Item.Icon" aria-hidden="true"></i>
+                    }
+                </div>
+
+                <!-- Text -->
+                <div class="col px-0">
+                    @if (!string.IsNullOrEmpty(Item.LinkToPage))
+                    {
+                        <!-- Prevent default navigation so we can handle nav & closing centrally -->
+                        <a href="@Item.LinkToPage"
+                           class="menu-link"
+                           @onclick="OnLinkClicked"
+                           @onclick:preventDefault="true"
+                           @onclick:stopPropagation="true">
+                            @Item.MenuText
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="menu-link">@Item.MenuText</span>
+                    }
+                </div>
+
+                <!-- Chevron (toggle zone) -->
+                @if (HasSub)
+                {
+                    <div class="col-auto chev ms-auto">
+                        <span class="chev-icon">@((Item.Checked) ? "▾" : "▸")</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+
+    @if ((Item.Checked || HasActiveChild(Item, NormalizePath(NavMan.ToBaseRelativePath(NavMan.Uri))))
+        && Item.SubItems?.Count > 0)
+    {
+        <div class="submenu-panel">
+            @foreach (var sub in Item.SubItems)
+            {
+                <!-- forward the same NavigateRequested so events bubble to top -->
+                <MenuItemComp Item="sub"
+                              Depth="@(Depth + 1)"
+                              NavigateRequested="NavigateRequested" />
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public MenuItem Item { get; set; } = default!;
+    [Parameter] public int Depth { get; set; } = 1;
+    [Parameter] public EventCallback<string> NavigateRequested { get; set; } // forwarded from parent (SideMenu)
+
+    private string UniqueId = "menu_" + Guid.NewGuid().ToString("N");
+    private string CssClass = "menu-item";
+    private bool HasSub => Item.SubItems?.Count > 0;
+    //private bool enabled = false;
+
+    protected override void OnInitialized()
+    {
+        NavMan.LocationChanged += OnLocationChanged;
+        UpdateActiveState();
+    }
+    // protected override void OnAfterRender(bool firstRender)
+    // {
+    //     if (firstRender)
+    //     {
+    //         UpdateActiveState();
+    //         StateHasChanged();
+    //     }
+    // }
+
+    protected override void OnParametersSet()
+    {
+        UpdateActiveState();
+    }
+
+    private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
+    {
+        _ = InvokeAsync(() =>
+        {
+            UpdateActiveState();
+            StateHasChanged();
+        });
+    }
+
+    // Normalize path (no query/fragment, no leading/trailing slashes)
+    private string NormalizePath(string? path)
+    {
+        if (string.IsNullOrEmpty(path))
+            return "/"; // 👈 FIX QUAN TRỌNG
+
+        var p = path.Split('?', '#')[0].Trim('/').ToLowerInvariant();
+
+        return string.IsNullOrEmpty(p) ? "/" : p;
+    }
+
+    private bool HasActiveChild(MenuItem item, string current)
+    {
+        if (item.SubItems == null || item.SubItems.Count == 0)
+            return false;
+
+        foreach (var s in item.SubItems)
+        {
+            if (!string.IsNullOrEmpty(s.LinkToPage))
+            {
+                var childPath = NormalizePath(s.LinkToPage);
+                if (!string.IsNullOrEmpty(childPath) &&
+                    (current.Equals(childPath, StringComparison.OrdinalIgnoreCase)
+                     || current.StartsWith(childPath + "/", StringComparison.OrdinalIgnoreCase)))
+                {
+                    return true;
+                }
+            }
+
+            if (HasActiveChild(s, current))
+                return true;
+        }
+
+        return false;
+    }
+
+    private void UpdateActiveState()
+    {
+        var currentRaw = NavMan.ToBaseRelativePath(NavMan.Uri);
+        var current = NormalizePath(currentRaw);
+
+        bool isActive = !string.IsNullOrEmpty(Item.LinkToPage)
+                        && NormalizePath(Item.LinkToPage) == current;
+
+        bool childActive = HasActiveChild(Item, current);
+
+        string depthClass = $"depth-{Depth}";
+        string baseClass = "menu-item";
+
+        if (isActive)
+        {
+            CssClass = $"{baseClass} active {depthClass}";
+            if (HasSub)
+                Item.Checked = true;
+        }
+        else if (childActive)
+        {
+            CssClass = $"{baseClass} parent-active {depthClass}";
+            Item.Checked = true;
+        }
+        else
+        {
+            CssClass = $"{baseClass} {depthClass}";
+            // nếu muốn tự đóng khi không active: Item.Checked = false;
+        }
+    }
+
+    private async Task OnLabelClicked()
+    { 
+        // click toàn vùng: nếu có sub thì toggle 
+        if (HasSub) 
+        {
+            Item.Checked = !Item.Checked;
+            return; 
+        }
+        // leaf node: request navigation via callback (bubble to SideMenu/NavMenu) or fallback to local nav 
+        if (!string.IsNullOrEmpty(Item.LinkToPage)) 
+        {
+            if (NavigateRequested.HasDelegate)
+                await NavigateRequested.InvokeAsync(Item.LinkToPage);
+            else
+                NavMan.NavigateTo(Item.LinkToPage); 
+        } 
+    }
+
+    private async Task OnLinkClicked(Microsoft.AspNetCore.Components.Web.MouseEventArgs e)
+    {
+        if (string.IsNullOrEmpty(Item.LinkToPage))
+            return;
+
+        if (NavigateRequested.HasDelegate)
+            await NavigateRequested.InvokeAsync(Item.LinkToPage);
+        else
+            NavMan.NavigateTo(Item.LinkToPage);
+    }
+
+    public void Dispose()
+    {
+        NavMan.LocationChanged -= OnLocationChanged;
+    }
+}

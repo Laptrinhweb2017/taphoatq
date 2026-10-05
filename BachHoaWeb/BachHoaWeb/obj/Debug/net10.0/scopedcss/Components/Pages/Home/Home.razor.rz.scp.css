@@ -1,0 +1,61 @@
+  .dashboard[b-nzs1jd8hhg] {
+        padding: 25px;
+    }
+
+    .welcome[b-nzs1jd8hhg] {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .cards[b-nzs1jd8hhg] {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 20px;
+    }
+
+    .card[b-nzs1jd8hhg] {
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        transition: .25s;
+        cursor: pointer;
+    }
+
+        .card:hover[b-nzs1jd8hhg] {
+            transform: translateY(-4px);
+        }
+
+    .revenue[b-nzs1jd8hhg] {
+        background: #16a34a;
+    }
+
+    .order[b-nzs1jd8hhg] {
+        background: #2563eb;
+    }
+
+    .customer[b-nzs1jd8hhg] {
+        background: #ea580c;
+    }
+
+    .inventory[b-nzs1jd8hhg] {
+        background: #9333ea;
+    }
+
+    .bottom[b-nzs1jd8hhg] {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+    }
+
+    .panel[b-nzs1jd8hhg] {
+        background: white;
+        min-height: 320px;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+

@@ -1,0 +1,8 @@
+﻿Category *
+Customer *
+Employee *
+WareHouse *
+Supplier *
+Inventory * 
+Price * 
+Payment *

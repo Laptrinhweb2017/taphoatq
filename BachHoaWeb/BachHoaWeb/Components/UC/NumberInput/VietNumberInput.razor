@@ -1,0 +1,188 @@
+﻿@using System.Globalization
+@typeparam TValue
+
+<div class="input-group @GroupClass">
+    @if (!string.IsNullOrEmpty(PrependText))
+    {
+        <span class="input-group-text">@PrependText</span>
+    }
+
+    <input type="text"
+           class="form-control @InputClass @(_hasError ? "is-invalid" : "")"
+           value="@DisplayValue"
+           @oninput="HandleInput"
+           @onblur="HandleBlur"
+           placeholder="@Placeholder" />
+
+    @if (!string.IsNullOrEmpty(AppendText))
+    {
+        <span class="input-group-text">@AppendText</span>
+    }
+</div>
+
+@if (_hasError)
+{
+    <div class="text-danger small mt-1 d-block fw-bold">
+        ⚠ @_errorMessage
+    </div>
+}
+
+@code {
+    [Parameter] public TValue Value { get; set; }
+    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+
+    [Parameter] public string DisplayFormat { get; set; } = "VI";
+    [Parameter] public string GroupClass { get; set; } = "";
+    [Parameter] public string InputClass { get; set; } = "";
+    [Parameter] public string Placeholder { get; set; } = "0";
+    [Parameter] public string PrependText { get; set; }
+    [Parameter] public string AppendText { get; set; }
+
+    private CultureInfo _currentCulture;
+    private bool _hasError = false;
+    private string _errorMessage = "";
+    private string _userInputRaw = null;
+
+    private string DisplayValue
+    {
+        get
+        {
+            if (_userInputRaw != null)
+                return _userInputRaw;
+
+            SetupCulture();
+            if (Value == null)
+                return "0";
+
+            if (decimal.TryParse(Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal number))
+            {
+                if (IsIntegerType(typeof(TValue)))
+                {
+                    return number.ToString("N0", _currentCulture);
+                }
+                return number.ToString("N", _currentCulture);
+            }
+            return Value.ToString();
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        SetupCulture();
+    }
+
+    private void SetupCulture()
+    {
+        _currentCulture = new CultureInfo("en-US");
+        if (DisplayFormat.ToUpper() == "VI")
+        {
+            _currentCulture.NumberFormat.NumberGroupSeparator = ".";
+            _currentCulture.NumberFormat.NumberDecimalSeparator = ",";
+        }
+        else
+        {
+            _currentCulture.NumberFormat.NumberGroupSeparator = ",";
+            _currentCulture.NumberFormat.NumberDecimalSeparator = ".";
+        }
+    }
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        _userInputRaw = e.Value?.ToString() ?? "";
+
+        if (string.IsNullOrWhiteSpace(_userInputRaw))
+        {
+            ResetError();
+            await UpdateValue(default);
+            return;
+        }
+
+        // Kiểm tra nhanh lỗi nhập số nguyên trước
+        if (IsIntegerType(typeof(TValue)) && (_userInputRaw.Contains(".") || _userInputRaw.Contains(",")))
+        {
+            SetError("Kiểu dữ liệu yêu cầu số nguyên, không được nhập phần thập phân.");
+            return;
+        }
+
+        try
+        {
+            string cleanValue = _userInputRaw;
+
+            // THUẬT TOÁN XỬ LÝ LINH HOẠT DẤU PHÂN CÁCH THẬP PHÂN:
+            // Tìm vị trí của dấu chấm và dấu phẩy cuối cùng xuất hiện trong chuỗi gõ vào
+            int lastDot = cleanValue.LastIndexOf('.');
+            int lastComma = cleanValue.LastIndexOf(',');
+
+            if (lastDot > lastComma)
+            {
+                // Người dùng dùng dấu CHẤM làm thập phân cuối cùng (Ví dụ: 1,500.50 hoặc gõ lụi 1500.50)
+                // Ta loại bỏ hết dấu phẩy (coi như phân cách hàng nghìn dính kèm) và đổi dấu chấm thành chuẩn Invariant
+                cleanValue = cleanValue.Replace(",", "");
+            }
+            else if (lastComma > lastDot)
+            {
+                // Người dùng dùng dấu PHẨY làm thập phân cuối cùng (Ví dụ: 1.500,50 hoặc gõ lụi 1500,50)
+                // Ta loại bỏ hết dấu chấm và đổi dấu phẩy sang dấu chấm để InvariantCulture parse được
+                cleanValue = cleanValue.Replace(".", "").Replace(",", ".");
+            }
+            else
+            {
+                // Trường hợp không có dấu nào hoặc gõ số thuần túy (Ví dụ: 1500)
+                cleanValue = cleanValue.Replace(".", "").Replace(",", "");
+            }
+
+            // Tiến hành Parse chuỗi đã được quy hoạch chuẩn hóa
+            if (decimal.TryParse(cleanValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedDecimal))
+            {
+                var convertedValue = (TValue)Convert.ChangeType(parsedDecimal, typeof(TValue));
+                ResetError();
+                await UpdateValue(convertedValue);
+            }
+            else
+            {
+                SetError("Định dạng số không hợp lệ.");
+            }
+        }
+        catch (OverflowException)
+        {
+            SetError("Số nhập vào vượt quá giới hạn lưu trữ.");
+        }
+        catch
+        {
+            SetError("Dữ liệu nhập vào không hợp lệ.");
+        }
+    }
+
+    private void HandleBlur()
+    {
+        if (!_hasError)
+        {
+            _userInputRaw = null; // Reset để ép hiển thị lại theo chuẩn DisplayFormat định sẵn
+        }
+        StateHasChanged();
+    }
+
+    private void SetError(string message)
+    {
+        _hasError = true;
+        _errorMessage = message;
+    }
+
+    private void ResetError()
+    {
+        _hasError = false;
+        _errorMessage = "";
+    }
+
+    private async Task UpdateValue(TValue newValue)
+    {
+        Value = newValue;
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    private bool IsIntegerType(Type type)
+    {
+        return type == typeof(int) || type == typeof(long) || type == typeof(short) ||
+               type == typeof(uint) || type == typeof(ulong) || type == typeof(ushort);
+    }
+}

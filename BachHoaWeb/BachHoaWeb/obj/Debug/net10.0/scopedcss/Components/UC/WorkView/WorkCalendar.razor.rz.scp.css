@@ -1,0 +1,119 @@
+.work-calendar[b-xsytjwvdun] {
+    width: 100%;
+    padding:10px;
+}
+
+/* HEADER */
+
+.calendar-header[b-xsytjwvdun] {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+    text-align: center;
+    font-weight: 600;
+}
+
+    .calendar-header > div[b-xsytjwvdun] {
+        padding: 6px 0;
+    }
+
+/* BODY */
+
+.calendar-body[b-xsytjwvdun] {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+/* CELL */
+
+.calendar-cell[b-xsytjwvdun] {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    background: white;
+}
+
+/* NGÀY THÁNG KHÁC */
+
+.other-month[b-xsytjwvdun] {
+    background-color:transparent;
+}
+
+/* OFF / NONE */
+
+.day-off[b-xsytjwvdun] {
+    background: #e5e5e5;
+}
+
+    .day-off .day-number[b-xsytjwvdun] {
+        color: #666;
+    }
+
+/* CONTENT */
+
+.day-content[b-xsytjwvdun] {
+    width: 100%;
+    height: 100%;
+}
+
+/* DAY NUMBER */
+
+.day-number[b-xsytjwvdun] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* STATUS BAR */
+
+.status-bar[b-xsytjwvdun] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 20%;
+    display: flex;
+    overflow: hidden;
+}
+
+/* STATUS SEGMENT */
+
+.status-segment[b-xsytjwvdun] {
+    flex: 1;
+}
+
+    .status-segment:not(:last-child)[b-xsytjwvdun] {
+        border-right: 1px solid rgba(255,255,255,.35);
+    }
+
+/* STATUS COLORS */
+
+.approved[b-xsytjwvdun] {
+    background: #4caf50;
+}
+
+.reject[b-xsytjwvdun] {
+    background: #f44336;
+}
+
+.needcheck[b-xsytjwvdun] {
+    background: #ff9800;
+}
+
+.overtime[b-xsytjwvdun] {
+    background: #42a5f5;
+}
+
+.leave[b-xsytjwvdun] {
+    background: #ba68c8;
+}

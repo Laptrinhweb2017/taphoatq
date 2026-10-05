@@ -1,0 +1,114 @@
+﻿.treelist-level {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Header */
+.treelist-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: grid;
+    align-items: center;
+    font-weight: bold;
+    background-color: lightblue;
+    border-bottom: 1px solid #ccc;
+    padding: 4px 0;
+    
+}
+    .treelist-header .header-cell {
+        padding: 4px 8px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+/* Row */
+.treelist-row {
+    /*display: grid;*/
+    align-items: center;
+    border-bottom: 1px solid darkgray;
+    cursor: pointer;
+    min-height: 28px;
+    background-color: whitesmoke;
+    touch-action: manipulation;
+
+}
+
+    .treelist-row:hover {
+        background-color: #f9f9f9;
+    }
+
+    .treelist-row .selected {
+        background-color: #dbeafe; /* xanh nhạt khi dòng được chọn */
+    }
+    .treelist-row.selected {
+        background-color: #dbeafe;
+    }
+/* Cell */
+.tl-cell {
+    padding: 2px 6px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.button-cell{
+
+}
+.top-level { /*style cho dòng level đầu tiên trong cây*/
+    font-style: italic;
+    font-weight: bold;
+    color: darkblue;
+}
+
+/* Expander cell */
+.tl-expander {
+    width: 30px; /* khớp ExpanderWidth */
+    text-align: center;
+}
+
+.tl-expander-icon {
+    cursor: pointer;
+    color: #555;
+}
+
+    .tl-expander-icon:hover {
+        color: #000;
+    }
+/* Mobile layout */
+.tl-mobile-line {
+    display: flex;
+    gap: 6px;
+    line-height: 1.4;
+}
+
+    .tl-mobile-line.mobile-main {
+        font-weight: 600;
+        padding-left: 0;
+    }
+
+    .tl-mobile-line.mobile-sub {
+        padding-left: 12px; /* 👈 thụt dòng không phải dòng đầu */
+    }
+
+.mobile-header {
+    min-width: 90px;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.mobile-value {
+    flex: 1;
+    word-break: break-word;
+}
+.treelist-mobile-cell {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+}
+
+.mobile-indent {
+    padding-left: 12px;
+}

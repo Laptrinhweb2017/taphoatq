@@ -1,0 +1,38 @@
+﻿.treelist-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: grid;
+    align-items: center;
+    font-weight: bold;
+    background-color: lightblue;
+    border-bottom: 1px solid #ccc;
+    padding: 4px 0;
+}
+
+    .treelist-header .header-cell {
+        padding: 4px 8px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+.tl-cell {
+    padding: 2px 6px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tl-expander {
+    width: 30px; /* khớp ExpanderWidth */
+    text-align: center;
+}
+
+.tl-expander-icon {
+    cursor: pointer;
+    color: #555;
+}
+
+    .tl-expander-icon:hover {
+        color: #000;
+    }

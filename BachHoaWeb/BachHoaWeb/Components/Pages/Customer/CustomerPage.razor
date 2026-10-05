@@ -1,0 +1,131 @@
+﻿@page "/customer"
+@using BachHoaWeb.Components.UC.FilterSelect
+
+@rendermode InteractiveServer
+
+@inject CustomerViewModel vm
+@inject NavigationManager NavMan
+@inject IJSRuntime JS
+
+<h3>Quản Lý Khách Hàng</h3>
+
+<button class="btn btn-success" @onclick="AddCust">Thêm Khách Hàng</button>
+<FilterSelect Items="vm.CustList"
+              TItem="DtoCustomer"
+              TValue="int?"
+              ItemTextSelector="x=> x.CustomerName"
+              ItemValueSelector="x=>x.Id"
+              Placeholder="-- Chọn Khách Hàng --" />
+
+
+<ModalDialog TData="DtoCustomer" @ref="custDialog"
+             Title="Thông tin khách hàng"
+             DataObject="@vm.SelectedCust"
+             ShowDeleteButton="false"
+             OnSaveClicked="AddCustomer"
+             Height="550px"
+             IsSucceed="@Succeed">
+    <FormTemplate Context="cust">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Mã Khách Hàng</label>
+                <input class="form-control" @bind="cust.CustomerCode" placeholder="Ví dụ: KH001" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Mật Khẩu</label>
+                <input class="form-control" @bind="vm.SelectedLogin.Password" placeholder="Tối thiểu 8 ký tự"
+                       type="password" />
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Tên Khách Hàng</label>
+                <input class="form-control" @bind="cust.CustomerName" placeholder="Nhập Họ Tên..." />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Mã Số Thuế</label>
+                <input class="form-control" @bind="cust.TaxCode" placeholder="Nhập Mã Số Thuế..." />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Số Điện Thoại</label>
+                <input class="form-control" @bind="cust.Phone" placeholder="Nhập Số Điện Thoại..." />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Địa Chỉ</label>
+                <input class="form-control" @bind="cust.Address" placeholder="Nhập Địa Chỉ..." />
+            </div>
+        </div>
+
+    </FormTemplate>
+</ModalDialog>
+
+<div class="container mt-4">
+
+    <TreeListComponent TItem="DtoCustomer"
+                       Items="vm.CustList"
+                       Headers="Headers"
+                       KeyFieldNames="Keys"
+                       ColumnWidths="Cols"
+                       DisplayProperties="DisplayProps"
+                       ExpanderWidth="30"
+                       TextCSS="css"
+                       Styles="styles"
+                       SelectedRowBg="lightblue"
+                       ShowEdit="ShowEdit"
+                       ShowDelete="ShowDelete"
+                       OnEditClicked="OnEditItem"
+                       OnRowDbleClicked="OnEditItem" />
+
+</div>
+
+<PopupMessage Duration="4000" @ref="popup"
+              Position="PopupMessage.PopupPosition.BottomRight"
+              Style="PopupMessage.PopupMessageStyle.Green" />
+
+@code {
+    ModalDialog<DtoCustomer> custDialog = default!;
+    PopupMessage popup = default!;
+    [CascadingParameter] Task<AuthenticationState>? AuthStateTask { get; set; }
+
+    bool Succeed = false;
+
+    List<string> Headers = ["Mã Khách Hàng", "Tên Khách Hàng", "Địa Chỉ", "Số Điện Thoại", "Mã Số Thuế"];
+    List<string> Keys = ["Id"];
+    List<bool> ShowEdit = [true];
+    List<bool> ShowDelete = [false];
+    List<List<int>> Cols = [[15, 20, 35, 10, 10]];
+    List<List<string>> DisplayProps = [["CustomerCode", "CustomerName", "Address", "Phone", "TaxCode"]];
+    List<List<string>> css = [["text-center", "text-center", "text-center", "text-center", "text-center"]];
+    List<List<string>> styles = [["color:#0000e6"]];
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateTask!;
+        var user = authState.User;
+
+        if (user.FindFirst("UserID") == null)
+        {
+            NavMan.NavigateTo("/login?returnUrl=home");
+        }
+        await vm.InitializeAsync();
+        vm.PropertyChanged += async (s, e) => { await InvokeAsync(StateHasChanged); }; //Khi VM có thay đổi giá trị => cập nhật lại giao diện
+    }
+
+    private async Task AddCustomer()
+    {
+        await vm.SaveCust();
+        if (!string.IsNullOrEmpty(vm.Message))
+            popup.ShowMessage(vm.Message, PopupMessage.PopupMessageStyle.Red);
+        // await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OnEditItem(object item)
+    {
+        vm.SelectedCust = (DtoCustomer)item;
+        await custDialog.ShowAsync();
+    }
+
+    private async Task AddCust()
+    {
+        vm.SelectedCust = new();
+        await custDialog.ShowAsync();
+    }
+}
