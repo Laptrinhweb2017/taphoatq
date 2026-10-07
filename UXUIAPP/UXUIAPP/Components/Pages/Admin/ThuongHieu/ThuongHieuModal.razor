@@ -1,0 +1,87 @@
+﻿@if (IsVisible)
+{
+    <div class="product-modal-overlay">
+
+        <div class="product-modal">
+
+            <!-- HEADER -->
+            <div class="product-modal-header">
+
+                <h2>Thêm thương hiệu</h2>
+
+                <button class="product-modal-close"
+                        @onclick="CloseModal">
+
+                    <i class="bi bi-x-lg"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- BODY -->
+            <div class="product-modal-body">
+
+                <div class="product-form">
+                    <!-- TÊN thương hiệu -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Tên Thương Hiệu
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Nhập tên thương hiệu" />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="product-modal-footer">
+
+                <button class="form-button cancel"
+                        @onclick="CloseModal">
+
+                    Hủy
+
+                </button>
+
+
+                <button class="form-button save">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Lưu
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+@code
+{
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+
+    private async Task CloseModal()
+    {
+        await OnClose.InvokeAsync();
+    }
+}

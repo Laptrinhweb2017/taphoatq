@@ -1,0 +1,19 @@
+.view-button[b-dis74jsaqo] {
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #555555;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .view-button:hover[b-dis74jsaqo] {
+        background: #f3f3f3;
+    }

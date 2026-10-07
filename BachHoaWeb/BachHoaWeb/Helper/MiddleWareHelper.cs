@@ -35,6 +35,7 @@ namespace BachHoaWeb.Helper
             builder.Services.AddScoped<LayoutService>();
 
 
+
         }
         public void RegisterAuthen(WebApplicationBuilder builder)
         {

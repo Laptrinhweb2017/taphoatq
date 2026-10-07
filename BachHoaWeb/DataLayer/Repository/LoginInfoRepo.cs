@@ -1,4 +1,4 @@
-﻿using Application.Assets.Dto;
+﻿using Application.Assets.Dtos;
 using Application.Assets.FullDto;
 using Microsoft.Data.SqlClient;
 using System.Data;

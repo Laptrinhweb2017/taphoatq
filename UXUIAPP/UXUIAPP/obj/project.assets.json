@@ -51,11 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LapTrinh\\Blazor\\UXUIAPP\\UXUIAPP\\UXUIAPP.csproj",
+      "projectUniqueName": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\UXUIAPP.csproj",
       "projectName": "UXUIAPP",
-      "projectPath": "D:\\LapTrinh\\Blazor\\UXUIAPP\\UXUIAPP\\UXUIAPP.csproj",
+      "projectPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\UXUIAPP.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\LapTrinh\\Blazor\\UXUIAPP\\UXUIAPP\\obj\\",
+      "outputPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

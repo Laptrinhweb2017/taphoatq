@@ -1,5 +1,5 @@
 ﻿using Application.Assets.Common;
-using Application.Assets.Dto;
+using Application.Assets.Dtos;
 using Application.Assets.FullDto;
 using Business;
 using Services;

@@ -1,0 +1,55 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestFE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3CE501D4-8085-4ED8-81FE-8993D314E6BB}|TestFE\\TestFE.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testfe\\testfe\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3CE501D4-8085-4ED8-81FE-8993D314E6BB}|TestFE\\TestFE.csproj|solutionrelative:testfe\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Home.razor",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestFE\\TestFE\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "TestFE\\Components\\Pages\\Home.razor",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestFE\\TestFE\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "TestFE\\Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-07T04:22:40.29Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

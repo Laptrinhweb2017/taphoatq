@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "JNfezjtT9zk=",
+  "dgSpecHash": "9dSZeUlIgIc=",
   "success": true,
-  "projectFilePath": "D:\\LapTrinh\\Blazor\\UXUIAPP\\UXUIAPP\\UXUIAPP.csproj",
+  "projectFilePath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\UXUIAPP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.11\\microsoft.aspnetcore.app.internal.assets.10.0.11.nupkg.sha512"
   ],

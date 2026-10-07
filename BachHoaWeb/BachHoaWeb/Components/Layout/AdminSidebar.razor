@@ -1,0 +1,260 @@
+﻿@using Application.Assets.Dtos
+@using BachHoaWeb.Components.UC.SideMenu
+@rendermode InteractiveServer
+
+<div class="sidebar-wrapper @(sidebarCollapsed ? "sidebar-collapsed" : "")">
+
+    <div class="sidebar-home">
+
+        <a href="/admin">
+            <i class="bi bi-house-fill"></i>
+            <span>Trang Chủ</span>
+        </a>
+
+        <button class="sidebar-toggle"
+                @onclick="ToggleSidebar">
+
+            <i class="bi @(sidebarCollapsed ? "bi-chevron-right" : "bi-chevron-left")"></i>
+
+        </button>
+
+    </div>
+
+    <!-- Menu -->
+    @foreach (var menu in MenuGroups)
+    {
+        <div class="menu-group">
+            <div class="menu-title">
+
+                <div class="menu-title-left">
+                    <i class="@menu.Icon"></i>
+                    <span>@menu.Title</span>
+                </div>
+
+                <button class="menu-arrow-button"
+                        @onclick="() => ToggleMenu(menu)">
+                    <i class="bi @(menu.IsOpen ? "bi-caret-up-fill" : "bi-caret-down-fill")"></i>
+                </button>
+
+            </div>
+
+            <div class="menu-sub @(menu.IsOpen ? "menu-sub-open" : "menu-sub-closed")">
+                @foreach (var item in menu.Items)
+                {
+                    <a href="@item.Link" class="menu-item">
+                        <i class="@item.Icon"></i>
+                        <span>@item.Title</span>
+                    </a>
+                }
+            </div>
+
+        </div>
+    }
+
+    <!-- Thông tin cửa hàng -->
+    <div class="menu-single">
+        <a href="/store-info"
+           class="menu-title single">
+
+            <div class="menu-title-left">
+                <i class="bi bi-info-square-fill"></i>
+                <span>Thông Tin Cửa Hàng</span>
+            </div>
+
+        </a>
+    </div>
+
+</div>
+<SideMenu MenuItems="MenuItems"/>
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        MenuItems =
+            [
+            new MyControl.MenuItem(){
+                MenuText="Menu 1",
+                IDPermission="10",
+                Icon="bi bi-2-square",
+                SubItems=[
+                    new(){
+                    MenuText="Menu 1",
+                    IDPermission="11",
+                    LinkToPage="/admin/khachhang",
+                    Icon="bi bi-2-square",
+                    }
+                ]
+        }
+        ];
+    }
+
+    private bool sidebarCollapsed = false;
+
+    private void ToggleSidebar()
+    {
+        sidebarCollapsed = !sidebarCollapsed;
+    }
+
+    private List<MenuGroup> MenuGroups = new()
+    {
+        new MenuGroup
+        {
+            Title = "Quản Lý Thông Tin",
+            Icon = "bi bi-person-vcard",
+
+            Items =
+            {
+                new MenuItem
+                {
+                    Title = "Khách hàng",
+                    Icon = "bi bi-person-fill",
+                    Link = "/admin/khachhang"
+                },
+
+                new MenuItem
+                {
+                    Title = "Nhân viên",
+                    Icon = "bi bi-people-fill",
+                    Link = "/admin/nhanvien"
+                }
+            }
+        },
+
+        new MenuGroup
+        {
+            Title = "Quản Lý Sản Phẩm",
+            Icon = "bi bi-boxes",
+
+            Items =
+            {
+                new MenuItem
+                {
+                    Title = "Danh Mục",
+                    Icon = "bi bi-list-columns",
+                    Link = "/admin/danhmuc"
+                },
+
+                new MenuItem
+                {
+                    Title = "Sản Phẩm",
+                    Icon = "bi bi-bag-fill",
+                    Link = "/admin/sanpham"
+                },
+
+                new MenuItem
+                {
+                    Title = "Thương Hiệu",
+                    Icon = "bi bi-tag-fill",
+                    Link = "/admin/thuonghieu"
+                }
+            }
+        },
+
+        new MenuGroup
+        {
+            Title = "Kho Hàng",
+            Icon = "bi bi-shop",
+
+            Items =
+            {
+                new MenuItem
+                {
+                    Title = "Quản Lý Kho",
+                    Icon = "bi bi-building",
+                    Link = "/warehouse"
+                },
+
+                new MenuItem
+                {
+                    Title = "Nhập Kho",
+                    Icon = "bi bi-box-arrow-in-down",
+                    Link = "/stock-input"
+                },
+
+                new MenuItem
+                {
+                    Title = "Xuất Kho",
+                    Icon = "bi bi-box-arrow-up",
+                    Link = "/stock-output"
+                }
+            }
+        },
+
+        new MenuGroup
+        {
+            Title = "Bán Hàng",
+            Icon = "bi bi-cart-fill",
+
+            Items =
+            {
+                new MenuItem
+                {
+                    Title = "Đơn Hàng",
+                    Icon = "bi bi-clipboard-check-fill",
+                    Link = "/orders"
+                },
+
+                new MenuItem
+                {
+                    Title = "Thanh Toán",
+                    Icon = "bi bi-credit-card-fill",
+                    Link = "/payment"
+                }
+            }
+        },
+
+        new MenuGroup
+        {
+            Title = "Báo Cáo Thống Kê",
+            Icon = "bi bi-bar-chart-fill",
+
+            Items =
+            {
+                new MenuItem
+                {
+                    Title = "Doanh Thu",
+                    Icon = "bi bi-cash-stack",
+                    Link = "/reports/revenue"
+                },
+
+                new MenuItem
+                {
+                    Title = "Sản Phẩm",
+                    Icon = "bi bi-box-seam-fill",
+                    Link = "/reports/products"
+                }
+            }
+        }
+    };
+    private List<MyControl.MenuItem> MenuItems;
+
+    private void ToggleMenu(MenuGroup menu)
+    {
+        menu.IsOpen = !menu.IsOpen;
+    }
+
+
+    private class MenuGroup
+    {
+        public string Title { get; set; } = "";
+
+        public string Icon { get; set; } = "";
+
+        public bool IsOpen { get; set; }
+
+        public List<MenuItem> Items { get; set; } = new();
+    }
+
+
+    private class MenuItem
+    {
+        public string Title { get; set; } = "";
+
+        public string Icon { get; set; } = "";
+
+        public string Link { get; set; } = "";
+    }
+
+
+}

@@ -1,5 +1,5 @@
 ﻿using Application.Assets.Common;
-using Application.Assets.Dto;
+using Application.Assets.Dtos;
 using Application.Assets.FullDto;
 using Services;
 using System;
@@ -13,22 +13,22 @@ namespace ViewModal
         bool _inited = false;
         public async Task InitializeAsync()
         {
-            //if (_inited)
-            //    return;
-            //DtoResult<FullLogin> result = await service.GetLogin();// Lấy danh sách người dùng từ service
-            //if (result.Succeed && result.ResultList != null)// Kiểm tra kết quả trả về từ service
-            //{
-            //    LoginList = result.ResultList;// Lưu danh sách người dùng hiện tại
-            //    _inited = true;
-            //    NotifyStateChanged();
-            //}
-            //else
-            //{
-            //    LoginList = [];// Nếu không có kết quả, khởi tạo danh sách người dùng rỗng
-            //    ErrMess = "Có lỗi xảy ra. Không lấy được dữ liệu";
-            //    NotifyStateChanged();
-            //    return;
-            //}
+            if (_inited)
+                return;
+            DtoResult<FullLogin> result = await service.GetLogin();// Lấy danh sách người dùng từ service
+            if (result.Succeed && result.ResultList != null)// Kiểm tra kết quả trả về từ service
+            {
+                LoginList = result.ResultList;// Lưu danh sách người dùng hiện tại
+                _inited = true;
+                NotifyStateChanged();
+            }
+            else
+            {
+                LoginList = [];// Nếu không có kết quả, khởi tạo danh sách người dùng rỗng
+                ErrMess = "Có lỗi xảy ra. Không lấy được dữ liệu";
+                NotifyStateChanged();
+                return;
+            }
         }
         public bool LoggedIn { get; set; }
         public string? ErrMess { get; set; }

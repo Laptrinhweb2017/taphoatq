@@ -2124,3 +2124,335 @@ select.form-control[b-pwxuqnidwm] {
     color: #999 !important;
     font-style: italic;
 }
+/* /Components/Pages/Admin/ThuongHieu/ThuongHieuModal.razor.rz.scp.css */
+.product-modal-overlay[b-yxpe2o8u2i] {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 2000;
+}
+
+.product-modal[b-yxpe2o8u2i] {
+    width: 600px;
+    max-width: calc(100vw - 40px);
+    max-height: 90vh;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+
+.product-modal-header[b-yxpe2o8u2i] {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+    .product-modal-header h2[b-yxpe2o8u2i] {
+        margin: 0;
+        color: #222222;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+
+.product-modal-close[b-yxpe2o8u2i] {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #666666;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .product-modal-close:hover[b-yxpe2o8u2i] {
+        background: #eeeeee;
+        color: #222222;
+    }
+
+    .product-modal-close i[b-yxpe2o8u2i] {
+        font-size: 15px;
+    }
+
+
+/* BODY */
+
+.product-modal-body[b-yxpe2o8u2i] {
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+    padding: 22px 20px;
+}
+
+
+/* FORM */
+
+.product-form[b-yxpe2o8u2i] {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group[b-yxpe2o8u2i] {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+    .form-group label[b-yxpe2o8u2i] {
+        color: #333333;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+
+/* INPUT */
+
+.form-control[b-yxpe2o8u2i] {
+    width: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid #d8d8d8;
+    border-radius: 7px;
+    outline: none;
+    color: #333333;
+    background: #ffffff;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+    .form-control:focus[b-yxpe2o8u2i] {
+        border-color: #1d4ed8;
+        box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.1);
+    }
+
+    .form-control[b-yxpe2o8u2i]::placeholder {
+        color: #999999;
+    }
+
+
+/* TEXTAREA */
+
+textarea.form-control[b-yxpe2o8u2i] {
+    min-height: 90px;
+    resize: vertical;
+}
+
+
+/* SELECT */
+
+select.form-control[b-yxpe2o8u2i] {
+    cursor: pointer;
+}
+
+
+/* FORM ROW */
+
+.form-row[b-yxpe2o8u2i] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+
+/* FOOTER */
+
+.product-modal-footer[b-yxpe2o8u2i] {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-top: 1px solid #eeeeee;
+}
+
+
+/* BUTTON */
+
+.form-button[b-yxpe2o8u2i] {
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 7px;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+
+    /* Hủy */
+
+    .form-button.cancel[b-yxpe2o8u2i] {
+        background: #eeeeee;
+        color: #333333;
+    }
+
+        .form-button.cancel:hover[b-yxpe2o8u2i] {
+            background: #dddddd;
+        }
+
+
+    /* Lưu */
+
+    .form-button.save[b-yxpe2o8u2i] {
+        background: #1d4ed8;
+        color: #ffffff;
+    }
+
+        .form-button.save:hover[b-yxpe2o8u2i] {
+            background: #1742b0;
+        }
+
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+
+    .product-modal[b-yxpe2o8u2i] {
+        width: calc(100vw - 24px);
+    }
+
+    .form-row[b-yxpe2o8u2i] {
+        grid-template-columns: 1fr;
+    }
+
+    .product-modal-body[b-yxpe2o8u2i] {
+        padding: 18px 16px;
+    }
+
+    .product-modal-footer[b-yxpe2o8u2i] {
+        padding: 12px 16px;
+    }
+}
+/* /Components/Pages/Admin/ThuongHieu/ThuongHieuPage.razor.rz.scp.css */
+.product-page[b-dsls17q90u] {
+width: 100%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+/* HEADER */
+.page-header[b-dsls17q90u] {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 22px;
+}
+
+.page-title h1[b-dsls17q90u] {
+margin: 0;
+color: #222;
+font-size: 25px;
+font-weight: 600;
+}
+
+.page-title p[b-dsls17q90u] {
+margin: 6px 0 0;
+color: #777;
+font-size: 14px;
+}
+
+/* TOOLBAR */
+.page-toolbar[b-dsls17q90u] {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 14px;
+}
+
+.product-total[b-dsls17q90u] {
+color: #666;
+font-size: 14px;
+}
+
+/* TABLE WRAPPER */
+.product-table-wrapper[b-dsls17q90u] {
+width: 100%;
+overflow-x: auto;
+background: #ffffff;
+border: 1px solid #e5e5e5;
+border-radius: 10px;
+}
+
+/* TABLE */
+.product-table[b-dsls17q90u] {
+width: 100%;
+border-collapse: collapse;
+table-layout: fixed;
+font-family: "Segoe UI", Arial, sans-serif;
+font-size: 14px;
+}
+
+.product-table th[b-dsls17q90u] {
+height: 48px;
+padding: 0 16px;
+background-color: #f8f9fa !important;
+border-bottom: 1px solid #e5e5e5;
+color: #333;
+font-weight: 600;
+text-align: left;
+white-space: nowrap;
+vertical-align: middle;
+}
+
+/* DATA CELL */
+.product-table td[b-dsls17q90u] {
+height: 52px;
+padding: 12px 16px;
+border-bottom: 1px solid #eeeeee;
+color: #444;
+vertical-align: middle;
+}
+
+.product-table th:first-child[b-dsls17q90u],
+.product-table td:first-child[b-dsls17q90u] {
+    width: 85%;
+    text-align: left;
+}
+
+.product-table th:last-child[b-dsls17q90u],
+.product-table td:last-child[b-dsls17q90u],
+.product-table th.product-action-column[b-dsls17q90u],
+.product-table td.product-action-column[b-dsls17q90u] {
+    width: 15%;
+    min-width: 140px;
+    text-align: center !important;
+}
+.product-actions[b-dsls17q90u] {
+text-align: center;
+white-space: nowrap !important;
+}
+
+
+.product-table tbody tr:hover[b-dsls17q90u] {
+background-color: #fafafa;
+}
+
+
+.empty-row[b-dsls17q90u] {
+height: 180px;
+text-align: center !important;
+color: #999 !important;
+font-style: italic;
+}

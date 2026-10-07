@@ -1,0 +1,83 @@
+﻿@page "/admin/thuonghieu"
+@using UXUIAPP.Components.Common
+@using UXUIAPP.Components.Common.Actions
+@rendermode InteractiveServer
+
+@layout AdminLayout
+
+<PageTitle>Thương Hiệu</PageTitle>
+
+<div class="product-page">
+
+    <div class="page-header">
+
+        <div class="page-title">
+            <h1>Thương Hiệu</h1>
+            <p>Thương hiệu sản phẩm trong cửa hàng</p>
+        </div>
+
+    </div>
+
+    <div class="page-toolbar">
+
+        <AddButton OnClick="OpenAddModal" />
+
+    </div>
+
+    <div class="product-table-wrapper">
+
+        <table class="product-table">
+
+            <thead>
+                <tr>
+                    <th>Tên thương hiệu</th>
+                    <th class="product-action-column">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                @* 
+                    dữ liệu thương hiệu sẽ được render từ ViewModel / Backend
+                *@
+
+                <tr>
+                    <td colspan="7" class="empty-row">
+                        Chưa có dữ liệu thương hiệu
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <Pagination />
+
+    <ThuongHieuModal IsVisible="showProductModal"
+                  OnClose="CloseProductModal" />
+
+</div>
+
+
+@code
+{
+    private bool showProductModal = false;
+    private int productCount = 0;
+
+    private void OpenAddModal()
+    {
+        showProductModal = true;
+    }
+
+
+    private void CloseProductModal()
+    {
+        showProductModal = false;
+    }
+}

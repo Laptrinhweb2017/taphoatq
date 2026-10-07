@@ -1,0 +1,32 @@
+
+.search-box[b-n38iwc3n9c] {
+    width: 280px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.search-icon[b-n38iwc3n9c] {
+    margin-right: 8px;
+    font-size: 16px;
+    color: #777;
+}
+
+.search-input[b-n38iwc3n9c] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+}
+
+    .search-input[b-n38iwc3n9c]::placeholder {
+        color: #999;
+    }

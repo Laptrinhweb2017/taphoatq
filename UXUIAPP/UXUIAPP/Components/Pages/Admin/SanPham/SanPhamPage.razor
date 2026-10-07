@@ -24,10 +24,6 @@
             Tổng: @productCount sản phẩm
         </div>
 
-        @* <div class="employee-total">
-        Tổng: @Product.Count nhân viên
-    </div>`*@
-
         <AddButton OnClick="OpenAddModal" />
 
     </div>
@@ -94,22 +90,3 @@
         showProductModal = false;
     }
 }
-
-
-
-@*@code
-{
-    private bool showEmployeeModal = false;
-
-    private List<Employee> Employees = new();
-
-    private void OpenAddModal()
-    {
-        showEmployeeModal = true;
-    }
-
-    private void CloseEmployeeModal()
-    {
-        showEmployeeModal = false;
-    }
-}*@

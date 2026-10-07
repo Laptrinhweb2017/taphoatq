@@ -1,23 +1,15 @@
 ﻿@inherits LayoutComponentBase
+
 @inject LayoutService layoutService
 
-
-
-<div class="page">
-    <div>
-        <NavbarMenu/>
-    </div>
-
-    <main>
-
-        <article class="content px-4">
+<div>
+    <NavMenu @rendermode="InteractiveServer" />
+    <main class="container main-normal">
+        <article style="margin-top:20px; margin-bottom:120px;">
             @Body
         </article>
     </main>
 </div>
-
-
-
 <ModalForm />
 @code {
     protected override Task OnInitializedAsync()

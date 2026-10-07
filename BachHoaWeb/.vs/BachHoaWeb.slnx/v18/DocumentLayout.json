@@ -1,10 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\LapTrinh\\Blazor\\BachHoaWeb\\",
+  "WorkspaceRootPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F7382C17-57A6-96BB-9AD6-F95812743794}|BachHoaWeb\\BachHoaWeb.csproj|d:\\laptrinh\\blazor\\bachhoaweb\\bachhoaweb\\helper\\authenstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7382C17-57A6-96BB-9AD6-F95812743794}|BachHoaWeb\\BachHoaWeb.csproj|solutionrelative:bachhoaweb\\helper\\authenstateprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F7382C17-57A6-96BB-9AD6-F95812743794}|BachHoaWeb\\BachHoaWeb.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\bachhoaweb\\bachhoaweb\\components\\layout\\adminnavmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F7382C17-57A6-96BB-9AD6-F95812743794}|BachHoaWeb\\BachHoaWeb.csproj|solutionrelative:bachhoaweb\\components\\layout\\adminnavmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AE4CF874-B0FD-42CB-8E01-023FF0180E6F}|Services\\Services.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\bachhoaweb\\services\\services\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AE4CF874-B0FD-42CB-8E01-023FF0180E6F}|Services\\Services.csproj|solutionrelative:services\\services\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7382C17-57A6-96BB-9AD6-F95812743794}|BachHoaWeb\\BachHoaWeb.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\bachhoaweb\\bachhoaweb\\components\\layout\\adminsidebar.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F7382C17-57A6-96BB-9AD6-F95812743794}|BachHoaWeb\\BachHoaWeb.csproj|solutionrelative:bachhoaweb\\components\\layout\\adminsidebar.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03B3993B-62CD-4B89-9223-36F9B9F4FCB4}|DataLayer\\DataLayer.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\bachhoaweb\\datalayer\\repository\\loginrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03B3993B-62CD-4B89-9223-36F9B9F4FCB4}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\repository\\loginrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +26,74 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginService.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\Services\\Services\\LoginService.cs",
+              "RelativeDocumentMoniker": "Services\\Services\\LoginService.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\Services\\Services\\LoginService.cs",
+              "RelativeToolTip": "Services\\Services\\LoginService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-07T11:11:59.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginRepo.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\DataLayer\\Repository\\LoginRepo.cs",
+              "RelativeDocumentMoniker": "DataLayer\\Repository\\LoginRepo.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\DataLayer\\Repository\\LoginRepo.cs",
+              "RelativeToolTip": "DataLayer\\Repository\\LoginRepo.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-07T11:11:47.267Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdminSidebar.razor",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\BachHoaWeb\\Components\\Layout\\AdminSidebar.razor",
+              "RelativeDocumentMoniker": "BachHoaWeb\\Components\\Layout\\AdminSidebar.razor",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\BachHoaWeb\\Components\\Layout\\AdminSidebar.razor",
+              "RelativeToolTip": "BachHoaWeb\\Components\\Layout\\AdminSidebar.razor",
+              "ViewState": "AgIAAB4AAAAAAAAAAADgv40AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-07T11:03:58.967Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AuthenStateProvider.cs",
-              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\BachHoaWeb\\BachHoaWeb\\Helper\\AuthenStateProvider.cs",
-              "RelativeDocumentMoniker": "BachHoaWeb\\Helper\\AuthenStateProvider.cs",
-              "ToolTip": "D:\\LapTrinh\\Blazor\\BachHoaWeb\\BachHoaWeb\\Helper\\AuthenStateProvider.cs",
-              "RelativeToolTip": "BachHoaWeb\\Helper\\AuthenStateProvider.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBYAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-05T13:41:46.804Z",
+              "Title": "AdminNavMenu.razor",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\BachHoaWeb\\Components\\Layout\\AdminNavMenu.razor",
+              "RelativeDocumentMoniker": "BachHoaWeb\\Components\\Layout\\AdminNavMenu.razor",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\BachHoaWeb\\BachHoaWeb\\Components\\Layout\\AdminNavMenu.razor",
+              "RelativeToolTip": "BachHoaWeb\\Components\\Layout\\AdminNavMenu.razor",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAACkAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-07T11:03:45.921Z",
               "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }

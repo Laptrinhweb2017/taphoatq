@@ -1,0 +1,184 @@
+﻿@page "/admin/khachhang"
+@using Application.Assets.Dtos
+@using BachHoaWeb.Components.Common
+@using BachHoaWeb.Components.Common.Actions
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+@layout AdminLayout
+@inject CustomerViewModel vm
+
+<PageTitle>Khách hàng</PageTitle>
+
+<div class="customer-page">
+
+    <div class="page-header">
+
+        <div class="page-title">
+            <h1>Khách hàng</h1>
+            <p>Quản lý thông tin khách hàng của cửa hàng.</p>
+        </div>
+
+        <SearchBox @bind-BindText="vm.SearchText"/>
+
+    </div>
+
+   <div class="page-toolbar">
+    <AddButton OnClick="OpenAddModal" />
+    <button class="btn btn-success" @onclick="AddCust">Thêm Khách Hàng</button>
+</div>
+   <div class="border border-1 border-danger">
+        <TreeListComponent TItem="DtoCustomer"
+                           Items="vm.CustList"
+                           Headers="TreeHead"
+                           KeyFieldNames="TreeKeys"
+                           ColumnWidths="TreeCols"
+                           DisplayProperties="TreeProps"
+                           ExpanderWidth="30"
+                           TopPos="0px"
+                           TextCSS="BootStraps"
+                           Styles="CSS"
+                           SelectedRowBg="lightblue"
+                           ConditionalFormats="ConF"
+                           SetToFields="setToField"
+                           ShowEdit="ShowEdit"
+                           ShowDelete="ShowDelete"
+                           OnEditClicked="OnEditItem"
+                           OnRowDbleClicked="OnEditItem"
+                           OnDeleteClicked="OnDeleteItem" />
+
+
+   </div>
+@*
+    <div class="customer-table-wrapper">
+
+        <table class="customer-table">
+
+            <thead>
+                <tr>
+                    <th>Mã KH</th>
+                    <th>KH</th>
+                    <th>SĐT</th>
+                    <th>Email</th>
+                    <th>Địa Chỉ</th>
+                    <th>Ghi Chú</th>
+                    <th>Trạng Thái</th>
+                    <th class="customer-action-column">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @* dữ liệu render từ ViewModel 
+
+                <tr>
+                    <td colspan="6" class="empty-row">
+                        Chưa có dữ liệu khách hàng.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>*@
+
+
+    <Pagination />
+
+
+    <KhachHangModal
+        IsVisible="showCustomerModal"
+        OnClose="CloseCustomerModal" />
+    <ModalDialog TData="DtoCustomer" @ref="custDialog"
+                 Title="Thông tin công ty"
+                 DataObject="@vm.SelectedCust"
+                 ShowDeleteButton="true"
+                 OnSaveClicked="SaveCust"
+                 IsSucceed="@custSucceed">
+        <FormTemplate Context="cust">
+            <div class="p-1 p-md-3">
+                <div class="row mb-2">
+                    <label for="custid">Mã KH</label>
+                    <input type="text" @bind="cust.CustomerName"/>
+                </div>
+            </div>
+        </FormTemplate>
+    </ModalDialog>
+
+</div>
+
+<PopupMessage Duration="5000" Position="PopupMessage.PopupPosition.TopRight" Style="PopupMessage.PopupMessageStyle.Green" @ref="popup"/>
+
+@code
+{
+    PopupMessage popup = default!;
+    ModalDialog<DtoCustomer> custDialog = default!;
+    private bool showCustomerModal = false;
+    private bool custSucceed;
+    private string[] TableHeaders = ["Mã Khách Hàng", "Tên Khách Hàng", "ĐỊa Chỉ"];
+    private string[] cols=["20fr","50fr","30fr"];
+    private List<string> TreeHead = ["Mã Khách Hàng", "Tên Khách Hàng", "ĐỊa Chỉ"];
+    private List<string> TreeKeys=["id"];
+    private List<List<int>> TreeCols=[[20,40,40]];
+    private List<List<string>> BootStraps = [["p-2 text-danger", "p-2", "p-2"]];
+    private List<List<string>> CSS=[];
+    private List<object> ShowEdit = [true];
+    private List<object> ShowDelete = [(DtoCustomer cust)=>!cust.Address.Equals("abc",StringComparison.OrdinalIgnoreCase)];
+    public List<List<string>> TreeProps = [["CustomerCode", "CustomerName", "Address"]];
+    private Dictionary<string, Dictionary<string, string>> ConF = new()
+    {
+        ["Address"] = new()
+        {
+            ["ABC"] = "color:brown; font-weight:bold; background-color:yellow;"
+        }
+    };
+    private List<string> setToField = ["Address", "CustomerCode"];
+
+    protected override async Task OnInitializedAsync()
+    {
+        vm.PropertyChanged += async (s, e) => await InvokeAsync(StateHasChanged);
+        await vm.InitializeAsync();
+    }
+
+    private void OpenAddModal()
+    {
+        showCustomerModal = true;
+    }
+
+
+    private void CloseCustomerModal()
+    {
+        showCustomerModal = false;
+    }
+
+
+    private async Task SaveCust()
+    {
+        //xử lý lưu
+        //sau đó kiểm tra lỗi, nếu không có lỗi thì đóng dialog
+        popup.ShowMessage("Lưu xong",PopupMessage.PopupMessageStyle.Red);
+        await custDialog.CloseAsync();
+    }
+
+    private async Task AddCust()
+    {
+        await custDialog.ShowAsync();
+    }
+
+
+    private async Task OnEditItem(object item)
+    {
+        DtoCustomer cust = (DtoCustomer)item;
+        vm.SelectedCust = cust;
+        await custDialog.ShowAsync();
+    }
+
+    private async Task OnDeleteItem(object item)
+    {
+        DtoCustomer cust = (DtoCustomer)item;
+        popup.ShowMessage($"Bạn đang xóa {cust.CustomerName}");
+    }
+}

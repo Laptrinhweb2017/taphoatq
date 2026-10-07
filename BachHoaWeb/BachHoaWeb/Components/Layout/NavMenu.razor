@@ -1,42 +1,87 @@
-﻿@* <div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">BachHoaWeb</a>
-    </div>
+﻿
+<div class="fixed-top nav-div">
+    <nav class="navbar navbar-expand-md mb-1 ">
+
+        <div class="container-fluid">
+            <NavLink class="navbar-brand"><img src="assets/img/eshop.png" class="brand-logo" /> </NavLink>
+
+            <button class="nav-toggler d-md-none" @onclick=@(() => ShowNavMenu = !ShowNavMenu)>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+
+            <div class="navbar-collapse collapse d-none d-md-inline-flex justify-content-between" id="navContent">
+                <ul class="navbar-nav flex-grow-1">
+                    <NavLink class="nav-link main-font-normal" href="/" Match="NavLinkMatch.All">
+                        <span class='fas fa-home nav-span d-inline d-lg-none d-xxl-inline' aria-hidden="true"></span> <p class="d-none d-lg-inline">Trang Chủ</p>
+                    </NavLink>
+
+                    <NavLink class="nav-link main-font-normal" href="san-pham">
+                        <span class='fas fa-shopping-cart nav-span d-inline d-lg-none d-xxl-inline' aria-hidden="true"></span> <p class="d-none d-lg-inline">Sản Phẩm</p>
+                    </NavLink>
+                    
+                    <NavLink class="nav-link main-font-normal" href="lien-he">
+                        <span class='fas fa-phone nav-span d-inline d-lg-none d-xxl-inline' aria-hidden="true"></span> <p class="d-none d-lg-inline">Liên Hệ</p>
+                    </NavLink>
+                    @* <NavLink class="nav-link main-font-normal" href="/check-in">
+                        <span class='fas fa-phone nav-span d-inline d-lg-none d-xxl-inline' aria-hidden="true"></span> <p class="d-none d-lg-inline">Check In</p>
+                    </NavLink> *@
+                </ul>
+                <ul class="navbar-nav flex-grow-1 justify-content-end">
+
+                    
+                    <NavLink class=" nav-link main-font-normal" href="/giohang">
+                        <span class='fas fa-shopping-cart nav-span d-inline d-lg-none d-xxl-inline' aria-hidden="true"></span> <p class="d-none d-lg-inline">Giỏ Hàng</p>
+                    </NavLink>
+                    
+                    <NavLink class="nav-link me-3 main-font-normal" href="/prod-man">
+                        <span class='fas fa-tools nav-span d-inline d-lg-none d-xxl-inline' aria-hidden="true"></span> <p class="d-none d-lg-inline">Admin</p>
+                    </NavLink>
+
+                </ul>
+            </div>
+        </div>
+        @if (ShowNavMenu)
+        {
+            <div class="d-flex div-nav-menu align-items-end" id="navContent">
+                <ul class="navbar-nav flex-grow-1" style="width:60vw">
+                    <NavLink class="nav-link main-font-normal ms-auto me-auto pe-3" href="/" Match="NavLinkMatch.All" @onclick="() => ShowNavMenu = false">
+                        <span class='fas fa-home nav-span' aria-hidden="true"></span> Trang Chủ
+                    </NavLink>
+                    <NavLink class="nav-link main-font-normal ms-auto me-auto pe-3" href="san-pham" @onclick="() => ShowNavMenu = false">
+                        <span class='fas fa-shopping-cart nav-span' aria-hidden="true"></span> Sản Phẩm
+                    </NavLink>
+                    <NavLink class="nav-link main-font-normal ms-auto me-auto pe-3" href="lien-he" @onclick="() => ShowNavMenu = false">
+                        <span class='fas fa-phone nav-span' aria-hidden="true"></span>Liên Hệ
+                    </NavLink>
+                    
+                        <NavLink class="nav-link main-font-normal ms-auto me-auto pe-3" href="/giohang" @onclick="() => ShowNavMenu = false">
+                            <span class='fas fa-shopping-cart nav-span' aria-hidden="true"></span>Giỏ Hàng
+                        </NavLink>
+                    
+                    <NavLink class="nav-link me-3 main-font-normal ms-auto me-auto pe-3" href="/prod-man">
+                        <span class='fas fa-tools nav-span' aria-hidden="true"></span> Admin
+                    </NavLink>
+                </ul>
+            </div>
+        }
+    </nav>
+
 </div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+@code {
+    private bool _subscribed = false;
+    private bool ShowNavMenu = false;
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu text-danger" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Quản Lý Nhân Viên 
-            </NavLink>
-        </div>
+    
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="test-customer">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Quản Lý Khách Hàng
-            </NavLink>
-        </div>
-        
-        <div class="nav-item px-3">
-        <NavLink class="nav-link" href="weather">
-            <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Nhà Cung Cấp
-        </NavLink>
-    </div>
+    private void CartChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Thông Tin Cửa Hàng
-            </NavLink>
-        </div>
-    </nav>
-</div> *@
+    
+}
+
 

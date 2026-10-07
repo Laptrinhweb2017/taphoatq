@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UXUIAPP")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de820019dc23b3d3f3a756b564e70d6f12042efd")]
 [assembly: System.Reflection.AssemblyProductAttribute("UXUIAPP")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UXUIAPP")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

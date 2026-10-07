@@ -12,181 +12,233 @@ build_property.EntryPointFilePath =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BachHoaWeb
 build_property.RootNamespace = BachHoaWeb
-build_property.ProjectDir = D:\LapTrinh\Blazor\BachHoaWeb\BachHoaWeb\
+build_property.ProjectDir = D:\LapTrinh\Blazor\GitHub\taphoatq\BachHoaWeb\BachHoaWeb\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\LapTrinh\Blazor\BachHoaWeb\BachHoaWeb
+build_property.MSBuildProjectDirectory = D:\LapTrinh\Blazor\GitHub\taphoatq\BachHoaWeb\BachHoaWeb
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/App.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Layout/NavbarMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2YmFyTWVudS5yYXpvcg==
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/AdminSidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5TaWRlYmFyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Counter.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Customer/CustomerPage.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDdXN0b21lclxDdXN0b21lclBhZ2UucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Error.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/Logout.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/Logout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbnNcTG9nb3V0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/NotAuthorized.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/NotAuthorized.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbnNcTm90QXV0aG9yaXplZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/NotFound.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/NotFound.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Product/ProductPage.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Product/ProductPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0XFByb2R1Y3RQYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Test/TestEmployeePage.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Stock/StockInputPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdG9ja1xTdG9ja0lucHV0UGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Test/TestEmployeePage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUZXN0XFRlc3RFbXBsb3llZVBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Test/TestLoginInfoPage.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Test/TestLoginInfoPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUZXN0XFRlc3RMb2dpbkluZm9QYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Test/TestPage.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Test/TestPage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUZXN0XFRlc3RQYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Weather.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Routes.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/FilterTextBox.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/FilterTextBox.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xGaWx0ZXJUZXh0Qm94LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/ModalDialog/ModalForm.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/ModalDialog/ModalForm.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xNb2RhbERpYWxvZ1xNb2RhbEZvcm0ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/ModalImgPreview/ModalImgPreview.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/ModalImgPreview/ModalImgPreview.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xNb2RhbEltZ1ByZXZpZXdcTW9kYWxJbWdQcmV2aWV3LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/NumberInput/VietNumberInput.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/NumberInput/VietNumberInput.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xOdW1iZXJJbnB1dFxWaWV0TnVtYmVySW5wdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/PagedAlbulm.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/PagedAlbulm.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xQYWdlZEFsYnVsbS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/PagedStory.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/PagedStory.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xQYWdlZFN0b3J5LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/PagedTable.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/PagedTable.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xQYWdlZFRhYmxlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/PopupMessage.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/PopupMessage.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xQb3B1cE1lc3NhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/SideMenu/MenuItemComp.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/SideMenu/MenuItemComp.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xTaWRlTWVudVxNZW51SXRlbUNvbXAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/TinyMCEEditor.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/TinyMCEEditor.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xUaW55TUNFRWRpdG9yLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/_Imports.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Layout/AdminLayout.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/Actions/AddButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xBZGRCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-0wq6nw9239
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/Actions/DeleteButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xEZWxldGVCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-nh74cah25i
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/Actions/EditButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xFZGl0QnV0dG9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-8hq5gajkdh
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/Actions/ViewButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xWaWV3QnV0dG9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-dis74jsaqo
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/ConfirmDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQ29uZmlybURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-cfgo8f5bwc
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/DataTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cRGF0YVRhYmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-tremwh120o
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/Loading.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cTG9hZGluZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-lvyh3k6wvn
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/Modal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-u8u9o02pau
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/Pagination.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cUGFnaW5hdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-88v3qlzefl
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Common/SearchBox.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cU2VhcmNoQm94LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-n38iwc3n9c
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/AdminHeader.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5IZWFkZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-3gh99j41ku
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/AdminLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-tttcmrwthp
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Layout/AdminNavMenu.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/AdminNavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5OYXZNZW51LnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-gqsuqnvao2
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Layout/MainLayout.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-aqtmic02pq
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Layout/NavMenu.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-jtn08otim1
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Layout/ReconnectModal.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/ReconnectModal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUmVjb25uZWN0TW9kYWwucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-wy0633cuke
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Home/Home.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Home/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lXEhvbWUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-nzs1jd8hhg
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/Login.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Khachhang/KhachHangModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xLaGFjaGhhbmdcS2hhY2hIYW5nTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-7en9p8f1zt
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Khachhang/KhachHangPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xLaGFjaGhhbmdcS2hhY2hIYW5nUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-io8r0n5ylc
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/Login.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbnNcTG9naW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-3rgqbvgo26
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/LoginLayout.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Logins/LoginLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xMb2dpbnNcTG9naW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-sb0ckahi1d
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/DateEngine/VietDateInput.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/DateEngine/VietDateInput.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xEYXRlRW5naW5lXFZpZXREYXRlSW5wdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-1jdu7vt9zi
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/Dialog/ConfirmDialog.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/Dialog/ConfirmDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xEaWFsb2dcQ29uZmlybURpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-nopjq9zkjl
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/Dialog/EditDialog.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/Dialog/EditDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xEaWFsb2dcRWRpdERpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-fs3gairoaf
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/FilterSelect/FilterSelect.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/FilterSelect/FilterSelect.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xGaWx0ZXJTZWxlY3RcRmlsdGVyU2VsZWN0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = b-jaw5p1wccn
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/ImagePreview.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/ImagePreview.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xJbWFnZVByZXZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-h1pg1kqch1
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/ModalDialog/ModalDialog.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/ModalDialog/ModalDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xNb2RhbERpYWxvZ1xNb2RhbERpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-m907xakk0t
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/SideMenu/SideMenu.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/SideMenu/SideMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xTaWRlTWVudVxTaWRlTWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-mugbb8tpl9
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/TreeList/TreeListComponent.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/TreeList/TreeListComponent.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xUcmVlTGlzdFxUcmVlTGlzdENvbXBvbmVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-svdq20ayfk
 
-[D:/LapTrinh/Blazor/BachHoaWeb/BachHoaWeb/Components/UC/TreeList/TreeListView.razor]
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/UC/TreeList/TreeListView.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xVQ1xUcmVlTGlzdFxUcmVlTGlzdFZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-bg7gxebsw4

@@ -1,0 +1,22 @@
+﻿
+@rendermode InteractiveServer
+<div class="search-box">
+    <i class="bi bi-search search-icons"></i>
+    <input type="text"
+        @bind="@BindText"
+        @oninput="OnInputChanged"
+        class="search-input"
+        placeholder="Tìm kiếm..."
+        />
+</div>
+@code{
+    [Parameter] public string BindText { get; set; }
+    [Parameter] public EventCallback<string> BindTextChanged { get; set; }
+
+    private async Task OnInputChanged(ChangeEventArgs e)
+    {
+        BindText = e.Value?.ToString();
+        // Báo cho component cha (vm.SearchText) cập nhật lại giá trị mới
+        await BindTextChanged.InvokeAsync(BindText);
+    }
+}

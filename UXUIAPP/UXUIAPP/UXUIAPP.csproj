@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Components\Layout\Shared\" />
-    <Folder Include="Components\Layout\Store\" />
     <Folder Include="Components\Pages\Admin\KhoHang\" />
     <Folder Include="Components\Pages\Admin\DonHang\" />
     <Folder Include="Components\Pages\Admin\BaoCaoDoanhThu\" />
@@ -18,7 +16,6 @@
     <Folder Include="Components\Pages\Admin\ThanhToan\" />
     <Folder Include="Components\Pages\Admin\XuatKho\" />
     <Folder Include="Components\Pages\Admin\NhapKho\" />
-    <Folder Include="Components\Pages\Admin\ThuongHieu\" />
     <Folder Include="wwwroot\assets\images\" />
     <Folder Include="wwwroot\assets\fonts\" />
   </ItemGroup>

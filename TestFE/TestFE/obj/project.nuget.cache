@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "yEFyJ2/t2qM=",
+  "success": true,
+  "projectFilePath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestFE\\TestFE\\TestFE.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.11\\microsoft.aspnetcore.app.internal.assets.10.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}

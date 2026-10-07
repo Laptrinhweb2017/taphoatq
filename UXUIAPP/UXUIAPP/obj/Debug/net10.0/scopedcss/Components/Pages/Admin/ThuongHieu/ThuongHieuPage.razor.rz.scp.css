@@ -1,0 +1,110 @@
+.product-page[b-dsls17q90u] {
+width: 100%;
+max-width: 1400px;
+margin: 0 auto;
+}
+
+/* HEADER */
+.page-header[b-dsls17q90u] {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 22px;
+}
+
+.page-title h1[b-dsls17q90u] {
+margin: 0;
+color: #222;
+font-size: 25px;
+font-weight: 600;
+}
+
+.page-title p[b-dsls17q90u] {
+margin: 6px 0 0;
+color: #777;
+font-size: 14px;
+}
+
+/* TOOLBAR */
+.page-toolbar[b-dsls17q90u] {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 14px;
+}
+
+.product-total[b-dsls17q90u] {
+color: #666;
+font-size: 14px;
+}
+
+/* TABLE WRAPPER */
+.product-table-wrapper[b-dsls17q90u] {
+width: 100%;
+overflow-x: auto;
+background: #ffffff;
+border: 1px solid #e5e5e5;
+border-radius: 10px;
+}
+
+/* TABLE */
+.product-table[b-dsls17q90u] {
+width: 100%;
+border-collapse: collapse;
+table-layout: fixed;
+font-family: "Segoe UI", Arial, sans-serif;
+font-size: 14px;
+}
+
+.product-table th[b-dsls17q90u] {
+height: 48px;
+padding: 0 16px;
+background-color: #f8f9fa !important;
+border-bottom: 1px solid #e5e5e5;
+color: #333;
+font-weight: 600;
+text-align: left;
+white-space: nowrap;
+vertical-align: middle;
+}
+
+/* DATA CELL */
+.product-table td[b-dsls17q90u] {
+height: 52px;
+padding: 12px 16px;
+border-bottom: 1px solid #eeeeee;
+color: #444;
+vertical-align: middle;
+}
+
+.product-table th:first-child[b-dsls17q90u],
+.product-table td:first-child[b-dsls17q90u] {
+    width: 85%;
+    text-align: left;
+}
+
+.product-table th:last-child[b-dsls17q90u],
+.product-table td:last-child[b-dsls17q90u],
+.product-table th.product-action-column[b-dsls17q90u],
+.product-table td.product-action-column[b-dsls17q90u] {
+    width: 15%;
+    min-width: 140px;
+    text-align: center !important;
+}
+.product-actions[b-dsls17q90u] {
+text-align: center;
+white-space: nowrap !important;
+}
+
+
+.product-table tbody tr:hover[b-dsls17q90u] {
+background-color: #fafafa;
+}
+
+
+.empty-row[b-dsls17q90u] {
+height: 180px;
+text-align: center !important;
+color: #999 !important;
+font-style: italic;
+}

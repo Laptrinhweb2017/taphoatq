@@ -1,5 +1,5 @@
 ﻿using Application.Assets.Common;
-using Application.Assets.Dto;
+using Application.Assets.Dtos;
 using Application.Assets.FullDto;
 using Business;
 using Services;
@@ -16,11 +16,56 @@ namespace ViewModal
             DtoResult<DtoCustomer> rs = await cust.GetAllAsync();
             if (rs.Succeed && rs.ResultList != null)
             {
-                CustList = rs.ResultList;
+                RootList = [..rs.ResultList.Select(x=> new DtoCustomer {
+                    Address = x.Address,
+                    CustomerCode = x.CustomerCode,
+                    CustomerName = x.CustomerName,
+                    Id = x.Id,
+                    Phone = x.Phone,
+                    TaxCode = x.TaxCode,
+                })];
+                CustList = [..rs.ResultList.Select(x=> new DtoCustomer {
+                    Address = x.Address,
+                    CustomerCode = x.CustomerCode,
+                    CustomerName = x.CustomerName,
+                    Id = x.Id,
+                    Phone = x.Phone,
+                    TaxCode = x.TaxCode,
+                })];
             }
+            OnPropertyChanged();
         }
 
+        private List<DtoCustomer> RootList = [];
         public List<DtoCustomer> CustList { get; set; } = [];
+
+        string searchText = "";
+        public string SearchText 
+        {
+            get => searchText;
+            set
+            {
+                searchText = value;
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    CustList = [.. RootList.Where(x =>
+                    x.CustomerCode!.Contains(searchText, StringComparison.CurrentCultureIgnoreCase) ||
+                    x.CustomerName!.Contains(searchText, StringComparison.CurrentCultureIgnoreCase) ||
+                    x.Phone!.Contains(searchText, StringComparison.CurrentCultureIgnoreCase)
+                    )];
+                }
+                else
+                    CustList = [..RootList.Select(x=> new DtoCustomer {
+                    Address = x.Address,
+                    CustomerCode = x.CustomerCode,
+                    CustomerName = x.CustomerName,
+                    Id = x.Id,
+                    Phone = x.Phone,
+                    TaxCode = x.TaxCode,
+                })];
+                OnPropertyChanged();
+            }
+        }
 
 
         public DtoCustomer SelectedCust { get; set; } = new();

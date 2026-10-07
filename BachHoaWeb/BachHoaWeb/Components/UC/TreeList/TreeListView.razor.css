@@ -4,6 +4,10 @@
     width: 100%;
 }
 
+.treelist-item-wrapper {
+    width: 100%;
+}
+
 /* Header */
 .treelist-header {
     position: sticky;
@@ -15,8 +19,8 @@
     background-color: lightblue;
     border-bottom: 1px solid #ccc;
     padding: 4px 0;
-    
 }
+
     .treelist-header .header-cell {
         padding: 4px 8px;
         text-align: left;
@@ -25,39 +29,39 @@
         text-overflow: ellipsis;
     }
 
-/* Row */
+/* Row General */
 .treelist-row {
-    /*display: grid;*/
     align-items: center;
     border-bottom: 1px solid darkgray;
     cursor: pointer;
     min-height: 28px;
     background-color: whitesmoke;
     touch-action: manipulation;
-
+    width: 100%;
 }
 
     .treelist-row:hover {
-        background-color: #f9f9f9;
+        background-color: #ffffff;
     }
 
+    .treelist-row.selected,
     .treelist-row .selected {
         background-color: #dbeafe; /* xanh nhạt khi dòng được chọn */
     }
-    .treelist-row.selected {
-        background-color: #dbeafe;
-    }
-/* Cell */
+
+/* Cell General */
 .tl-cell {
     padding: 2px 6px;
     white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    box-sizing: border-box;
 }
-.button-cell{
 
+.button-cell {
 }
-.top-level { /*style cho dòng level đầu tiên trong cây*/
+
+.top-level {
     font-style: italic;
     font-weight: bold;
     color: darkblue;
@@ -65,50 +69,85 @@
 
 /* Expander cell */
 .tl-expander {
-    width: 30px; /* khớp ExpanderWidth */
+    width: 30px;
+    min-width: 30px;
     text-align: center;
 }
 
-.tl-expander-icon {
+::deep .tl-expander-icon {
     cursor: pointer;
-    color: #555;
+    color: #0000cc !important;
 }
 
-    .tl-expander-icon:hover {
-        color: #000;
+    ::deep .tl-expander-icon:hover {
+        color: #4d4dff !important;
     }
-/* Mobile layout */
+
+/* ========================================== */
+/* MOBILE SPECIFIC STYLES (FULL BACKGROUND)   */
+/* ========================================== */
+
+.mobile-row-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-cells-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.mobile-buttons-wrapper {
+    display: flex;
+    margin-left: 8px;
+    align-items: center;
+}
+
+.treelist-mobile-cell {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    width: 100%;
+}
+
+    .treelist-mobile-cell .tl-cell {
+        width: 100%; /* Đảm bảo cell chiếm trọn 100% chiều ngang dòng */
+        display: flex;
+        align-items: center;
+    }
+
 .tl-mobile-line {
     display: flex;
     gap: 6px;
     line-height: 1.4;
+    width: 100%;
 }
 
     .tl-mobile-line.mobile-main {
         font-weight: 600;
-        padding-left: 0;
+        padding-left: 4px;
     }
 
     .tl-mobile-line.mobile-sub {
-        padding-left: 12px; /* 👈 thụt dòng không phải dòng đầu */
+        padding-left: 12px;
     }
 
+.mobile-indent {
+    padding-left: 12px;
+}
+
 .mobile-header {
-    min-width: 90px;
+    min-width: 80px;
     color: #666;
     font-size: 0.85rem;
+    flex-shrink: 0;
 }
 
 .mobile-value {
     flex: 1;
     word-break: break-word;
-}
-.treelist-mobile-cell {
-    display: flex;
-    align-items: center;
-    min-height: 28px;
-}
-
-.mobile-indent {
-    padding-left: 12px;
 }

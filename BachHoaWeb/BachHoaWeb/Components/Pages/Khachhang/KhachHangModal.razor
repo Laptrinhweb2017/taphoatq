@@ -1,0 +1,140 @@
+@if (IsVisible)
+{
+    <div class="customer-modal-overlay">
+
+        <div class="customer-modal">
+
+            <div class="customer-modal-header">
+
+                <h2>Thêm khách hàng</h2>
+
+                <button class="customer-modal-close"
+                        @onclick="CloseModal">
+
+                    <i class="bi bi-x-lg"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="customer-modal-body">
+
+                <div class="customer-form">
+
+                    <div class="form-group">
+
+                        <label>
+                            Họ và tên
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Nhập họ và tên" />
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>
+                                Số điện thoại
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Nhập số điện thoại" />
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="Nhập email" />
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Địa chỉ
+                        </label>
+
+                        <textarea class="form-control"
+                                  rows="3"
+                                  placeholder="Nhập địa chỉ">
+                        </textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Ghi chú
+                        </label>
+
+                        <textarea class="form-control"
+                                  rows="3"
+                                  placeholder="Nhập ghi chú">
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="customer-modal-footer">
+
+                <button class="form-button cancel"
+                        @onclick="CloseModal">
+
+                    Hủy
+
+                </button>
+
+
+                <button class="form-button save">
+
+                    <i class="bi bi-check-lg"></i>
+
+                    Lưu
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+@code
+{
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+
+    private async Task CloseModal()
+    {
+        await OnClose.InvokeAsync();
+    }
+}

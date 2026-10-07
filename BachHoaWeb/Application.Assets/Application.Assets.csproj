@@ -5,5 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="TextProcessing">
+	    <HintPath>..\DataLayer\TextProcessing.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
 </Project>

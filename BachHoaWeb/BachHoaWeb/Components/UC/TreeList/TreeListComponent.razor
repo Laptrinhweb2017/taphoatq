@@ -1,59 +1,81 @@
-﻿@using MyControl
+﻿@using Application.Assets.Dtos
+@using MyControl
 @typeparam TItem
 
-@if (Headers != null && ColumnWidths != null)
-{
-    <div class="treelist-header d-none d-md-grid sticky-top"
-         style="grid-template-columns:@GetHeaderGridTemplate();">
-        <div class="tl-cell tl-expander"></div>
+<div class="treelist-wrapper" style="position: relative; width: 100%;">
 
-        @foreach (var h in Headers)
-        {
-            <div class="tl-cell header-cell">@h</div>
-        }
+    @if (Headers != null && ColumnWidths != null)
+    {
+        <div class="treelist-header d-none d-md-grid"
+             style="grid-template-columns: @GetHeaderGridTemplate();
+            position: sticky;
+            @topPos
+            z-index: 100;
+            background-color: @HeaderBGColor;
+            border-bottom: 2px solid #a0c4ff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
 
-        @if (ShowDelete.Last())
-        {
-            <div class="tl-cell header-cell"></div>
-        }
-        @if (ShowEdit.Last())
-        {
-            <div class="tl-cell header-cell"></div>
-        }
+            @* Ô nút mở rộng tree *@
+            <div class="tl-cell tl-expander" style="border-right: 1px solid #a0c4ff;"></div>
+
+            @* Các ô Header chính *@
+            @foreach (var h in Headers)
+            {
+                <div class="tl-cell header-cell fw-bold px-3 d-flex align-items-center"
+                     style="border-right: 1px solid #a0c4ff;">
+                    @h
+                </div>
+            }
+
+            @* Cột thao tác Sửa/Xóa (Khớp đúng thứ tự RenderButtons của TreeListView: Edit trước, Delete sau) *@
+            @if (HasEditButtonConfig())
+            {
+                <div class="tl-cell header-cell" style="border-right: 1px solid #a0c4ff;"></div>
+            }
+            @if (HasDeleteButtonConfig())
+            {
+                <div class="tl-cell header-cell"></div>
+            }
+        </div>
+    }
+
+    @* Phần nội dung danh sách TreeListView bên dưới *@
+    <div style="background-color: @MainBGColor;">
+        <TreeListView TItem="TItem"
+                      Items="Items"
+                      Level="0"
+                      IndentPx="IndentPx"
+                      ExpanderWidth="ExpanderWidth"
+                      ColumnWidths="ColumnWidths"
+                      SelectedRowBg="SelectedRowBg"
+                      SelectionState="_selectionState"
+                      KeyFieldNames="KeyFieldNames"
+                      DisplayProperties="DisplayProperties"
+                      ChildPropertyNames="ChildPropertyNames"
+                      Headers="Headers"
+                      ShowDelete="ShowDelete"
+                      ShowEdit="ShowEdit"
+                      OnSelectionChanged="OnSelectionChanged"
+                      OnRowDbleClicked="OnRowDbleClicked"
+                      OnRowClicked="OnRowClicked"
+                      OnDeleteClicked="OnDeleteClicked"
+                      OnEditClicked="OnEditClicked"
+                      ColumnFormats="ColumnFormats"
+                      ConditionalFormats="ConditionalFormats"
+                      SetToFields="SetToFields"
+                      ApplyOnlyLeafLevel="ApplyOnlyLeafLevel"
+                      TextCSS="TextCSS"
+                      LinkFields="LinkFields"
+                      Styles="Styles" />
     </div>
-}
-<div class="p-2" style="background-color:@MainBGColor">
-    <TreeListView TItem="TItem"
-                  Items="Items"
-                  Level="0"
-                  IndentPx="IndentPx"
-                  ExpanderWidth="ExpanderWidth"
-                  ColumnWidths="ColumnWidths"
-                  SelectedRowBg="SelectedRowBg"
-                  SelectionState="_selectionState"
-                  KeyFieldNames="KeyFieldNames"
-                  DisplayProperties="DisplayProperties"
-                  ChildPropertyNames="ChildPropertyNames"
-                  Headers="Headers"
-                  ShowDelete="ShowDelete"
-                  ShowEdit="ShowEdit"
-                  OnSelectionChanged="OnSelectionChanged"
-                  OnRowDbleClicked="OnRowDbleClicked"
-                  OnRowClicked="OnRowClicked"
-                  OnDeleteClicked="OnDeleteClicked"
-                  OnEditClicked="OnEditClicked"
-                  ColumnFormats="ColumnFormats"
-                  ConditionalFormats="ConditionalFormats"
-                  SetToFields="SetToFields"
-                  ApplyOnlyLeafLevel="ApplyOnlyLeafLevel"
-                  TextCSS="TextCSS"
-                  LinkFields="LinkFields"
-                  Styles="Styles" />
-
 </div>
-                
+
 @code {
-    [Parameter] public string MainBGColor { get; set; } = "white";
+    private string topPos => !string.IsNullOrEmpty(TopPos) ? $"top:{TopPos};" : "top:0px;";
+
+    [Parameter] public string TopPos { get; set; } = "";
+    [Parameter] public string MainBGColor { get; set; } = "#ffffff";
+    [Parameter] public string HeaderBGColor { get; set; } = "#dbeaff";
     [Parameter] public IReadOnlyList<TItem>? Items { get; set; }
     [Parameter] public List<List<int>>? ColumnWidths { get; set; }
     [Parameter] public int ExpanderWidth { get; set; } = 40;
@@ -66,13 +88,13 @@
     [Parameter] public Dictionary<string, Dictionary<string, string>> ConditionalFormats { get; set; } = [];
 
     [Parameter] public List<string>? SetToFields { get; set; }
-
     [Parameter] public bool ApplyOnlyLeafLevel { get; set; } = true;
 
-    [Parameter] public List<bool> ShowEdit { get; set; } = [];
-    [Parameter] public List<bool> ShowDelete { get; set; } = [];
+    // Sửa kiểu dữ liệu từ List<bool> sang List<object> để đồng bộ với TreeListView
+    [Parameter] public List<object> ShowEdit { get; set; } = [];
+    [Parameter] public List<object> ShowDelete { get; set; } = [];
 
-    [Parameter] public List<string>? Headers { get; set; } 
+    [Parameter] public List<string>? Headers { get; set; }
     [Parameter] public List<string>? ChildPropertyNames { get; set; }
     [Parameter] public List<string>? KeyFieldNames { get; set; }
     [Parameter] public List<string> LinkFields { get; set; } = [];
@@ -84,27 +106,37 @@
     [Parameter] public EventCallback<object> OnDeleteClicked { get; set; }
 
     private TreeSelectionState _selectionState = new();
+
+    private bool HasEditButtonConfig() => ShowEdit != null && ShowEdit.Any(x => x != null);
+    private bool HasDeleteButtonConfig() => ShowDelete != null && ShowDelete.Any(x => x != null);
+
     private string GetHeaderGridTemplate()
     {
         var cols = new List<string>();
 
-        // Expander
+        // 1. Ô Expander ngoài cùng bên trái (khớp với icon + / -)
         var expander = ExpanderWidth > 30 ? ExpanderWidth : 30;
         cols.Add($"{expander}px");
 
-        // Columns theo LAST level
-        var widths = ColumnWidths!.Last();
+        // 2. Lấy danh sách cột từ Level chứa dữ liệu hiển thị (thường là cấp con / Last level)
+        if (ColumnWidths != null && ColumnWidths.Count > 0)
+        {
+            // Dùng .Last() để lấy cấu trúc chia cột của dòng con (ĐEN ĐÁ, Giá, Checkbox...)
+            var widths = ColumnWidths.Count > 1 ? ColumnWidths.Last() : ColumnWidths[0];
 
-        foreach (var w in widths)
-            cols.Add($"{w}fr");
+            foreach (var w in widths)
+            {
+                cols.Add($"{w}fr");
+            }
+        }
 
-        // Buttons
-        if (ShowDelete.Any(x=>x==true))
+        // 3. Thêm cột nút Edit / Delete tương ứng để Header khớp chiều rộng với Data row
+        if (HasEditButtonConfig())
             cols.Add("40px");
-        if (ShowEdit.Any(x => x== true))
+
+        if (HasDeleteButtonConfig())
             cols.Add("40px");
 
         return string.Join(" ", cols);
     }
-
 }

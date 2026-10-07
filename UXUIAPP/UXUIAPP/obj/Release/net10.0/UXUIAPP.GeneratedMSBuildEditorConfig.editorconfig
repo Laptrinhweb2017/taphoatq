@@ -1,0 +1,140 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EntryPointFilePath = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = UXUIAPP
+build_property.RootNamespace = UXUIAPP
+build_property.ProjectDir = D:\LapTrinh\Blazor\GitHub\taphoatq\UXUIAPP\UXUIAPP\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 10.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\LapTrinh\Blazor\GitHub\taphoatq\UXUIAPP\UXUIAPP
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Layout/Admin/AdminHeader.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5cQWRtaW5IZWFkZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Layout/Admin/AdminLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5cQWRtaW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Layout/Admin/AdminSidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5cQWRtaW5TaWRlYmFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/NotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xOb3RGb3VuZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Store/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdG9yZVxIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/Actions/AddButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xBZGRCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-r3i7cpa71n
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/Actions/DeleteButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xEZWxldGVCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-5coh18xb3z
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/Actions/EditButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xFZGl0QnV0dG9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-yscd7w80e6
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/Actions/ViewButton.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQWN0aW9uc1xWaWV3QnV0dG9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-3vzhp76e51
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/ConfirmDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cQ29uZmlybURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-ninx545z07
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/DataTable.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cRGF0YVRhYmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-vp5u7v5py1
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/Loading.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cTG9hZGluZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-2azh5vwevm
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/Modal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-3vrvln3t5r
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/Pagination.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cUGFnaW5hdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-0p4hwxoffx
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Common/SearchBox.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb21tb25cU2VhcmNoQm94LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-ap8onigmev
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-n8k67oywkb
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Layout/ReconnectModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcUmVjb25uZWN0TW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-k71iygu8hv
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/DanhMuc/DanhMucModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxEYW5oTXVjXERhbmhNdWNNb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-3086gn47hb
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/DanhMuc/DanhMucPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxEYW5oTXVjXERhbmhNdWNQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-y1s17ke8ok
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/Dashboard/DashboardPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxEYXNoYm9hcmRcRGFzaGJvYXJkUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-073yjnmlns
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/KhachHang/KhachHangModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxLaGFjaEhhbmdcS2hhY2hIYW5nTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-udi9i758ao
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/KhachHang/KhachHangPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxLaGFjaEhhbmdcS2hhY2hIYW5nUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-t3n8ap7dxf
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/NhanVien/NhanVienModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxOaGFuVmllblxOaGFuVmllbk1vZGFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-tob4tiwidd
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/NhanVien/NhanVienPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxOaGFuVmllblxOaGFuVmllblBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-cdmd6zct86
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/SanPham/SanPhamModal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxTYW5QaGFtXFNhblBoYW1Nb2RhbC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-pwxuqnidwm
+
+[D:/LapTrinh/Blazor/GitHub/taphoatq/UXUIAPP/UXUIAPP/Components/Pages/Admin/SanPham/SanPhamPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxTYW5QaGFtXFNhblBoYW1QYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-n9a23hukwp

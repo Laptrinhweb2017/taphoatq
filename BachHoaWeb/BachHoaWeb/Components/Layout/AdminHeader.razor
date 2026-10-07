@@ -1,0 +1,78 @@
+﻿
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+@inject HeaderInfo headerInfo
+@inject LoginViewModel vm
+@inject NavigationManager NavMan
+@* @inject StaffViewModel staffVM
+ *@
+ @inject AuthenticationStateProvider AuthProvider
+
+
+
+<div class="header-line d-none d-md-flex">
+    <p class="header-title mt-0 mb-0 text-white">@headerInfo.HeadTitle</p>
+    @if (vm.LoggedIn)
+    {
+        <div class="ms-auto me-2 align-items-center d-flex">
+            <p class="p-0 m-0 me-2 text-white d-inline-block">@TimePeriod, <span class="text-info fst-italic fw-bold"> @headerInfo.LogingName</span></p>
+            <button class="btn btn-light btn-logout px-2 w-auto mx-2" @onclick="LogoutUser">Logout</button>
+        </div>
+    }
+</div>
+
+<PopupMessage Duration="5000" Position="PopupMessage.PopupPosition.BottomRight" @ref="popup" Style="PopupMessage.PopupMessageStyle.Green"/>
+@code {
+    string TimePeriod = "";
+    string CurrentCulture = "vi-VN";
+
+    PopupMessage popup = default!;
+    bool passSucceed = false;
+    protected override void OnInitialized()
+    {
+        //CurrentCulture = CultureInfo.CurrentUICulture.Name;
+        var cultureName = CultureInfo.CurrentUICulture.Name;
+        if (cultureName.Equals("vi-vn", StringComparison.OrdinalIgnoreCase))
+            CurrentCulture = "vi-VN";
+        else if (cultureName.Equals("en-us", StringComparison.OrdinalIgnoreCase))
+            CurrentCulture = "en-US";
+        else
+            CurrentCulture = "vi-VN"; // Mặc định nếu không khớp
+        headerInfo.OnChange += ChangeHeader;
+        int hour = DateTime.Now.Hour;
+        if (hour < 11)
+            TimePeriod = "goodmorning";
+        else if(hour <16)
+            TimePeriod = "goodafternoon";
+        else if (hour < 18)
+            TimePeriod = "goodevening";
+        else
+            TimePeriod = "goodnight";
+
+        // headerInfo.HeadTitle = CurrentCulture;
+    }
+
+    bool already = false;
+    private void ChangeHeader()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+    private async Task LogoutUser(MouseEventArgs args)
+    {
+        await InvokeAsync(() =>
+        {
+            NavMan.NavigateTo("/logout", forceLoad:true);
+        });
+    }
+    void ChangeLang()
+    {
+        var uri = new Uri(NavMan.Uri).PathAndQuery;
+        NavMan.NavigateTo($"/culture/set?culture={CurrentCulture}&redirectUri={uri}", forceLoad: true);
+
+    }
+    string? UserCode = "";
+
+    
+    
+}
