@@ -1,0 +1,139 @@
+/* =========================
+CONTAINER CHÍNH
+========================= */
+.brand-page[b-h3jdajqqtp] {
+width: 100%;
+max-width: 1400px;
+margin: 0 auto;
+padding: 16px;
+}
+
+/* =========================
+HEADER
+========================= */
+.page-header[b-h3jdajqqtp] {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 22px;
+}
+
+
+.page-title p[b-h3jdajqqtp] {
+margin: 6px 0 0;
+color: #777;
+font-size: 22px;
+}
+
+/* =========================
+TOOLBAR
+========================= */
+.page-toolbar[b-h3jdajqqtp] {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+margin-bottom: 16px;
+}
+
+.page-toolbar .btn[b-h3jdajqqtp] {
+margin-bottom: 8px;
+}
+
+.brand-total[b-h3jdajqqtp] {
+color: #666;
+font-size: 14px;
+}
+
+/* =========================
+TABLE & TREELIST WRAPPER
+========================= */
+.brand-table-wrapper[b-h3jdajqqtp] {
+width: 100%;
+overflow-x: auto;
+background: #ffffff;
+border: 1px solid #e5e5e5;
+border-radius: 10px;
+box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.brand-table[b-h3jdajqqtp] {
+width: 100%;
+border-collapse: collapse;
+table-layout: fixed;
+font-family: "Segoe UI", Arial, sans-serif;
+font-size: 14px;
+}
+
+.brand-table th[b-h3jdajqqtp] {
+height: 48px;
+padding: 0 12px;
+background: #f8f9fa;
+border-bottom: 1px solid #e5e5e5;
+color: #333;
+font-weight: 600;
+text-align: left;
+white-space: nowrap;
+}
+
+.brand-table td[b-h3jdajqqtp] {
+min-height: 52px;
+padding: 12px;
+border-bottom: 1px solid #eeeeee;
+color: #444;
+white-space: normal;
+overflow-wrap: break-word;
+vertical-align: middle;
+}
+
+.brand-table tbody tr:hover[b-h3jdajqqtp] {
+background: #fafafa;
+}
+
+/* =========================
+KÍCH THƯỚC CÁC CỘT
+========================= */
+/* Cột 1: ID */
+.brand-table th:nth-child(1)[b-h3jdajqqtp],
+.brand-table td:nth-child(1)[b-h3jdajqqtp] {
+width: 120px;
+}
+
+/* Cột 2: Tên thương hiệu */
+.brand-table th:nth-child(2)[b-h3jdajqqtp],
+.brand-table td:nth-child(2)[b-h3jdajqqtp] {
+width: auto;
+}
+
+/* Cột 3: Thao tác */
+.brand-table th:nth-child(3)[b-h3jdajqqtp],
+.brand-table td:nth-child(3)[b-h3jdajqqtp] {
+width: 180px;
+}
+
+/* =========================
+ACTION BUTTONS
+========================= */
+.brand-action-column[b-h3jdajqqtp] {
+width: 180px;
+text-align: center !important;
+}
+
+.brand-actions[b-h3jdajqqtp] {
+text-align: center;
+white-space: nowrap !important;
+}
+
+.brand-actions .edit-button[b-h3jdajqqtp],
+.brand-actions .delete-button[b-h3jdajqqtp] {
+margin: 0 2px;
+}
+
+/* =========================
+TRẠNG THÁI RỖNG (EMPTY STATE)
+========================= */
+.empty-row[b-h3jdajqqtp] {
+height: 180px;
+text-align: center !important;
+color: #999 !important;
+font-style: italic;
+}

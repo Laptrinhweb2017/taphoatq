@@ -1,0 +1,174 @@
+﻿@page "/"
+
+@rendermode @(new InteractiveServerRenderMode(prerender:false))
+@inject LoginViewModel login
+@inject NavigationManager NavMan
+@inject HomeViewModel vm
+
+@inject HeaderInfo header
+
+
+<PageTitle>Trang chủ</PageTitle>
+@*<div class="col-12 col-md-6 col-lg-4 col-xl-3 card order">
+
+            <h4> <i class="bi bi-cart4"></i> Đơn hàng</h4>
+
+            <h2>...</h2>
+
+        </div>*@
+
+<div class="row g-3">
+
+    <!-- Khung Thao Tác Nhanh -->
+    <section class="quick-actions card h-100 col-12 col-md-6">
+        <div class="card-body">
+            <div class="section-title mb-3">
+                <i class="bi bi-lightning-charge-fill"></i>
+                <span>Thao Tác Nhanh</span>
+            </div>
+
+            <div class="row g-2">
+                <div class="col-12 col-sm-6">
+                    <a href="/admin/don-hang"
+                       class="quick-action-item d-flex align-items-center gap-2 p-3 border rounded text-decoration-none h-100">
+                        <i class="bi bi-cart-plus-fill"></i>
+                        <span>Tạo Đơn Hàng</span>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <a href="/admin/nhap-kho"
+                       class="quick-action-item d-flex align-items-center gap-2 p-3 border rounded text-decoration-none h-100">
+                        <i class="bi bi-box-arrow-in-down"></i>
+                        <span>Nhập Kho</span>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <a href="/admin/khach-hang"
+                       class="quick-action-item d-flex align-items-center gap-2 p-3 border rounded text-decoration-none h-100">
+                        <i class="bi bi-person-plus-fill"></i>
+                        <span>Khách hàng</span>
+                    </a>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <a href="/admin/san-pham"
+                       class="quick-action-item d-flex align-items-center gap-2 p-3 border rounded text-decoration-none h-100">
+                        <i class="bi bi-box-seam-fill"></i>
+                        <span>Sản phẩm</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Khung Cần xử lý -->
+    <div class="dashboard-right col-12 col-md-6">
+        <section class="dashboard-panel card h-100">
+            <div class="card-body">
+                <div class="section-title mb-3">
+                    <i class="bi bi-exclamation-circle-fill"></i>
+                    <span>Cần xử lý</span>
+                </div>
+
+                <div class="action-list d-grid gap-2">
+                    @if (vm.PendingItems != null && vm.PendingItems.Count > 0)
+                    {
+                        foreach (var item in vm.PendingItems)
+                        {
+                            <a href="@item.Url"
+                               class="action-row d-flex align-items-center justify-content-between gap-2 p-3 border rounded text-decoration-none">
+
+                                <div class="action-info d-flex align-items-start gap-2">
+                                    <i class="@item.Icon"></i>
+
+                                    <div class="d-flex flex-column">
+                                        <strong>@item.Title</strong>
+                                        <span>@item.Description</span>
+                                    </div>
+                                </div>
+
+                                <i class="bi bi-chevron-right action-arrow flex-shrink-0"></i>
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+
+<PopupMessage Duration="5000"
+              Position="PopupMessage.PopupPosition.TopRight"
+              Style="PopupMessage.PopupMessageStyle.Green"
+              @ref="popup" />
+
+
+@code{
+
+    [CascadingParameter] Task<AuthenticationState>? AuthStateTask { get; set; }
+    private PopupMessage popup = default!;
+
+    string s = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthStateTask == null)
+            return;
+
+        var authState = await AuthStateTask;
+        var user = authState.User;
+
+        if (user.Identity == null || !user.Identity.IsAuthenticated)
+        {
+            NavMan.NavigateTo($"/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+        //xác định thông tin user
+        var userID = user.FindFirst("ID");
+        if (userID == null)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+        int? UserID;
+        string? UserCode;
+        string? UserName;
+        string? UType;
+
+        UserID = int.Parse(userID.Value);
+        UserCode = user.FindFirst("UserID")?.Value;
+
+        if (!string.IsNullOrEmpty(UserCode) && (login.LoggedUser==null || login.LoggedUser.id==null))
+        {
+            await login.InitializeAsync();
+            login.LoggedUser = await login.GetLogin(UserCode);
+        }
+
+        if (login.LoggedUser != null)
+        {
+            UserCode = login.LoggedUser.UserID;
+            UserName = login.LoggedUser.LoginName;
+            header.SetUser(UserName!);
+        }
+        header.SetTile("CỬA HÀNG TẠP HÓA QN");
+
+        // Đăng ký event
+        vm.PropertyChanged += async (s,e) => await InvokeAsync(StateHasChanged);
+
+        await vm.InitializeAsync();
+
+        if (!string.IsNullOrEmpty(vm.ErrMess))
+        {
+            popup?.ShowMessage($"Có lỗi xảy ra! {vm.ErrMess}", PopupMessage.PopupMessageStyle.Red);
+        }
+    }
+
+    private async Task Click()
+    {
+        throw new NotImplementedException();
+    }
+}

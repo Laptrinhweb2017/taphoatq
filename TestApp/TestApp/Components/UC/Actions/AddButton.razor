@@ -1,0 +1,14 @@
+﻿<button class="action-button add"
+        @onclick="OnClick">
+
+    <i class="bi bi-plus-lg"></i>
+
+    <span>Thêm</span>
+
+</button>
+
+@code
+{
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+}

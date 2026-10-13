@@ -27,8 +27,8 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/AdminSidebar.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5TaWRlYmFyLnJhem9y
+[D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Layout/Component.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQ29tcG9uZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/LapTrinh/Blazor/GitHub/taphoatq/BachHoaWeb/BachHoaWeb/Components/Pages/Counter.razor]

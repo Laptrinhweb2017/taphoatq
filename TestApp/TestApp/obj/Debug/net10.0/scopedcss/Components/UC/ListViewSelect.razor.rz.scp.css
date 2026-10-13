@@ -1,0 +1,170 @@
+.lvs-container[b-udpmuzmpjj] {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+/* Input Trigger: Viền xanh thiên thanh, bo góc mềm */
+.lvs-trigger[b-udpmuzmpjj] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid #4fc3f7;
+    border-radius: 8px;
+    background: #fff;
+    height: 40px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+    .lvs-trigger:hover[b-udpmuzmpjj],
+    .lvs-trigger.active[b-udpmuzmpjj] {
+        border-color: #0288d1;
+        box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.25);
+    }
+
+.lvs-selected-text[b-udpmuzmpjj] {
+    padding: 0 12px;
+    font-size: 15px;
+    color: #333;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ô chứa Icon Bootstrap */
+.lvs-icon-box[b-udpmuzmpjj] {
+    width: 36px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.lvs-caret[b-udpmuzmpjj] {
+    color: #dc3545;
+    font-size: 14px;
+    transition: transform 0.2s;
+}
+
+.lvs-trigger.active .lvs-caret[b-udpmuzmpjj] {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Bảng: Thêm khoảng hở thấy rõ bo góc */
+.lvs-dropdown[b-udpmuzmpjj] {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 6px;
+    background: #fff;
+    border: 1.5px solid #4fc3f7;
+    border-radius: 8px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    z-index: 1050;
+    overflow: hidden;
+}
+
+/* Khung Search */
+.lvs-search-box[b-udpmuzmpjj] {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.lvs-search-icon[b-udpmuzmpjj] {
+    color: #0288d1;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.lvs-search-input[b-udpmuzmpjj] {
+    width: 100%;
+    border: 1px solid #b2ebf2;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+    .lvs-search-input:focus[b-udpmuzmpjj] {
+        border-color: #0288d1;
+    }
+
+/* Header Row */
+.lvs-header-row[b-udpmuzmpjj] {
+    display: flex;
+    background: #e0f7fa;
+    border-bottom: 1px solid #b2ebf2;
+}
+
+.lvs-header-cell[b-udpmuzmpjj] {
+    flex: 1;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    color: #006064;
+    border-right: 1px solid #b2ebf2;
+}
+
+    .lvs-header-cell:last-child[b-udpmuzmpjj] {
+        border-right: none;
+    }
+
+/* Body Row */
+.lvs-body[b-udpmuzmpjj] {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.lvs-row[b-udpmuzmpjj] {
+    display: flex;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+}
+
+    .lvs-row:last-child[b-udpmuzmpjj] {
+        border-bottom: none;
+    }
+
+    .lvs-row:hover[b-udpmuzmpjj] {
+        background-color: #e1f5fe;
+    }
+
+    .lvs-row.selected[b-udpmuzmpjj] {
+        background-color: #b3e5fc;
+        font-weight: 500;
+    }
+
+.lvs-cell[b-udpmuzmpjj] {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-right: 1px solid #f0f0f0;
+}
+
+    .lvs-cell:last-child[b-udpmuzmpjj] {
+        border-right: none;
+    }
+
+.lvs-empty[b-udpmuzmpjj] {
+    padding: 12px;
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+}

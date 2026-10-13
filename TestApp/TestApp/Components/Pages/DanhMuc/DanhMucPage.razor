@@ -1,0 +1,280 @@
+﻿@page "/admin/danh-muc"
+@using System.ComponentModel
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+@layout AdminLayout
+
+@implements IDisposable
+
+@inject CategoryViewModel vm
+@inject LoginViewModel login
+@inject NavigationManager NavMan
+@inject HeaderInfo header
+
+
+<PageTitle>Danh mục</PageTitle>
+
+<div class="category-page">
+
+    <div class="page-header">
+        <div class="page-title">
+            <p>Quản Lý Danh Mục Của Cửa Hàng.</p>
+        </div>
+    </div>
+
+    <div class="page-toolbar">
+        <button class="btn btn-success" @onclick="AddCategory">
+            Thêm Danh Mục
+        </button>
+    </div>
+
+    <TreeListComponent TItem="DtoCategory"
+                       Items="vm.CategoryList"
+                       Headers="TreeHead"
+                       KeyFieldNames="TreeKeys"
+                       ColumnWidths="TreeCols"
+                       DisplayProperties="TreeProps"
+                       ExpanderWidth="30"
+                       TopPos="0px"
+                       TextCSS="BootStraps"
+                       Styles="CSS"
+                       SelectedRowBg="lightblue"
+                       ConditionalFormats="ConF"
+                       SetToFields="setToField"
+                       ShowEdit="ShowEdit"
+                       ShowDelete="ShowDelete"
+                       OnDeleteClicked="DeleteCate"
+                       OnEditClicked="OnEditItem"
+                       OnRowDbleClicked="OnEditItem" />
+
+    <ModalDialog TData="DtoCategory"
+                 @ref="categoryDialog"
+                 Title="Thông Tin Danh Mục"
+                 DataObject="@vm.SelectedCategory"
+                 ShowDeleteButton="true"
+                 ShowConfirmButton="true"
+                 OnSaveClicked="SaveCategory"
+                 OnDeleteClicked="DeleteCategory"
+                 IsSucceed="@categorySucceed">
+
+        <FormTemplate Context="category">
+            <div class="p-1 p-md-3">
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <label for="catename" class="form-label">
+                            Tên Danh Mục
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="catename"
+                               placeholder="Nhập tên danh mục"
+                               @bind="category.CateName" />
+                    </div>
+                </div>
+            </div>
+        </FormTemplate>
+
+    </ModalDialog>
+
+</div>
+
+<PopupMessage Duration="5000"
+              Position="PopupMessage.PopupPosition.TopRight"
+              Style="PopupMessage.PopupMessageStyle.Green"
+              @ref="popup" />
+
+
+@code
+{
+    PopupMessage popup = default!;
+    ModalDialog<DtoCategory> categoryDialog = default!;
+
+    private bool categorySucceed = false;
+
+    private List<string> TreeHead = ["Tên Danh Mục"];
+    private List<string> TreeKeys = ["id"];
+    private List<List<int>> TreeCols = [[100]];
+
+    private List<List<string>> BootStraps = [["p-2 text-danger", "p-2"]];
+
+    private List<List<string>> CSS = [];
+    private List<object> ShowEdit = [true];
+    private List<object> ShowDelete = [true];
+
+    public List<List<string>> TreeProps = [["CateName"]];
+
+    private Dictionary<string, Dictionary<string, string>> ConF = new();
+    private List<string> setToField = ["CateName"];
+
+
+    [CascadingParameter]
+    Task<AuthenticationState>? AuthStateTask { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthStateTask == null)
+            return;
+
+        var authState = await AuthStateTask;
+        var user = authState.User;
+
+        if (user.Identity == null || !user.Identity.IsAuthenticated)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+
+        var userID = user.FindFirst("ID");
+
+        if (userID == null)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+
+        var userCode = user.FindFirst("UserID")?.Value;
+
+        if (!string.IsNullOrEmpty(userCode)
+            && (login.LoggedUser == null || login.LoggedUser.id == null))
+        {
+            await login.InitializeAsync();
+            login.LoggedUser = await login.GetLogin(userCode);
+        }
+
+        if (login.LoggedUser != null)
+        {
+            var userName = login.LoggedUser.LoginName;
+            header.SetUser(userName!);
+        }
+
+        header.SetTile("THÔNG TIN DANH MỤC");
+
+        vm.PropertyChanged += async (s, e) => await InvokeAsync(StateHasChanged);
+
+        await vm.InitializeAsync();
+
+        if (!string.IsNullOrWhiteSpace(vm.ErrMess))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+
+    private async void UpdateView(object sender, PropertyChangedEventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task AddCategory()
+    {
+        vm.SelectedCategory = new DtoCategory();
+        categorySucceed = false;
+
+        await categoryDialog.ShowAsync();
+    }
+
+
+
+    #region Dùng cho TreeList
+    private async Task OnEditItem(object item)//nút edit trên tree list
+    {
+        DtoCategory category = (DtoCategory)item;
+
+        vm.SelectedCategory = new DtoCategory
+        {
+            id = category.id,
+            CateName = category.CateName
+        };
+
+        categorySucceed = false;
+
+        await categoryDialog.ShowAsync();
+    }
+    private async Task DeleteCate(object item) //nút delete trên treelist
+    {
+        DtoCategory category = (DtoCategory)item;
+
+        vm.SelectedCategory = new DtoCategory
+        {
+            id = category.id,
+            CateName = category.CateName
+        };
+        await vm.DeleteCategory();
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+
+            await categoryDialog.CloseAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+    #endregion
+
+    #region Dùng cho Dialog
+
+    private async Task DeleteCategory() //nút xóa trên dialog
+    {
+        await vm.DeleteCategory();
+
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+            await InvokeAsync(StateHasChanged);
+            await categoryDialog.CloseAsync();
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+    private async Task SaveCategory() //nút save trên dialog
+    {
+        await vm.SaveCategory();
+
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+            await InvokeAsync(StateHasChanged);
+            await categoryDialog.CloseAsync();
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+
+    public void Dispose()
+    {
+        vm.PropertyChanged -= async (s, e) => await InvokeAsync(StateHasChanged);
+    }
+
+    #endregion
+
+}

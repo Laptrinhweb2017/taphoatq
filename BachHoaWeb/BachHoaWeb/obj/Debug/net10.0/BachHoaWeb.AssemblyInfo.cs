@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BachHoaWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de820019dc23b3d3f3a756b564e70d6f12042efd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+126da9935ed59c5d9ccea6eb1932ecc4965dcaff")]
 [assembly: System.Reflection.AssemblyProductAttribute("BachHoaWeb")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BachHoaWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

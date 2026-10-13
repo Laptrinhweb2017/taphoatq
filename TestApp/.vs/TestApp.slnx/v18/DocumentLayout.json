@@ -1,0 +1,292 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\servicelib\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|solutionrelative:servicelib\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\servicelib\\services\\brandservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|solutionrelative:servicelib\\services\\brandservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\servicelib\\services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|solutionrelative:servicelib\\services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27B94C23-53EB-0E62-AD2E-EA33F26C84B6}|Application.Asset\\Application.Asset.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\application.asset\\interfaces\\iservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27B94C23-53EB-0E62-AD2E-EA33F26C84B6}|Application.Asset\\Application.Asset.csproj|solutionrelative:application.asset\\interfaces\\iservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\helper\\middlewarehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\helper\\middlewarehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F099EF83-E570-F1A7-D403-3F0F186F11BD}|ViewModel\\ViewModel.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\viewmodel\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F099EF83-E570-F1A7-D403-3F0F186F11BD}|ViewModel\\ViewModel.csproj|solutionrelative:viewmodel\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\servicelib\\services\\productsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8316AB88-74BE-DB09-5311-85C876BCA24A}|ServiceLib\\ServiceLib.csproj|solutionrelative:servicelib\\services\\productsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\components\\pages\\thuonghieu\\thuonghieupage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\components\\pages\\thuonghieu\\thuonghieupage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\components\\pages\\thuonghieu\\thuonghieupage.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\components\\pages\\thuonghieu\\thuonghieupage.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F099EF83-E570-F1A7-D403-3F0F186F11BD}|ViewModel\\ViewModel.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\viewmodel\\brandviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F099EF83-E570-F1A7-D403-3F0F186F11BD}|ViewModel\\ViewModel.csproj|solutionrelative:viewmodel\\brandviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\modellib\\sqlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|solutionrelative:modellib\\sqlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IService.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\Application.Asset\\Interfaces\\IService.cs",
+              "RelativeDocumentMoniker": "Application.Asset\\Interfaces\\IService.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\Application.Asset\\Interfaces\\IService.cs",
+              "RelativeToolTip": "Application.Asset\\Interfaces\\IService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T04:06:20.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CustomerService.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\CustomerService.cs",
+              "RelativeDocumentMoniker": "ServiceLib\\Services\\CustomerService.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\CustomerService.cs",
+              "RelativeToolTip": "ServiceLib\\Services\\CustomerService.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAswFgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T03:48:51.376Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "TestApp\\Components\\_Imports.razor",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\_Imports.razor",
+              "RelativeToolTip": "TestApp\\Components\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-13T02:45:44.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CategoryViewModel.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ViewModel\\CategoryViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\CategoryViewModel.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ViewModel\\CategoryViewModel.cs",
+              "RelativeToolTip": "ViewModel\\CategoryViewModel.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAUwGwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T00:54:22.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BrandService.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\BrandService.cs",
+              "RelativeDocumentMoniker": "ServiceLib\\Services\\BrandService.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\BrandService.cs",
+              "RelativeToolTip": "ServiceLib\\Services\\BrandService.cs",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAAAHQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T01:18:22.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\CategoryService.cs",
+              "RelativeDocumentMoniker": "ServiceLib\\Services\\CategoryService.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\CategoryService.cs",
+              "RelativeToolTip": "ServiceLib\\Services\\CategoryService.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAswHEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T02:35:09.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MiddlewareHelper.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Helper\\MiddlewareHelper.cs",
+              "RelativeDocumentMoniker": "TestApp\\Helper\\MiddlewareHelper.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Helper\\MiddlewareHelper.cs",
+              "RelativeToolTip": "TestApp\\Helper\\MiddlewareHelper.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwDYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T02:53:21.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "App.razor",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\App.razor",
+              "RelativeDocumentMoniker": "TestApp\\Components\\App.razor",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\App.razor",
+              "RelativeToolTip": "TestApp\\Components\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-13T02:45:48.338Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ThuongHieuPage.razor.css",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor.css",
+              "RelativeDocumentMoniker": "TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor.css",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor.css",
+              "RelativeToolTip": "TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor.css",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACIAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-10-13T03:13:06.986Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductsService.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\ProductsService.cs",
+              "RelativeDocumentMoniker": "ServiceLib\\Services\\ProductsService.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\Services\\ProductsService.cs",
+              "RelativeToolTip": "ServiceLib\\Services\\ProductsService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACAAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T03:44:15.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Routes.razor",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\Routes.razor",
+              "RelativeDocumentMoniker": "TestApp\\Components\\Routes.razor",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\Routes.razor",
+              "RelativeToolTip": "TestApp\\Components\\Routes.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-13T02:45:49.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Program.cs",
+              "RelativeDocumentMoniker": "TestApp\\Program.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Program.cs",
+              "RelativeToolTip": "TestApp\\Program.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAQwCQAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T02:44:48.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ThuongHieuPage.razor",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor",
+              "RelativeDocumentMoniker": "TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor",
+              "RelativeToolTip": "TestApp\\Components\\Pages\\ThuongHieu\\ThuongHieuPage.razor",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAADoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-10-13T01:32:16.682Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BrandViewModel.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ViewModel\\BrandViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModel\\BrandViewModel.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ViewModel\\BrandViewModel.cs",
+              "RelativeToolTip": "ViewModel\\BrandViewModel.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAcwAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-13T00:46:22.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SqlHelper.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\SqlHelper.cs",
+              "RelativeDocumentMoniker": "ModelLib\\SqlHelper.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\SqlHelper.cs",
+              "RelativeToolTip": "ModelLib\\SqlHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-12T15:23:07.464Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

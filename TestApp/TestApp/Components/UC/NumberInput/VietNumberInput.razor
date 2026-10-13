@@ -1,0 +1,182 @@
+﻿@using System.Globalization
+@typeparam TValue
+
+<div class="input-group @GroupClass">
+    @if (!string.IsNullOrEmpty(PrependText))
+    {
+        <span class="input-group-text">@PrependText</span>
+    }
+
+    <input type="text"
+           class="form-control @InputClass @(_hasError ? "is-invalid" : "")"
+           value="@DisplayValue"
+           @oninput="HandleInput"
+           @onblur="HandleBlur"
+           placeholder="@Placeholder" />
+
+    @if (!string.IsNullOrEmpty(AppendText))
+    {
+        <span class="input-group-text">@AppendText</span>
+    }
+</div>
+
+@if (_hasError)
+{
+    <div class="text-danger small mt-1 d-block fw-bold">
+        ⚠ @_errorMessage
+    </div>
+}
+
+@code {
+    [Parameter] public TValue Value { get; set; }
+    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+
+    [Parameter] public string DisplayFormat { get; set; } = "VI";
+    [Parameter] public string GroupClass { get; set; } = "";
+    [Parameter] public string InputClass { get; set; } = "";
+    [Parameter] public string Placeholder { get; set; } = "0";
+    [Parameter] public string PrependText { get; set; }
+    [Parameter] public string AppendText { get; set; }
+
+    private CultureInfo _currentCulture;
+    private bool _hasError = false;
+    private string _errorMessage = "";
+    private string _userInputRaw = null;
+
+    private string DisplayValue
+    {
+        get
+        {
+            if (_userInputRaw != null)
+                return _userInputRaw;
+
+            SetupCulture();
+            if (Value == null)
+                return "";
+
+            try
+            {
+                double number = Convert.ToDouble(Value);
+
+                // Gọi IsIntegerType() không tham số
+                if (IsIntegerType() || number % 1 == 0)
+                {
+                    return number.ToString("N0", _currentCulture);
+                }
+
+                return number.ToString("N", _currentCulture);
+            }
+            catch
+            {
+                return Value.ToString();
+            }
+        }
+    }
+
+    protected override void OnParametersSet()
+    {
+        SetupCulture();
+    }
+
+    private void SetupCulture()
+    {
+        _currentCulture = new CultureInfo("en-US");
+        if (DisplayFormat.Equals("VI", StringComparison.OrdinalIgnoreCase))
+        {
+            _currentCulture.NumberFormat.NumberGroupSeparator = ".";
+            _currentCulture.NumberFormat.NumberDecimalSeparator = ",";
+        }
+        else
+        {
+            _currentCulture.NumberFormat.NumberGroupSeparator = ",";
+            _currentCulture.NumberFormat.NumberDecimalSeparator = ".";
+        }
+    }
+
+    private async Task HandleInput(ChangeEventArgs e)
+    {
+        _userInputRaw = e.Value?.ToString() ?? "";
+
+        if (string.IsNullOrWhiteSpace(_userInputRaw))
+        {
+            ResetError();
+            await UpdateValue(default);
+            return;
+        }
+
+        try
+        {
+            string cleanValue = _userInputRaw;
+
+            if (DisplayFormat.Equals("VI", StringComparison.OrdinalIgnoreCase))
+            {
+                // Định dạng Việt Nam:
+                // - Bỏ hết dấu chấm (nghìn)
+                // - Thay dấu phẩy (thập phân) thành dấu chấm để Invariant Culture parse được
+                cleanValue = cleanValue.Replace(".", "").Replace(",", ".");
+            }
+            else
+            {
+                // Định dạng Anh/Mỹ:
+                // - Bỏ hết dấu phẩy (nghìn)
+                cleanValue = cleanValue.Replace(",", "");
+            }
+
+            if (decimal.TryParse(cleanValue, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal parsedDecimal))
+            {
+                // Xử lý an toàn cho cả kiểu Nullable<T> như decimal?
+                var targetType = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
+                var convertedValue = (TValue)Convert.ChangeType(parsedDecimal, targetType);
+
+                ResetError();
+                await UpdateValue(convertedValue);
+            }
+            else
+            {
+                SetError("Định dạng số không hợp lệ.");
+            }
+        }
+        catch (OverflowException)
+        {
+            SetError("Số nhập vào vượt quá giới hạn lưu trữ.");
+        }
+        catch
+        {
+            SetError("Dữ liệu nhập vào không hợp lệ.");
+        }
+    }
+
+    private void HandleBlur()
+    {
+        if (!_hasError)
+        {
+            _userInputRaw = null; // Reset để ép hiển thị lại theo format chuẩn
+        }
+        StateHasChanged();
+    }
+
+    private void SetError(string message)
+    {
+        _hasError = true;
+        _errorMessage = message;
+    }
+
+    private void ResetError()
+    {
+        _hasError = false;
+        _errorMessage = "";
+    }
+
+    private async Task UpdateValue(TValue newValue)
+    {
+        Value = newValue;
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    private bool IsIntegerType()
+    {
+        var type = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
+        return type == typeof(int) || type == typeof(long) || type == typeof(short) ||
+               type == typeof(uint) || type == typeof(ulong) || type == typeof(ushort);
+    }
+}

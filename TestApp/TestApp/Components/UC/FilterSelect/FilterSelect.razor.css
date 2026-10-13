@@ -1,0 +1,33 @@
+﻿.btn-hover-effect:hover {
+    background-color: #0d6efd; /* hoặc màu khác */
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.2s ease-in-out;
+}
+.filter-dropdown {
+    position: absolute;
+    background-color: lightcyan;
+    border: 1px solid #ccc;
+    border-radius: 0px 0px 14px 14px;
+    margin-top: 3px;
+    z-index: 1000;
+    max-height: 200px; /* 👈 Giới hạn chiều cao dropdown */
+    overflow-y: auto; /* 👈 Hiện scroll nếu vượt quá */
+    width: 100%; /* 👈 Bằng với input select */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: block;
+    top: 100%;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+}
+.filter-select-wrapper {
+    position: relative;
+    flex-wrap: nowrap !important;
+}
+
+    .filter-select-wrapper input {
+        flex: 1 1 auto;
+        min-width: 0;
+    }

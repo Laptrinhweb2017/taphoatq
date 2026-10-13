@@ -1,0 +1,282 @@
+﻿@typeparam TItem
+@typeparam TValue
+@using System.Reflection
+@using Microsoft.JSInterop
+
+<div @ref="wrapperRef" class="lvs-container">
+    <!-- Input gõ tìm kiếm & Nút mũi tên -->
+    <div class="input-group">
+        @if (!ReadOnly)
+        {
+            <input type="text"
+                   class="form-control lvs-input @Bootstrap"
+                   placeholder="@Placeholder"
+                   id="@Id"
+                   style="@CSS"
+                   autocomplete="off"
+                   name="@Guid.NewGuid().ToString()"
+                   value="@displayText"
+                   @oninput="OnInputChanged"
+                   @onfocus="ShowDropdown"
+                   @onclick="ShowDropdown" />
+
+            <button type="button" class="btn lvs-btn-arrow" @onclick="ToggleDropdown">
+                <i class="bi bi-caret-down-fill lvs-caret @(isDropdownOpen ? "open" : "")"></i>
+            </button>
+        }
+        else
+        {
+            <input type="text"
+                   class="form-control lvs-input @Bootstrap"
+                   placeholder="@Placeholder"
+                   name="@Guid.NewGuid().ToString()"
+                   autocomplete="off"
+                   style="@CSS"
+                   id="@Id"
+                   readonly
+                   value="@displayText" />
+
+            <button type="button" class="btn lvs-btn-arrow" disabled>
+                <i class="bi bi-caret-down-fill lvs-caret"></i>
+            </button>
+        }
+    </div>
+
+    <!-- Dropdown chứa ListView -->
+    @if (isDropdownOpen)
+    {
+        <div class="lvs-dropdown">
+            <!-- Header Bảng -->
+            @if (Headers != null && Headers.Any())
+            {
+                <div class="lvs-header-row">
+                    @foreach (var header in Headers)
+                    {
+                        <div class="lvs-header-cell">@header</div>
+                    }
+                </div>
+            }
+
+            <!-- Danh Sách Dữ Liệu -->
+            <div class="lvs-body">
+                @if (filteredItems != null && filteredItems.Any())
+                {
+                    @foreach (var item in filteredItems)
+                    {
+                        <div class="lvs-row @(IsSelected(item) ? "selected" : "")"
+                             @onclick="() => SelectItem(item)">
+                            @foreach (var prop in PropList)
+                            {
+                                <div class="lvs-cell">@GetPropertyValue(item, prop)</div>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="lvs-empty">Không tìm thấy dữ liệu</div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public IEnumerable<TItem>? Items { get; set; }
+    [Parameter] public EventCallback<TValue> ValueChanged { get; set; }
+    [Parameter] public TValue? Value { get; set; }
+
+    [Parameter] public Func<TItem, TValue> ItemValueSelector { get; set; } = default!;
+    [Parameter] public Func<TItem, string> ItemTextSelector { get; set; } = default!;
+
+    [Parameter] public List<string> PropList { get; set; } = new();
+    [Parameter] public List<string> Headers { get; set; } = new();
+
+    [Parameter] public string? Placeholder { get; set; } = "vui lòng chọn...";
+    [Parameter] public string? Id { get; set; } = "lvsSelect";
+    [Parameter] public bool ReadOnly { get; set; } = false;
+    [Parameter] public string CSS { get; set; } = "";
+    [Parameter] public string Bootstrap { get; set; } = "";
+
+    private List<TItem> filteredItems = new();
+    private bool isDropdownOpen = false;
+    private string displayText = "";
+    private bool isUserTyping = false; // Cờ đánh dấu người dùng đang gõ tìm kiếm
+
+    private ElementReference wrapperRef;
+    private IJSObjectReference? jsModule;
+    private DotNetObjectReference<ListViewSelect<TItem, TValue>>? dotNetRef;
+
+    [Inject] private IJSRuntime JS { get; set; } = default!;
+
+    protected override void OnParametersSet()
+    {
+        // Chỉ cập nhật displayText từ Value khi người dùng KHÔNG gõ phím
+        if (!isUserTyping)
+        {
+            if (Value != null && Items != null)
+            {
+                var selected = Items.FirstOrDefault(x => EqualityComparer<TValue>.Default.Equals(ItemValueSelector(x), Value));
+                if (selected != null)
+                {
+                    displayText = ItemTextSelector(selected);
+                }
+            }
+            else
+            {
+                displayText = string.Empty;
+            }
+
+            // Mặc định luôn show full danh sách trừ khi user chủ động gõ tìm kiếm
+            filteredItems = Items?.ToList() ?? new List<TItem>();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            const string jsCode = @"
+                let handler = null;
+                export function attachOutsideClick(wrapper, dotnetHelper) {
+                    handler = function (event) {
+                        if (wrapper && !wrapper.contains(event.target)) {
+                            dotnetHelper.invokeMethodAsync('CloseDropdownAsync');
+                        }
+                    };
+                    document.addEventListener('mousedown', handler);
+                }
+                export function detachOutsideClick(wrapper) {
+                    if (handler) {
+                        document.removeEventListener('mousedown', handler);
+                        handler = null;
+                    }
+                }
+            ";
+
+            var moduleDataUrl = $"data:text/javascript;charset=utf-8,{Uri.EscapeDataString(jsCode)}";
+            jsModule = await JS.InvokeAsync<IJSObjectReference>("import", moduleDataUrl);
+
+            dotNetRef = DotNetObjectReference.Create(this);
+            await jsModule.InvokeVoidAsync("attachOutsideClick", wrapperRef, dotNetRef);
+        }
+    }
+
+    [JSInvokable("CloseDropdownAsync")]
+    public Task CloseDropdownAsync()
+    {
+        if (isDropdownOpen)
+        {
+            isDropdownOpen = false;
+            ResetSearchAndFilter();
+            StateHasChanged();
+        }
+        return Task.CompletedTask;
+    }
+
+    private void OnInputChanged(ChangeEventArgs e)
+    {
+        displayText = e.Value?.ToString() ?? "";
+        isUserTyping = true;
+        isDropdownOpen = true;
+        FilterItems(displayText);
+    }
+
+    private void FilterItems(string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            filteredItems = Items?.ToList() ?? new List<TItem>();
+        }
+        else
+        {
+            filteredItems = Items?
+                .Where(item => PropList.Any(prop =>
+                    GetPropertyValue(item, prop)?.ToString()?.Contains(query, StringComparison.OrdinalIgnoreCase) ?? false)
+                    || ItemTextSelector(item).Contains(query, StringComparison.OrdinalIgnoreCase))
+                .ToList() ?? new List<TItem>();
+        }
+    }
+
+    private void ToggleDropdown()
+    {
+        isDropdownOpen = !isDropdownOpen;
+        if (isDropdownOpen)
+        {
+            // Mở ra thì luôn load full danh sách
+            filteredItems = Items?.ToList() ?? new List<TItem>();
+        }
+        else
+        {
+            ResetSearchAndFilter();
+        }
+    }
+
+    private void ShowDropdown()
+    {
+        isDropdownOpen = true;
+        // Bấm vào ô input để mở menu cũng sẽ hiện full danh sách
+        filteredItems = Items?.ToList() ?? new List<TItem>();
+    }
+
+    private async Task SelectItem(TItem item)
+    {
+        Value = ItemValueSelector(item);
+        displayText = ItemTextSelector(item);
+
+        isUserTyping = false;
+        isDropdownOpen = false;
+
+        // Reset lại filteredItems về full list cho lần mở sau
+        filteredItems = Items?.ToList() ?? new List<TItem>();
+
+        await ValueChanged.InvokeAsync(Value);
+    }
+
+    private void ResetSearchAndFilter()
+    {
+        isUserTyping = false;
+        // Khôi phục lại text hiển thị theo Value đã chọn
+        if (Value != null && Items != null)
+        {
+            var selected = Items.FirstOrDefault(x => EqualityComparer<TValue>.Default.Equals(ItemValueSelector(x), Value));
+            if (selected != null)
+            {
+                displayText = ItemTextSelector(selected);
+            }
+        }
+        else
+        {
+            displayText = string.Empty;
+        }
+
+        filteredItems = Items?.ToList() ?? new List<TItem>();
+    }
+
+    private object? GetPropertyValue(TItem item, string propName)
+    {
+        if (item == null || string.IsNullOrEmpty(propName))
+            return null;
+
+        var propInfo = typeof(TItem).GetProperty(propName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+        return propInfo?.GetValue(item, null);
+    }
+
+    private bool IsSelected(TItem item)
+    {
+        if (Value == null)
+            return false;
+        return EqualityComparer<TValue>.Default.Equals(ItemValueSelector(item), Value);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (jsModule is not null)
+        {
+            await jsModule.InvokeVoidAsync("detachOutsideClick", wrapperRef);
+            await jsModule.DisposeAsync();
+        }
+
+        dotNetRef?.Dispose();
+    }
+}

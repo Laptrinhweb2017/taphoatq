@@ -1,0 +1,12 @@
+body[b-bsfs2p7zoc] {
+}
+.res-size[b-bsfs2p7zoc]{
+    min-width:500px;
+    width:fit-content;
+}
+@media(max-width: 767.98px)
+{
+    .res-size[b-bsfs2p7zoc]{
+        min-width: 300px;
+    }
+}

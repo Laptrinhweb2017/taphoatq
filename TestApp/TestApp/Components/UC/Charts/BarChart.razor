@@ -1,0 +1,145 @@
+﻿@typeparam TItem
+@using System.Linq
+
+<div class="bar-chart-container card p-3 shadow-sm @CustomClass">
+    <div class="d-flex flex-column gap-2">
+        @if (SortedItems != null && SortedItems.Any())
+        {
+            @foreach (var item in SortedItems)
+            {
+                var itemName = TextSelector != null ? TextSelector(item) : string.Empty;
+                var doubleVal = GetDoubleValue(item);
+
+                var percentage = MaxValue > 0 ? Math.Clamp((doubleVal / MaxValue) * 100, 0, 100) : 0;
+
+                var isCustomCssColor = !string.IsNullOrEmpty(BarColor) &&
+                                    (BarColor.StartsWith("#") || BarColor.StartsWith("rgb") || BarColor.StartsWith("hsl") || !BarColor.StartsWith("bg-"));
+
+                var bgClass = !isCustomCssColor ? BarColor : "";
+                var inlineStyle = isCustomCssColor ? $"background-color: {BarColor};" : "";
+
+                <div class="d-flex align-items-center gap-3 w-100 py-1">
+                    <!-- 1. Cột Tên Item: Set độ rộng cố định (VD: 160px), chữ dài tự hiện ... -->
+                    <div class="bar-item-name fw-medium text-body text-end pe-1"
+                         title="@itemName">
+                        @itemName
+                    </div>
+
+                    <!-- 2. Thanh Bar & Giá trị: Gióng hàng thẳng băng từ 1 vị trí -->
+                    <div class="bar-progress-wrapper d-flex align-items-center gap-2 flex-grow-1">
+                        <div class="progress flex-grow-1" style="height: 18px; background-color: #f1f3f5;">
+                            <div class="progress-bar @bgClass"
+                                 role="progressbar"
+                                 style="width: @percentage.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)%; @inlineStyle"
+                                 aria-valuenow="@doubleVal"
+                                 aria-valuemin="0"
+                                 aria-valuemax="@MaxValue">
+                            </div>
+                        </div>
+
+                        <!-- 3. Cột Giá trị số bên phải -->
+                        <div class="bar-value text-muted small fw-bold text-end">
+                            @doubleVal.ToString("N0")
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-muted text-center py-2">Không có dữ liệu hiển thị</div>
+        }
+    </div>
+</div>
+
+<style>
+    /* Cột Tên: Độ rộng cố định, căn lề phải, dài quá tự hiện ... */
+    .bar-chart-container .bar-item-name {
+        width: 140px;
+        min-width: 140px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.875rem;
+    }
+
+    /* Khung chứa thanh bar: Co giãn tối đa */
+    .bar-chart-container .bar-progress-wrapper {
+        min-width: 0;
+    }
+
+    /* Cột Số/Giá trị: TỰ CO GIÃN TÙY THEO ĐỘ DÀI CON SỐ (Max Content, không rớt dòng) */
+    .bar-chart-container .bar-value {
+        width: max-content;
+        min-width: max-content;
+        white-space: nowrap; /* Tuyệt đối không cho xuống dòng */
+        flex-shrink: 0; /* Không bị thanh bar ép dẹp lại */
+    }
+
+    .bar-chart-container .progress-bar {
+        transition: width 0.5s ease-in-out;
+        border-radius: 4px;
+    }
+
+    .bar-chart-container .progress {
+        border-radius: 4px;
+    }
+</style>
+
+@code {
+    public enum SortOption
+    {
+        Unsorted,
+        MaxFirst,
+        MinFirst
+    }
+
+    [Parameter] public IEnumerable<TItem> Items { get; set; }
+    [Parameter] public Func<TItem, string> TextSelector { get; set; }
+    [Parameter] public Func<TItem, object> ValueSelector { get; set; }
+    [Parameter] public SortOption SortType { get; set; } = SortOption.Unsorted;
+    [Parameter] public string BarColor { get; set; } = "bg-primary";
+    [Parameter] public string CustomClass { get; set; } = string.Empty;
+
+    private double GetDoubleValue(TItem item)
+    {
+        if (item == null || ValueSelector == null)
+            return 0;
+        var val = ValueSelector(item);
+        if (val == null || val == DBNull.Value)
+            return 0;
+
+        try
+        { return Convert.ToDouble(val); }
+        catch { return 0; }
+    }
+
+    private IEnumerable<TItem> SortedItems
+    {
+        get
+        {
+            if (Items == null || !Items.Any())
+                return Enumerable.Empty<TItem>();
+            if (ValueSelector == null)
+                return Items;
+
+            return SortType switch
+            {
+                SortOption.MaxFirst => Items.OrderByDescending(GetDoubleValue),
+                SortOption.MinFirst => Items.OrderBy(GetDoubleValue),
+                _ => Items
+            };
+        }
+    }
+
+    private double MaxValue
+    {
+        get
+        {
+            if (Items == null || !Items.Any() || ValueSelector == null)
+                return 1;
+            var max = Items.Max(GetDoubleValue);
+            return max > 0 ? max : 1;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+.header-line[b-ku79805a17] {
+    height: 56px;
+    background-color: #ffffb3;
+    color: black;
+    display: flex;
+    font-family: 'Times New Roman';
+    /*border-bottom: 1px solid #d6d5d5;*/
+    width: 100%;
+    /*position: fixed;*/
+    /*top: 55px;*/
+}
+
+.header-title[b-ku79805a17] {
+    font-size: 22px;
+    font-weight: bold;
+    align-content: center;
+    margin-left: 35px;
+    color:darkblue;
+}
+
+.header-user[b-ku79805a17] {
+    font-size: 18px;
+    align-content: center;
+    margin-right: 20px;
+    color:brown;
+}
+
+.btn-logout[b-ku79805a17] {
+    height: 40px;
+    width: 200px;
+    padding: 0px;
+    margin: 0px 5px 0px 10px;
+}
+@media (max-width: 640.98px) {
+    .header-line[b-ku79805a17] {
+        height: 28px;
+        background-color: #333333;
+    }
+}

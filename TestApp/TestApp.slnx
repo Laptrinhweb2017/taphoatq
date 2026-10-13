@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Application.Asset/Application.Asset.csproj" />
+  <Project Path="ModelLib/ModelLib.csproj" />
+  <Project Path="ServiceLib/ServiceLib.csproj" />
+  <Project Path="TestApp/TestApp.csproj" />
+  <Project Path="ViewModel/ViewModel.csproj" />
+</Solution>

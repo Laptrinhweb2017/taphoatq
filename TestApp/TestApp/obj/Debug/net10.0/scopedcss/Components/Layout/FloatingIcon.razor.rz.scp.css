@@ -1,0 +1,160 @@
+.call-me-button[b-bc2x9kx2fx] {
+    position: fixed;
+    bottom: 120px;
+    left: 50px;
+    background-color: #f99d1c;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .call-me-button:hover[b-bc2x9kx2fx] {
+        transform: scale(1.1);
+    }
+
+.call-me-button-sm[b-bc2x9kx2fx] {
+    position: relative;
+    margin: 5px;
+    background-color: #f99d1c;
+    color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .call-me-button-sm:hover[b-bc2x9kx2fx] {
+        transform: scale(1.1);
+    }
+
+.zalo-button[b-bc2x9kx2fx] {
+    position: fixed;
+    bottom: 190px;
+    left: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .zalo-button:hover[b-bc2x9kx2fx] {
+        transform: scale(1.1);
+    }
+
+.zalo-button-sm[b-bc2x9kx2fx] {
+    position: relative;
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+    .zalo-button-sm:hover[b-bc2x9kx2fx] {
+        transform: scale(1.1);
+    }
+
+.price-button[b-bc2x9kx2fx] {
+    position: fixed;
+    bottom: 260px;
+    left: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.price-button-sm[b-bc2x9kx2fx] {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    z-index: 9999;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+a[b-bc2x9kx2fx] {
+    text-decoration: none;
+    color: inherit;
+}
+
+.ringing[b-bc2x9kx2fx] {
+    animation: ring-b-bc2x9kx2fx 1s infinite;
+}
+
+@keyframes ring-b-bc2x9kx2fx {
+    0% {
+        transform: rotate(0);
+    }
+
+    10% {
+        transform: rotate(15deg);
+    }
+
+    20% {
+        transform: rotate(-10deg);
+    }
+
+    30% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    60% {
+        transform: rotate(-3deg);
+    }
+
+    70% {
+        transform: rotate(2deg);
+    }
+
+    80% {
+        transform: rotate(-1deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}

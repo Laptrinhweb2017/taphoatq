@@ -1,0 +1,223 @@
+﻿@page "/admin/khach-hang"
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+@layout AdminLayout
+@inject CustomerViewModel vm
+
+@inject LoginViewModel login
+@inject NavigationManager NavMan
+@inject HeaderInfo header
+
+
+<PageTitle>Khách hàng</PageTitle>
+
+<div class="customer-page">
+    <div class="page-header">
+        <div class="page-title">
+            <p>Quản Lý Thông Tin Khách Hàng Của Cửa Hàng.</p>
+        </div>
+    </div>
+    <div class="page-toolbar">
+        <button class="btn btn-success" @onclick="AddCust">Thêm Khách Hàng</button>
+    </div>
+    <TreeListComponent TItem="DtoCustomer"
+                       Items="vm.CustList"
+                       Headers="TreeHead"
+                       KeyFieldNames="TreeKeys"
+                       ColumnWidths="TreeCols"
+                       DisplayProperties="TreeProps"
+                       ExpanderWidth="30"
+                       TopPos="0px"
+                       TextCSS="BootStraps"
+                       Styles="CSS"
+                       SelectedRowBg="lightblue"
+                       ConditionalFormats="ConF"
+                       SetToFields="setToField"
+                       ShowEdit="ShowEdit"
+                       ShowDelete="ShowDelete"
+                       OnEditClicked="OnEditItem"
+                       OnRowDbleClicked="OnEditItem" />
+
+    <ModalDialog TData="DtoCustomer" @ref="custDialog"
+                 Title="Thông Tin Khách Hàng"
+                 DataObject="@vm.SelectedCust"
+                 ShowDeleteButton="false"
+                 OnSaveClicked="SaveCust"
+                 IsSucceed="@custSucceed">
+        <FormTemplate Context="cust">
+            <div class="p-1 p-md-3">
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <label for="custid" class="form-label">Mã KH</label>
+                        @if (vm.SelectedCust.id != null && vm.SelectedCust.id > 0)
+                        {
+                            <input type="text" class="form-control" @bind="cust.CustomerCode" readonly />
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control" @bind="cust.CustomerCode" />
+                        }
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="custname" class="form-label">Tên KH</label>
+                        <input type="text" class="form-control" @bind="cust.CustomerName" />
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <label for="custadd" class="form-label">Địa Chỉ</label>
+                        <input type="text" class="form-control" @bind="cust.Address" />
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <label for="custphone" class="form-label">Điện Thoại</label>
+                        <input type="text" class="form-control" @bind="cust.Phone" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="custtax" class="form-label">MST</label>
+                        <input @bind="cust.TaxCode" class="form-control" id="custtax"/>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <label for="custpass" class="form-label">Mật Khẩu</label>
+                        <input type="password" class="form-control" 
+                                autocomplete="new-password" 
+                                id ="custpass" 
+                                @bind = "vm.SelectedLogin.PassWord" />
+                    </div>
+                </div>
+            </div>
+        </FormTemplate>
+    </ModalDialog>
+
+
+
+</div>
+
+<PopupMessage Duration="5000" Position="PopupMessage.PopupPosition.TopRight" Style="PopupMessage.PopupMessageStyle.Green" @ref="popup" />
+
+@code
+{
+    PopupMessage popup = default!;
+    ModalDialog<DtoCustomer> custDialog = default!;
+
+    private bool showCustomerModal = false;
+    private bool custSucceed = false;
+    // private string[] TableHeaders = ["Mã Khách Hàng", "Tên Khách Hàng", "Địa Chỉ", "Số Điện Thoại", "Mã Số Thuế", ""];
+    // private string[] cols = ["10fr", "30fr", "40fr", "10fr", "10fr"];
+    private List<string> TreeHead = ["Mã KH", "Tên KH", "Địa Chỉ", "Điện Thoại", "MST", ];
+    private List<string> TreeKeys = ["id"];
+    private List<List<int>> TreeCols = [[10, 30, 35, 15, 10]];
+    private List<List<string>> BootStraps = [["p-2 text-danger", "p-2", "p-2"]];
+    private List<List<string>> CSS = [];
+    private List<object> ShowEdit = [true];
+    private List<object> ShowDelete = [false];
+    public List<List<string>> TreeProps = [["CustomerCode", "CustomerName", "Address", "Phone", "TaxCode"]];
+    private Dictionary<string, Dictionary<string, string>> ConF = new()
+    {
+        ["CustomerCode"] = new()
+        {
+            ["ABC"] = "color:brown; font-weight:bold"
+        }
+    };
+    private List<string> setToField = ["Address", "CustomerCode"];
+
+
+    [CascadingParameter] Task<AuthenticationState>? AuthStateTask { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthStateTask == null)
+            return;
+
+        var authState = await AuthStateTask;
+        var user = authState.User;
+
+        if (user.Identity == null || !user.Identity.IsAuthenticated)
+        {
+            NavMan.NavigateTo($"/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+        //xác định thông tin user
+        var userID = user.FindFirst("ID");
+        if (userID == null)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+        int? UserID;
+        string? UserCode;
+        string? UserName;
+
+        UserID = int.Parse(userID.Value);
+        UserCode = user.FindFirst("UserID")?.Value;
+
+        if (!string.IsNullOrEmpty(UserCode) && (login.LoggedUser == null || login.LoggedUser.id == null))
+        {
+            await login.InitializeAsync();
+            login.LoggedUser = await login.GetLogin(UserCode);
+        }
+
+        if (login.LoggedUser != null)
+        {
+            UserCode = login.LoggedUser.UserID;
+            UserName = login.LoggedUser.LoginName;
+            header.SetUser(UserName!);
+        }
+        header.SetTile("THÔNG TIN KHÁCH HÀNG");
+
+        vm.PropertyChanged += async (s, e) => await InvokeAsync(StateHasChanged);
+        await vm.InitializeAsync();
+    }
+
+    private void OpenAddModal()
+    {
+        showCustomerModal = true;
+    }
+
+
+    private void CloseCustomerModal()
+    {
+        showCustomerModal = false;
+    }
+
+
+    private async Task SaveCust()
+    {
+        //xử lý lưu
+        //sau đó kiểm tra lỗi, nếu không có lỗi thì đóng dialog
+        // await custDialog.CloseAsync();
+        await vm.SaveCust();
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage("Lưu xong", PopupMessage.PopupMessageStyle.Green);
+            await custDialog.CloseAsync();
+        }
+        else
+            popup.ShowMessage(vm.ErrMess, PopupMessage.PopupMessageStyle.Red);
+    }
+
+    private async Task AddCust()
+    {
+        vm.SelectedCust = new DtoCustomer(); // khởi tạo ô thêm hoàn toàn trống dữ liệu
+        vm.SelectedLogin = new(){PassWord="", UserID=""};
+        await custDialog.ShowAsync();
+    }
+
+
+    private async Task OnEditItem(object item)
+    {
+        DtoCustomer cust = (DtoCustomer)item;
+        vm.SelectedCust = cust;
+        vm.SelectedLogin = vm.UserList.FirstOrDefault(x => x.UserID == cust.CustomerCode)??new();
+        await custDialog.ShowAsync();
+    }
+
+}

@@ -1,0 +1,31 @@
+﻿@inject IJSRuntime JSRuntime
+
+@if (!isStarted)
+{
+    <div class="d-flex align-items-center justify-content-center position-fixed top-0 start-0 w-100 vh-100 bg-white" style="z-index: 9999;">
+        <button class="btn btn-success fw-bold fs-5"
+                @onclick="HandleStartToWork"
+                style="height:100px; width:220px;">
+            🔔 BẮT ĐẦU CÔNG VIỆC
+        </button>
+    </div>
+}
+
+@code {
+    [Parameter] public EventCallback OnStarted { get; set; }
+    private bool isStarted = false;
+
+    private async Task HandleStartToWork()
+    {
+        isStarted = true;
+
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("kitchenAudio.init", "/assets/sounds/s1.mp3");
+        }
+        catch { }
+
+        // Gọi trực tiếp, EventCallback sẽ tự bỏ qua nếu không truyền handler
+        await OnStarted.InvokeAsync();
+    }
+}

@@ -1,0 +1,35 @@
+﻿
+
+@inject IJSRuntime JS
+@inject IHttpContextAccessor env
+<!-- FloatingCallMe.razor -->
+<div class="d-none d-md-block">
+    <a href="tel:0933633113" class="call-me-button ringing" title="Call me" target="_blank">
+        <i class="fas fa-phone"></i>
+    </a>
+    <a href="https://zalo.me/0933633113" class="zalo-button ringing" title="Zalo me" target="_blank">
+        <img src="assets/img/zalo.png" style="height:50px; width:50px;" />
+    </a>
+@*     <button class="btn btn-info rounded-circle text-white price-button ringing" @onclick="PriceDownload" title="Download">
+        <i class="fas fa-download"></i>
+    </button>
+ *@</div>
+<div class="d-flex d-md-none fixed-bottom" style="margin-bottom:55px;">
+    <a href="tel:0933633113" class="call-me-button-sm ringing" title="Call me" target="_blank">
+        <i class="fas fa-phone"></i>
+    </a>
+    <a href="https://zalo.me/0933633113" class="zalo-button-sm ringing" title="Zalo me" target="_blank">
+        <img src="assets/img/zalo.png" style="height:40px; width:40px;" />
+    </a>
+@*     <button class="btn btn-info rounded-circle price-button-sm text-white ringing" @onclick="PriceDownload" title="Download">
+        <i class="fas fa-download"></i>
+    </button>
+ *@</div>
+@code {
+
+
+    private async Task PriceDownload()
+    {
+        await JS.InvokeVoidAsync("open", "/api/PdfCreate/create-price-list", "_blank");
+    }
+}

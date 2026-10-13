@@ -1,0 +1,153 @@
+.treelist-level[b-fy0vg951ig] {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.treelist-item-wrapper[b-fy0vg951ig] {
+    width: 100%;
+}
+
+/* Header */
+.treelist-header[b-fy0vg951ig] {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: grid;
+    align-items: center;
+    font-weight: bold;
+    background-color: lightblue;
+    border-bottom: 1px solid #ccc;
+    padding: 4px 0;
+}
+
+    .treelist-header .header-cell[b-fy0vg951ig] {
+        padding: 4px 8px;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+/* Row General */
+.treelist-row[b-fy0vg951ig] {
+    align-items: center;
+    border-bottom: 1px solid darkgray;
+    cursor: pointer;
+    min-height: 28px;
+    background-color: whitesmoke;
+    touch-action: manipulation;
+    width: 100%;
+}
+
+    .treelist-row:hover[b-fy0vg951ig] {
+        background-color: #ffffff;
+    }
+
+    .treelist-row.selected[b-fy0vg951ig],
+    .treelist-row .selected[b-fy0vg951ig] {
+        background-color: #dbeafe; /* xanh nhạt khi dòng được chọn */
+    }
+
+/* Cell General */
+.tl-cell[b-fy0vg951ig] {
+    padding: 2px 6px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.button-cell[b-fy0vg951ig] {
+}
+
+.top-level[b-fy0vg951ig] {
+    font-style: italic;
+    font-weight: bold;
+    color: darkblue;
+}
+
+/* Expander cell */
+.tl-expander[b-fy0vg951ig] {
+    width: 30px;
+    min-width: 30px;
+    text-align: center;
+}
+
+[b-fy0vg951ig] .tl-expander-icon {
+    cursor: pointer;
+    color: #0000cc !important;
+}
+
+    [b-fy0vg951ig] .tl-expander-icon:hover {
+        color: #4d4dff !important;
+    }
+
+/* ========================================== */
+/* MOBILE SPECIFIC STYLES (FULL BACKGROUND)   */
+/* ========================================== */
+
+.mobile-row-content[b-fy0vg951ig] {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-cells-wrapper[b-fy0vg951ig] {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.mobile-buttons-wrapper[b-fy0vg951ig] {
+    display: flex;
+    margin-left: 8px;
+    align-items: center;
+}
+
+.treelist-mobile-cell[b-fy0vg951ig] {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    width: 100%;
+}
+
+    .treelist-mobile-cell .tl-cell[b-fy0vg951ig] {
+        width: 100%; /* Đảm bảo cell chiếm trọn 100% chiều ngang dòng */
+        display: flex;
+        align-items: center;
+    }
+
+.tl-mobile-line[b-fy0vg951ig] {
+    display: flex;
+    gap: 6px;
+    line-height: 1.4;
+    width: 100%;
+}
+
+    .tl-mobile-line.mobile-main[b-fy0vg951ig] {
+        font-weight: 600;
+        padding-left: 4px;
+    }
+
+    .tl-mobile-line.mobile-sub[b-fy0vg951ig] {
+        padding-left: 12px;
+    }
+
+.mobile-indent[b-fy0vg951ig] {
+    padding-left: 12px;
+}
+
+.mobile-header[b-fy0vg951ig] {
+    min-width: 80px;
+    color: #666;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.mobile-value[b-fy0vg951ig] {
+    flex: 1;
+    word-break: break-word;
+}

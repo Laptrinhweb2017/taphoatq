@@ -1,0 +1,280 @@
+﻿@page "/admin/thuong-hieu"
+@using System.ComponentModel
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+@layout AdminLayout
+
+@implements IDisposable
+
+@inject BrandViewModel vm
+@inject LoginViewModel login
+@inject NavigationManager NavMan
+@inject HeaderInfo header
+
+<PageTitle>Thương hiệu</PageTitle>
+
+<div class="brand-page">
+
+    <div class="page-header">
+        <div class="page-title">
+            <p>Quản Lý Thương Hiệu Của Cửa Hàng.</p>
+        </div>
+    </div>
+
+    <div class="page-toolbar">
+        <button class="btn btn-success" @onclick="AddBrand">
+            Thêm Thương Hiệu
+        </button>
+    </div>
+
+    <TreeListComponent TItem="DtoBrand"
+                       Items="vm.BrandList"
+                       Headers="TreeHead"
+                       KeyFieldNames="TreeKeys"
+                       ColumnWidths="TreeCols"
+                       DisplayProperties="TreeProps"
+                       ExpanderWidth="30"
+                       TopPos="15px"
+                       TextCSS="BootStraps"
+                       Styles="CSS"
+                       SelectedRowBg="lightblue"
+                       ConditionalFormats="ConF"
+                       SetToFields="setToField"
+                       ShowEdit="ShowEdit"
+                       ShowDelete="ShowDelete"
+                       OnDeleteClicked="DeleteBrandRow"
+                       OnEditClicked="OnEditItem"
+                       OnRowDbleClicked="OnEditItem" />
+
+    <ModalDialog TData="DtoBrand"
+                 @ref="brandDialog"
+                 Title="Thông Tin Thương Hiệu"
+                 DataObject="@vm.SelectedBrand"
+                 ShowDeleteButton="true"
+                 ShowConfirmButton="true"
+                 OnSaveClicked="SaveBrand"
+                 OnDeleteClicked="DeleteBrand"
+                 IsSucceed="@brandSucceed">
+
+        <FormTemplate Context="brand">
+            <div class="p-1 p-md-3">
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <label for="brandname" class="form-label">
+                            Tên Thương Hiệu
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="brandname"
+                               placeholder="Nhập tên thương hiệu"
+                               @bind="brand.BrandName" />
+                    </div>
+                </div>
+            </div>
+        </FormTemplate>
+
+    </ModalDialog>
+
+</div>
+
+<PopupMessage Duration="5000"
+              Position="PopupMessage.PopupPosition.TopRight"
+              Style="PopupMessage.PopupMessageStyle.Green"
+              @ref="popup" />
+
+
+@code
+{
+    PopupMessage popup = default!;
+    ModalDialog<DtoBrand> brandDialog = default!;
+
+    private bool brandSucceed = false;
+
+    private List<string> TreeHead = ["Tên Thương Hiệu"];
+    private List<string> TreeKeys = ["id"];
+    private List<List<int>> TreeCols = [[100]];
+
+    private List<List<string>> BootStraps = [["p-2 text-danger", "p-2"]];
+
+    private List<List<string>> CSS = [];
+    private List<object> ShowEdit = [true];
+    private List<object> ShowDelete = [true];
+
+    public List<List<string>> TreeProps = [["BrandName"]];
+
+    private Dictionary<string, Dictionary<string, string>> ConF = new();
+    private List<string> setToField = ["BrandName"];
+
+
+    [CascadingParameter]
+    Task<AuthenticationState>? AuthStateTask { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthStateTask == null)
+            return;
+
+        var authState = await AuthStateTask;
+        var user = authState.User;
+
+        if (user.Identity == null || !user.Identity.IsAuthenticated)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+
+        var userID = user.FindFirst("ID");
+
+        if (userID == null)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+
+        var userCode = user.FindFirst("UserID")?.Value;
+
+        if (!string.IsNullOrEmpty(userCode)
+            && (login.LoggedUser == null || login.LoggedUser.id == null))
+        {
+            await login.InitializeAsync();
+            login.LoggedUser = await login.GetLogin(userCode);
+        }
+
+        if (login.LoggedUser != null)
+        {
+            var userName = login.LoggedUser.LoginName;
+            header.SetUser(userName!);
+        }
+
+        header.SetTile("THÔNG TIN THƯƠNG HIỆU");
+
+        vm.PropertyChanged += async (s, e) => await InvokeAsync(StateHasChanged);
+
+        await vm.InitializeAsync();
+
+        if (!string.IsNullOrWhiteSpace(vm.ErrMess))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+
+    private async void UpdateView(object sender, PropertyChangedEventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task AddBrand()
+    {
+        vm.SelectedBrand = new DtoBrand();
+        brandSucceed = false;
+
+        await brandDialog.ShowAsync();
+    }
+
+
+    #region Dùng cho TreeList
+    private async Task OnEditItem(object item) //nút edit trên tree list
+    {
+        DtoBrand brand = (DtoBrand)item;
+
+        vm.SelectedBrand = new DtoBrand
+        {
+            id = brand.id,
+            BrandName = brand.BrandName
+        };
+
+        brandSucceed = false;
+
+        await brandDialog.ShowAsync();
+    }
+
+    private async Task DeleteBrandRow(object item) //nút delete trên treelist
+    {
+        DtoBrand brand = (DtoBrand)item;
+
+        vm.SelectedBrand = new DtoBrand
+        {
+            id = brand.id,
+            BrandName = brand.BrandName
+        };
+        await vm.DeleteBrand();
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+
+            await brandDialog.CloseAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+    #endregion
+
+    #region Dùng cho Dialog
+
+    private async Task DeleteBrand() //nút xóa trên dialog
+    {
+        await vm.DeleteBrand();
+
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+            await InvokeAsync(StateHasChanged);
+            await brandDialog.CloseAsync();
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+
+    private async Task SaveBrand() //nút save trên dialog
+    {
+        await vm.SaveBrand();
+
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+            await InvokeAsync(StateHasChanged);
+            await brandDialog.CloseAsync();
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+
+    public void Dispose()
+    {
+        vm.PropertyChanged -= async (s, e) => await InvokeAsync(StateHasChanged);
+    }
+
+    #endregion
+
+}

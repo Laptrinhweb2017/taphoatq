@@ -1,0 +1,223 @@
+﻿@inject NavigationManager NavMan
+@inject LoginViewModel UserVM
+@inject IJSRuntime JS
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+<div class="navbar d-flex d-md-none align-items-center" style="height:56px;">
+    <div class="ms-2 align-items-center d-flex d-md-none">
+        <a class="btn "
+           style="height:90%; background-color:#e6e600; width:100%;"
+           @onclick="GoHome">
+            Trang chủ
+        </a>
+    </div>
+    <div class="ms-2 align-items-center d-flex d-md-none">
+        <a class="btn "
+           style="height:90%; background-color:#e6e600; width:100%;"
+           @onclick="LogoutUser">
+            Đăng Xuất
+        </a>
+    </div>
+    <button class="d-md-none ms-auto bg-transparent border-0 me-3"
+            @onclick="@(() => ShowNavMenu = !ShowNavMenu)">
+        <span class="navbar-toggler" style="filter: invert(1);"></span>
+    </button>
+</div>
+
+<div class="d-none d-md-block">
+    <div class="d-flex align-items-center justify-content-center" style="height:56px; background-color: #ffffb3;">
+        <!-- Sử dụng máy tính thì không cần làm gì, hiển thị lên -->
+        <a class="btn align-content-center fw-bold"
+           style="height:80%; background-color:#e6e600; width:90%; color:darkblue"
+           href="/">
+            <i class="bi bi-house"></i> Trang Chủ
+        </a>
+    </div>
+    <SideMenu MenuItems="MenuItems" />
+</div>
+
+@if (ShowNavMenu)
+{
+    <div class="d-block d-md-none sticky-top">
+        <!-- trên di động, khi click vào item thì sẽ ẩn cái menu đi -->
+        <SideMenu MenuItems="MenuItems"
+                  @bind-ShowNavMenu="ShowNavMenu"
+                  NavigateRequested="OnNavigateFromMenu" />
+    </div>
+}
+
+@code {
+    [CascadingParameter] Task<AuthenticationState>? AuthStateTask { get; set; }
+
+    private bool ShowNavMenu = false;
+
+    List<MenuItem> MenuItems = new();
+    private void SetMenuEnable(MenuItem item, string? allow)
+    {
+        item.Checked = item.SubItems != null && item.SubItems.Count > 0;
+        item.Enabled = UserVM.LoggedIn &&
+                       (item.IDPermission != null && allow != null &&
+                           allow.Contains($"{item.IDPermission}|") ||
+                        item.IDPermission == null);
+        if (item.SubItems != null && item.SubItems.Count > 0)
+        {
+            foreach (MenuItem sub in item.SubItems)
+            {
+                SetMenuEnable(sub, allow);
+            }
+            if (item.SubItems.FirstOrDefault(x => x.Enabled) != null)
+                item.Enabled = true;
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthStateTask!;
+        var user = authState.User;
+
+        string? permission = user.FindFirst("Permit") != null ? user.FindFirst("Permit")!.Value : null;
+
+        UserVM.LoggedIn = permission != null;
+        MenuItems = new List<MenuItem>
+        {
+            new MenuItem //Khách hàng
+            {
+                MenuText ="Khách Hàng",
+                Icon = "bi bi-people-fill",
+                IDPermission = "10",
+                LinkToPage = "/admin/khach-hang",
+            },
+            new MenuItem //Sản phẩm
+            {
+                MenuText ="Quản Lý Sản Phẩm",
+                Icon = "bi bi-boxes",
+                IDPermission = "20",
+                SubItems=[
+                    new MenuItem
+                    {
+                        MenuText = "Sản Phẩm",
+                        Icon = "bi bi-bag-fill",
+                        IDPermission = "21",
+                        LinkToPage = "/admin/san-pham",
+                    },
+                    new MenuItem
+                    {
+                        MenuText = "Danh Mục",
+                        Icon = "bi bi-list-columns",
+                        IDPermission = "22",
+                        LinkToPage = "/admin/danh-muc",
+                    },
+                    new MenuItem
+                    {
+                        MenuText = "Thương Hiệu",
+                        Icon = "bi bi-tag-fill",
+                        IDPermission = "23",
+                        LinkToPage = "/admin/thuong-hieu",
+                    },
+                ]
+            },
+            new MenuItem //Kho
+            {
+                MenuText ="Quản Lý Kho",
+                Icon = "bi bi-shop",
+                IDPermission = "30",
+                SubItems=[
+                    new MenuItem
+                    {
+                        MenuText = "Kho Hàng",
+                        Icon = "bi bi-building",
+                        IDPermission = "31",
+                        LinkToPage = "/admin/kho-hang",
+                    },
+                    new MenuItem
+                    {
+                        MenuText = "Nhập Kho",
+                        Icon = "bi bi-box-arrow-in-down",
+                        IDPermission = "32",
+                        LinkToPage = "/admin/nhap-kho",
+                    },
+                    new MenuItem
+                    {
+                        MenuText = "Xuất Kho",
+                        Icon = "bi bi-box-arrow-up",
+                        IDPermission = "33",
+                        LinkToPage = "/admin/xuat-kho",
+                    },
+                ]
+            },
+            new MenuItem //Bán Hàng
+            {
+                MenuText ="Quản Lý Bán Hàng",
+                Icon = "bi bi-cart-fill",
+                IDPermission = "40",
+                SubItems=[
+                    new MenuItem
+                    {
+                        MenuText = "Đơn Hàng",
+                        Icon = "bi bi-clipboard-check-fill",
+                        IDPermission = "41",
+                        LinkToPage = "/admin/don-hang",
+                    },
+                    new MenuItem
+                    {
+                        MenuText = "Thanh Toán",
+                        Icon = "bi bi-credit-card-fill",
+                        IDPermission = "42",
+                        LinkToPage = "/admin/thanh-toan",
+                    },
+                ]
+            },
+            new MenuItem //Thống kê
+            {
+                MenuText ="Quản Lý Thống Kê",
+                Icon = "bi bi-bar-chart-fill",
+                IDPermission = "50",
+                LinkToPage = "/admin/thong-ke",
+            },
+             new MenuItem //Thông tin
+            {
+                MenuText ="Thông Tin Cửa Hàng",
+                Icon = "bi bi-info-square-fill",
+                IDPermission = "60",
+                LinkToPage = "/admin/thong-tin",
+            },
+        };
+
+        UserChange(permission);
+
+    }
+    private void UserChange(string? permission)
+    {
+
+        permission = permission ?? "";
+        foreach (MenuItem item in MenuItems)
+        {
+            SetMenuEnable(item, permission);
+        }
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task OnNavigateFromMenu(string link)
+    {
+        // Xử lý link khi ở màn hình di động
+        NavMan.NavigateTo(link);
+        ShowNavMenu = false;
+        StateHasChanged();
+    }
+    public void Dispose()
+    {
+        UserVM.OnChange -= StateHasChanged;
+    }
+    private async Task LogoutUser(MouseEventArgs args)
+    {
+        await InvokeAsync(() =>
+        {
+            NavMan.NavigateTo("/logout");
+        });
+    }
+    private async Task GoHome()
+    {
+        NavMan.NavigateTo("/", forceLoad: true);
+    }
+    
+}

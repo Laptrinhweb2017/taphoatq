@@ -1,0 +1,45 @@
+[
+  {
+    "ContainingType": "AppPipelineExtensions\u002B\u003C\u003Ec",
+    "Method": "\u003CUseAppPipeline\u003Eb__0_0",
+    "RelativePath": "culture/set",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "culture",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "redirectUri",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "AppPipelineExtensions\u002B\u003C\u003Ec",
+    "Method": "\u003CUseAppPipeline\u003Eb__0_1",
+    "RelativePath": "logout",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

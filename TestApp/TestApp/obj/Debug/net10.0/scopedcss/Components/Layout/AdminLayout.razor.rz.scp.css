@@ -1,0 +1,117 @@
+/* =========================
+   ROOT LAYOUT
+========================= */
+
+.page[b-v66ghl39w5] {
+    display: flex;
+    min-height: 100vh;
+    background-color: #002db3;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar[b-v66ghl39w5] {
+    width: 250px;
+    /*background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);*/
+    background-color: #ffffb3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-admin[b-v66ghl39w5] {
+    flex: 1;
+    margin-left: 250px;
+    display: flex;
+    flex-direction: column;
+    /*min-height: 90vh;*/
+    height: 100vh;
+}
+.admin-article[b-v66ghl39w5] {
+    background-color: white;
+    border-radius: 30px 0 0 30px;
+}
+/*.main-admin {
+    margin-top: 0px !important;
+    margin-bottom: 0;
+    padding: 0;*/
+    /*background-color: var(--blue-bg-color);*/
+    /*height: 100vh;
+    width: 100%;
+}*/
+/* =========================
+   TOP BAR
+========================= */
+
+.top-row[b-v66ghl39w5] {
+    height: 3.5rem;
+    background-color: #333333;
+    border-bottom: 1px solid #d6d5d5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+    .top-row[b-v66ghl39w5]  a,
+    .top-row[b-v66ghl39w5]  .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+        .top-row[b-v66ghl39w5]  a:hover,
+        .top-row[b-v66ghl39w5]  .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .top-row[b-v66ghl39w5]  a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+/* =========================
+   PAGE CONTENT
+========================= */
+
+.content[b-v66ghl39w5] {
+    flex: 1;
+    /*padding: 1.5rem;*/
+    overflow-y: auto;
+}
+
+/* =========================
+   RESPONSIVE - MOBILE
+========================= */
+
+@media (max-width: 640.98px) {
+
+    .sidebar[b-v66ghl39w5] {
+        width: 100vw;
+        height: auto;
+        position: fixed;
+        top: 0;
+    }
+
+    .main-admin[b-v66ghl39w5] {
+        margin-left: 0;
+        padding-top: 65px;
+    }
+
+    .top-row[b-v66ghl39w5] {
+        display: none;
+    }
+    .admin-article[b-v66ghl39w5] {
+        border-radius: 0;
+    }
+}

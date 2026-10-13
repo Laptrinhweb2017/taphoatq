@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
+    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModelLib\ModelLib.csproj" />
+    <ProjectReference Include="..\ServiceLib\ServiceLib.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Blazor.Bootstrap">
+      <Version>3.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer">
+      <Version>8.0.15</Version>
+    </PackageReference>
+    <PackageReference Include="Scrutor">
+      <Version>7.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="conf.cfg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Reference Include="TextProcessing">
+      <HintPath>TextProcessing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\img\" />
+    <Folder Include="wwwroot\assets\logs\" />
+    <Folder Include="wwwroot\assets\setting\" />
+  </ItemGroup>
+</Project>

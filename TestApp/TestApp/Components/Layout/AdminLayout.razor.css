@@ -1,0 +1,117 @@
+/* =========================
+   ROOT LAYOUT
+========================= */
+
+.page {
+    display: flex;
+    min-height: 100vh;
+    background-color: #002db3;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 250px;
+    /*background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);*/
+    background-color: #ffffb3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main-admin {
+    flex: 1;
+    margin-left: 250px;
+    display: flex;
+    flex-direction: column;
+    /*min-height: 90vh;*/
+    height: 100vh;
+}
+.admin-article {
+    background-color: white;
+    border-radius: 30px 0 0 30px;
+}
+/*.main-admin {
+    margin-top: 0px !important;
+    margin-bottom: 0;
+    padding: 0;*/
+    /*background-color: var(--blue-bg-color);*/
+    /*height: 100vh;
+    width: 100%;
+}*/
+/* =========================
+   TOP BAR
+========================= */
+
+.top-row {
+    height: 3.5rem;
+    background-color: #333333;
+    border-bottom: 1px solid #d6d5d5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+    .top-row ::deep a,
+    .top-row ::deep .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+        text-decoration: none;
+    }
+
+        .top-row ::deep a:hover,
+        .top-row ::deep .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .top-row ::deep a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+/* =========================
+   PAGE CONTENT
+========================= */
+
+.content {
+    flex: 1;
+    /*padding: 1.5rem;*/
+    overflow-y: auto;
+}
+
+/* =========================
+   RESPONSIVE - MOBILE
+========================= */
+
+@media (max-width: 640.98px) {
+
+    .sidebar {
+        width: 100vw;
+        height: auto;
+        position: fixed;
+        top: 0;
+    }
+
+    .main-admin {
+        margin-left: 0;
+        padding-top: 65px;
+    }
+
+    .top-row {
+        display: none;
+    }
+    .admin-article {
+        border-radius: 0;
+    }
+}

@@ -1,0 +1,141 @@
+.customer-page[b-h7jr2f1l3c] {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.page-header[b-h7jr2f1l3c] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.page-title p[b-h7jr2f1l3c] {
+    margin: 6px 0 0;
+    color: #222222;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+
+.page-toolbar[b-h7jr2f1l3c] {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+
+
+.customer-table-wrapper[b-h7jr2f1l3c] {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+}
+
+.customer-table[b-h7jr2f1l3c] {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 14px;
+}
+
+    .customer-table th[b-h7jr2f1l3c] {
+        height: 48px;
+        padding: 0 12px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e5e5e5;
+        color: #333;
+        font-weight: 600;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    /* dữ liệu tự xuống dòng */
+    .customer-table td[b-h7jr2f1l3c] {
+        min-height: 52px;
+        padding: 12px;
+        border-bottom: 1px solid #eeeeee;
+        color: #444;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+        vertical-align: middle;
+    }
+
+    .customer-table tbody tr:hover[b-h7jr2f1l3c] {
+        background: #fafafa;
+    }
+
+    /* cột khách hàng */
+    .customer-table th:nth-child(1)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(1)[b-h7jr2f1l3c] {
+        width: 120px;
+    }
+
+    /* cột Khách hàng*/
+    .customer-table th:nth-child(2)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(2)[b-h7jr2f1l3c] {
+        width: 160px;
+    }
+
+    /* cột SĐT*/
+    .customer-table th:nth-child(3)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(3)[b-h7jr2f1l3c] {
+        width: 125px;
+    }
+
+    /* cột email */
+    .customer-table th:nth-child(4)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(4)[b-h7jr2f1l3c] {
+        width: 210px;
+    }
+
+    /* cột địa chỉ */
+    .customer-table th:nth-child(5)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(5)[b-h7jr2f1l3c] {
+        width: 220px;
+    }
+
+    /* cột ghi chú */
+    .customer-table th:nth-child(6)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(6)[b-h7jr2f1l3c] {
+        width: 180px;
+    }
+
+    /* cột trạng thái */
+    .customer-table th:nth-child(7)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(7)[b-h7jr2f1l3c] {
+        width: 105px;
+        white-space: nowrap;
+    }
+
+    /* cột thao tác */
+    .customer-table th:nth-child(8)[b-h7jr2f1l3c],
+    .customer-table td:nth-child(8)[b-h7jr2f1l3c] {
+        width: 150px;
+    }
+
+.customer-action-column[b-h7jr2f1l3c] {
+    width: 150px;
+    text-align: center !important;
+}
+
+.customer-actions[b-h7jr2f1l3c] {
+    text-align: center;
+    white-space: nowrap !important;
+}
+
+    .customer-actions .edit-button[b-h7jr2f1l3c],
+    .customer-actions .delete-button[b-h7jr2f1l3c] {
+        margin: 0 2px;
+    }
+
+.empty-row[b-h7jr2f1l3c] {
+    height: 180px;
+    text-align: center !important;
+    color: #999 !important;
+    font-style: italic;
+}

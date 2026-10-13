@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+
+@inject LayoutService layoutService
+
+<div>
+    <NavMenu @rendermode="InteractiveServer" />
+    <main class="container main-normal">
+        <article style="margin-top:20px; margin-bottom:120px;">
+            @Body
+        </article>
+    </main>
+    <Footer/>
+    <FloatingIcon @rendermode="InteractiveServer" />
+</div>
+<ModalForm />
+@code {
+    protected override Task OnInitializedAsync()
+    {
+        layoutService.OnChange += StateHasChanged;
+        return base.OnInitializedAsync();
+    }
+}

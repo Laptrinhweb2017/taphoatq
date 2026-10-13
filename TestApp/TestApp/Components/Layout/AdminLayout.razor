@@ -1,0 +1,65 @@
+﻿@inherits LayoutComponentBase
+@inject LayoutService layoutService
+@inject LoginViewModel login
+@inject NavigationManager NavMan
+
+<div class="page">
+    <div class="sidebar">
+        <AdminNavMenu />
+    </div>
+    <main class="main-admin">
+        <div class="top-row">
+            <AdminHeader />
+        </div>
+
+        <article class="content admin-article">
+            <div class="m-1 m-md-4">
+                @if (isLoaded)
+                {
+                    @Body
+                }
+                else
+                {
+                    <div class="auth-loading">
+                        <p>Đang đồng bộ ứng dụng...</p>
+                    </div>
+                }
+            </div>
+        </article>
+    </main>
+</div>
+<ModalForm />
+
+@code {
+    [CascadingParameter] Task<AuthenticationState>? AuthStateTask { get; set; }
+    private bool isLoaded = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthStateTask == null)
+            return;
+
+        var authState = await AuthStateTask;
+        var user = authState.User;
+
+        // 📌 Kiểm tra nghiêm ngặt xem User đã thực sự Authen chưa
+        if (user.Identity == null || !user.Identity.IsAuthenticated)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+
+        string? UserCode = user.FindFirst("StaffCode")?.Value;
+
+        if (!string.IsNullOrEmpty(UserCode))
+        {
+            // Chắc chắn nạp xong data vào VM
+            await login.GetLogin(UserCode);
+        }
+
+        layoutService.OnChange += StateHasChanged;
+
+        // Bật đèn xanh cho phép @Body và các component con render
+        isLoaded = true;
+    }
+}
