@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C866D485-09B7-A9EE-8659-A83FE5EC3EAA}|UXUIAPP\\UXUIAPP.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\uxuiapp\\uxuiapp\\components\\pages\\admin\\dashboard\\dashboardpage.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{C866D485-09B7-A9EE-8659-A83FE5EC3EAA}|UXUIAPP\\UXUIAPP.csproj|solutionrelative:uxuiapp\\components\\pages\\admin\\dashboard\\dashboardpage.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C866D485-09B7-A9EE-8659-A83FE5EC3EAA}|UXUIAPP\\UXUIAPP.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\uxuiapp\\uxuiapp\\components\\pages\\admin\\sanpham\\sanphampage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C866D485-09B7-A9EE-8659-A83FE5EC3EAA}|UXUIAPP\\UXUIAPP.csproj|solutionrelative:uxuiapp\\components\\pages\\admin\\sanpham\\sanphampage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C866D485-09B7-A9EE-8659-A83FE5EC3EAA}|UXUIAPP\\UXUIAPP.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\uxuiapp\\uxuiapp\\components\\pages\\admin\\dashboard\\dashboardpage.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C866D485-09B7-A9EE-8659-A83FE5EC3EAA}|UXUIAPP\\UXUIAPP.csproj|solutionrelative:uxuiapp\\components\\pages\\admin\\dashboard\\dashboardpage.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C866D485-09B7-A9EE-8659-A83FE5EC3EAA}|UXUIAPP\\UXUIAPP.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\uxuiapp\\uxuiapp\\components\\layout\\admin\\adminsidebar.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -54,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,7 +62,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DashboardPage.razor.css",
               "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\Components\\Pages\\Admin\\Dashboard\\DashboardPage.razor.css",
               "RelativeDocumentMoniker": "UXUIAPP\\Components\\Pages\\Admin\\Dashboard\\DashboardPage.razor.css",
@@ -70,20 +70,7 @@
               "RelativeToolTip": "UXUIAPP\\Components\\Pages\\Admin\\Dashboard\\DashboardPage.razor.css",
               "ViewState": "AgIAAKAAAAAAAAAAAAAgwL4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-10-08T07:19:26.21Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "KhachHangModal.razor.css",
-              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
-              "RelativeDocumentMoniker": "UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
-              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
-              "RelativeToolTip": "UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAcwJUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-10-07T04:36:22.124Z"
+              "WhenOpened": "2026-10-08T07:19:26.21Z"
             },
             {
               "$type": "Document",
@@ -135,16 +122,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "SanPhamPage.razor",
               "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\Components\\Pages\\Admin\\SanPham\\SanPhamPage.razor",
               "RelativeDocumentMoniker": "UXUIAPP\\Components\\Pages\\Admin\\SanPham\\SanPhamPage.razor",
               "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\Components\\Pages\\Admin\\SanPham\\SanPhamPage.razor",
               "RelativeToolTip": "UXUIAPP\\Components\\Pages\\Admin\\SanPham\\SanPhamPage.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-10-05T11:55:05.905Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "KhachHangModal.razor.css",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
+              "RelativeDocumentMoniker": "UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\UXUIAPP\\UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
+              "RelativeToolTip": "UXUIAPP\\Components\\Pages\\Admin\\KhachHang\\KhachHangModal.razor.css",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAcwJUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-10-07T04:36:22.124Z"
             },
             {
               "$type": "Document",

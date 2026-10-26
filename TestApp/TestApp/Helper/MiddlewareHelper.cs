@@ -6,6 +6,7 @@ using Application.Asset.Dtos;
 using Application.Asset.Interfaces;
 using ViewModel;
 using Application.Asset.ViewDtos;
+using Application.Asset.FullDto;
 
 namespace TestApp.Helper
 {
@@ -29,7 +30,7 @@ namespace TestApp.Helper
 			AddRepoService<DtoStoreInfo, StoreInfoRepo, StoreInfoService>(builder);
 			AddRepoService<DtoBrand, BrandRepo, BrandService>(builder);
 			AddRepoService<DtoCategory, CategoryRepo, CategoryService>(builder);
-			AddRepoService<DtoProducts, ProductsRepo, ProductsService>(builder);
+			AddRepoService<FullProduct, ProductsRepo, ProductsService>(builder);
 			AddRepoService<DtoPrice, PriceRepo, PriceService>(builder);
 			AddRepoService<DtoWarehouses, WarehousesRepo, WarehousesService>(builder);
 			AddRepoService<DtoInventory, InventoryRepo, InventoryService>(builder);

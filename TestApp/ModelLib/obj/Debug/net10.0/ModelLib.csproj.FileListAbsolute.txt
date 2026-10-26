@@ -15,7 +15,6 @@ D:\Programming\Blazors\TestApp\ModelLib\obj\Debug\net10.0\ModelLib.dll
 D:\Programming\Blazors\TestApp\ModelLib\obj\Debug\net10.0\refint\ModelLib.dll
 D:\Programming\Blazors\TestApp\ModelLib\obj\Debug\net10.0\ModelLib.pdb
 D:\Programming\Blazors\TestApp\ModelLib\obj\Debug\net10.0\ref\ModelLib.dll
-D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ModelLib\bin\Debug\net10.0\conf.cfg
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ModelLib\bin\Debug\net10.0\ModelLib.deps.json
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ModelLib\bin\Debug\net10.0\ModelLib.dll
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ModelLib\bin\Debug\net10.0\ModelLib.pdb

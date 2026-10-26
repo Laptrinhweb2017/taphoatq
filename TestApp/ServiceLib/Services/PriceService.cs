@@ -83,7 +83,32 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoPrice>> UpdateAsync(DtoPrice dto)
+
+        public async Task<DtoResult<DtoPrice>> SaveAsync(DtoPrice dto)
+        {
+            DtoResult<DtoPrice> rs = new();
+
+            if (!dto.Price.HasValue || dto.Price.Value < 0)
+            {
+                rs.Message = "Giá sản phẩm không hợp lệ!";
+                return rs;
+            }
+
+            dto.AppliedDate ??= DateTime.Now;
+
+            if (dto.id.HasValue && dto.id.Value > 0)
+            {
+                rs = await UpdateAsync(dto);
+            }
+            else
+            {
+                rs = await AddAsync(dto);
+            }
+
+            return rs;
+        }
+
+        public async Task<DtoResult<DtoPrice>> UpdateAsync(DtoPrice dto)
 		{
 			DtoResult<DtoPrice> result = new();
 			try

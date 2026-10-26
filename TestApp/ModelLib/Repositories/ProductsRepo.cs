@@ -1,7 +1,9 @@
+using Application.Asset.FullDto;
+
 namespace ModelLib.Repositories{
-	public class ProductsRepo : IRepository<DtoProducts>
+	public class ProductsRepo : IRepository<FullProduct>
 	{
-		private static DtoProducts MapReader(SqlDataReader reader) => new()
+		private static FullProduct MapReader(SqlDataReader reader) => new()
 		{
 			id = reader["id"] as int?,
 			ProductCode = reader["ProductCode"] as string,
@@ -10,11 +12,13 @@ namespace ModelLib.Repositories{
 			Descript = reader["Descript"] as string,
 			CreatedAt = reader["CreatedAt"] as DateTime?,
 			BrandID = reader["BrandID"] as int?,
-			CateID = reader["CateID"] as int?
+			CateID = reader["CateID"] as int?,
+			BrandName =  reader["BrandName"] as string,
+			CateName = reader["CateName"] as string,
 		};
-		private async Task<List<DtoProducts>> ExecuteReaderAsync(SqlCommand cmd)
+		private async Task<List<FullProduct>> ExecuteReaderAsync(SqlCommand cmd)
 		{
-			var result = new List<DtoProducts>();
+			var result = new List<FullProduct>();
 			await using var reader = await cmd.ExecuteReaderAsync();
 			while (await reader.ReadAsync())
 			{
@@ -22,17 +26,17 @@ namespace ModelLib.Repositories{
 			}
 			return result;
 		}
-		private async Task<DtoResult<DtoProducts>> GetProductsAsync(DtoProducts dto, bool exact = false)
+		private async Task<DtoResult<FullProduct>> GetProductsAsync(FullProduct dto, bool exact = false)
 		{
-			var result = new DtoResult<DtoProducts>();
+			var result = new DtoResult<FullProduct>();
 			try
 			{
-				string condition = RepoBuildHelper<DtoProducts>.BuildCondition(dto, exact);
-				string sql = "SELECT * FROM Products" + condition;
+				string sql = "GetFullProduct"; //gọi về sp
 
 				await using SqlConnection conn = new(SqlHelper.SqlConn());
 				await conn.OpenAsync();
 				await using SqlCommand cmd = new(sql, conn);
+				cmd.CommandType = CommandType.StoredProcedure;
 				var data = await ExecuteReaderAsync(cmd);
 
 				result.Message = "OK";
@@ -47,13 +51,13 @@ namespace ModelLib.Repositories{
 			}
 			return result;
 		}
-		public Task<DtoResult<DtoProducts>> GetAll() => GetProductsAsync(new DtoProducts());
-		public Task<DtoResult<DtoProducts>> GetOne(DtoProducts entity) => GetProductsAsync(entity, true);
-		public Task<DtoResult<DtoProducts>> Find(DtoProducts entity) => GetProductsAsync(entity);
+		public Task<DtoResult<FullProduct>> GetAll() => GetProductsAsync(new FullProduct());
+		public Task<DtoResult<FullProduct>> GetOne(FullProduct entity) => GetProductsAsync(entity, true);
+		public Task<DtoResult<FullProduct>> Find(FullProduct entity) => GetProductsAsync(entity);
 
-		public async Task<DtoResult<DtoProducts>> Add(DtoProducts entity)
+		public async Task<DtoResult<FullProduct>> Add(FullProduct entity)
 		{
-			var result = new DtoResult<DtoProducts>();
+			var result = new DtoResult<FullProduct>();
 			try
 			{
 				await using SqlConnection conn = new(SqlHelper.SqlConn());
@@ -76,9 +80,9 @@ namespace ModelLib.Repositories{
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoProducts>> Update(DtoProducts entity)
+		public async Task<DtoResult<FullProduct>> Update(FullProduct entity)
 		{
-			var result = new DtoResult<DtoProducts>();
+			var result = new DtoResult<FullProduct>();
 			try
 			{
 				await using SqlConnection conn = new(SqlHelper.SqlConn());
@@ -102,10 +106,10 @@ namespace ModelLib.Repositories{
 			}
 			return result;
 		}
-		public Task<DtoResult<DtoProducts>> Delete(DtoProducts entity) => Delete(entity.id);
-		public async Task<DtoResult<DtoProducts>> Delete(object? entityId)
+		public Task<DtoResult<FullProduct>> Delete(FullProduct entity) => Delete(entity.id);
+		public async Task<DtoResult<FullProduct>> Delete(object? entityId)
 		{
-			var result = new DtoResult<DtoProducts>();
+			var result = new DtoResult<FullProduct>();
 			try
 			{
 				await using SqlConnection conn = new(SqlHelper.SqlConn());

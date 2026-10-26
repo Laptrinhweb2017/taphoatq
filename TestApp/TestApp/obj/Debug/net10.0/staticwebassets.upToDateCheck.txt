@@ -63,6 +63,10 @@ C:\Users\Admin\.nuget\packages\microsoft.aspnetcore.app.internal.assets\10.0.11\
 wwwroot\app.css
 wwwroot\assets\contents\KeepFolder.txt
 wwwroot\assets\css\mycss.css
+wwwroot\assets\img\preview\SP001.jpg
+wwwroot\assets\img\preview\SP001.png
+wwwroot\assets\img\product\SP001.jpg
+wwwroot\assets\img\product\default.jpg
 wwwroot\assets\js\CheckinHelper.js
 wwwroot\assets\js\TextFile.txt
 wwwroot\assets\js\appscript.js

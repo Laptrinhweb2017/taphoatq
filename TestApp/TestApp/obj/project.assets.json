@@ -459,7 +459,7 @@
           }
         }
       },
-      "System.Security.Cryptography.Pkcs/9.0.13": {
+      "System.Security.Cryptography.Pkcs/9.0.21": {
         "type": "package",
         "compile": {
           "lib/net9.0/System.Security.Cryptography.Pkcs.dll": {
@@ -517,7 +517,8 @@
           "Application.Asset": "1.0.0",
           "Microsoft.Data.SqlClient": "7.0.2",
           "Newtonsoft.Json": "13.0.4",
-          "Swashbuckle.AspNetCore": "10.2.3"
+          "Swashbuckle.AspNetCore": "10.2.3",
+          "System.Security.Cryptography.Pkcs": "9.0.21"
         },
         "compile": {
           "bin/placeholder/ModelLib.dll": {}
@@ -530,7 +531,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
-          "ModelLib": "1.0.0"
+          "Application.Asset": "1.0.0",
+          "ModelLib": "1.0.0",
+          "System.Security.Cryptography.Pkcs": "9.0.21"
         },
         "compile": {
           "bin/placeholder/ServiceLib.dll": {}
@@ -544,7 +547,8 @@
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
           "Application.Asset": "1.0.0",
-          "ServiceLib": "1.0.0"
+          "ServiceLib": "1.0.0",
+          "System.Security.Cryptography.Pkcs": "9.0.21"
         },
         "compile": {
           "bin/placeholder/ViewModel.dll": {}
@@ -1437,10 +1441,10 @@
         "system.identitymodel.tokens.jwt.nuspec"
       ]
     },
-    "System.Security.Cryptography.Pkcs/9.0.13": {
-      "sha512": "dxJhkuoaelvWy588wPXjShNks+ZMiSgXnN75/u+DPbER5PqKrLPDftE0BvGM7nDK/scQAVlD+gRXlCAAjWi58Q==",
+    "System.Security.Cryptography.Pkcs/9.0.21": {
+      "sha512": "KD+oHoYIxwNCajjVe58WVwq9cRpum+Pg3tRveDRtkcaw6w3oc7sNBoMRtb5P5OehI3bgv1ucMpgjf8lpj5J96A==",
       "type": "package",
-      "path": "system.security.cryptography.pkcs/9.0.13",
+      "path": "system.security.cryptography.pkcs/9.0.21",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1465,7 +1469,7 @@
         "runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.xml",
         "runtimes/win/lib/net9.0/System.Security.Cryptography.Pkcs.dll",
         "runtimes/win/lib/net9.0/System.Security.Cryptography.Pkcs.xml",
-        "system.security.cryptography.pkcs.9.0.13.nupkg.sha512",
+        "system.security.cryptography.pkcs.9.0.21.nupkg.sha512",
         "system.security.cryptography.pkcs.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -1527,12 +1531,12 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Application.Asset >= 1.0.0",
       "Blazor.Bootstrap >= 3.3.1",
       "Microsoft.AspNetCore.App.Internal.Assets >= 10.0.11",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.15",
-      "ModelLib >= 1.0.0",
       "Scrutor >= 7.0.0",
-      "ServiceLib >= 1.0.0",
+      "System.Security.Cryptography.Pkcs >= 9.0.21",
       "ViewModel >= 1.0.0"
     ]
   },
@@ -1569,11 +1573,8 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\ModelLib.csproj": {
-              "projectPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\ModelLib.csproj"
-            },
-            "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\ServiceLib.csproj": {
-              "projectPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\ServiceLib.csproj"
+            "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\Application.Asset\\Application.Asset.csproj": {
+              "projectPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\Application.Asset\\Application.Asset.csproj"
             },
             "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ViewModel\\ViewModel.csproj": {
               "projectPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ViewModel\\ViewModel.csproj"
@@ -1615,6 +1616,10 @@
           "Scrutor": {
             "target": "Package",
             "version": "[7.0.0, )"
+          },
+          "System.Security.Cryptography.Pkcs": {
+            "target": "Package",
+            "version": "[9.0.21, )"
           }
         },
         "imports": [

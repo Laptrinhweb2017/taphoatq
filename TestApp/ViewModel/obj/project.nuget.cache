@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ATJ21i21OB4=",
+  "dgSpecHash": "4lqIJYyqFxg=",
   "success": true,
   "projectFilePath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ViewModel\\ViewModel.csproj",
   "expectedPackageFiles": [
@@ -32,7 +32,7 @@
     "C:\\Users\\Admin\\.nuget\\packages\\system.configuration.configurationmanager\\9.0.13\\system.configuration.configurationmanager.9.0.13.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.diagnostics.eventlog\\9.0.13\\system.diagnostics.eventlog.9.0.13.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.16.0\\system.identitymodel.tokens.jwt.8.16.0.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.13\\system.security.cryptography.pkcs.9.0.13.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.security.cryptography.pkcs\\9.0.21\\system.security.cryptography.pkcs.9.0.21.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.security.cryptography.protecteddata\\9.0.13\\system.security.cryptography.protecteddata.9.0.13.nupkg.sha512"
   ],
   "logs": []

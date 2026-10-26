@@ -1,17 +1,22 @@
+/* =========================
+   CONTAINER CHÍNH
+   ========================= */
 .product-page {
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    padding: 16px;
 }
 
-
-/* HEADER */
-
+/* =========================
+   HEADER
+   ========================= */
 .page-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 22px;
+    font-size: 20px;
 }
 
 .page-title h1 {
@@ -24,50 +29,90 @@
 .page-title p {
     margin: 6px 0 0;
     color: #777;
-    font-size: 14px;
+    font-size: 20px;
 }
 
-
-/* TOOLBAR */
-
+/* =========================
+   TOOLBAR
+   ========================= */
 .page-toolbar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
+    justify-content: flex-start;
+    margin-bottom: 16px !important;
 }
 
-.product-total {
-    color: #666;
+    .page-toolbar .btn {
+        margin-bottom: 8px;
+    }
+
+/* =========================
+   FORM MODAL DIALOG (THIẾT KẾ CHO SẢN PHẨM)
+   ========================= */
+.form-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.form-control, .form-select {
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    padding: 8px 12px;
     font-size: 14px;
 }
 
+    .form-control:focus, .form-select:focus {
+        border-color: #198754;
+        box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+    }
 
-/* TABLE WRAPPER */
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
 
+/* =========================
+   TABLE & TREELIST WRAPPER
+   ========================= */
 .product-table-wrapper {
     width: 100%;
     overflow-x: auto;
     background: #ffffff;
     border: 1px solid #e5e5e5;
     border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-
-/* TABLE */
-
-.product-table {
+.product-table,
+.product-page table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    table-layout: fixed; /* Bắt buộc để chia tỷ lệ cột chính xác */
     font-family: "Segoe UI", Arial, sans-serif;
     font-size: 14px;
 }
 
+    /* Định nghĩa tỷ lệ độ rộng 4 cột Header */
+    .product-table th:nth-child(1), .product-page table th:nth-child(1) {
+        width: 25%;
+    }
+    /* Danh Mục / Thương Hiệu */
+    .product-table th:nth-child(2), .product-page table th:nth-child(2) {
+        width: 15%;
+    }
+    /* Mã SP */
+    .product-table th:nth-child(3), .product-page table th:nth-child(3) {
+        width: 25%;
+    }
+    /* Tên SP */
+    .product-table th:nth-child(4), .product-page table th:nth-child(4) {
+        width: 35%;
+    }
+    /* Mô Tả */
 
-    /* HEADER */
-
-    .product-table th {
+    .product-table th, .product-page table th {
         height: 48px;
         padding: 0 12px;
         background: #f8f9fa;
@@ -78,100 +123,38 @@
         white-space: nowrap;
     }
 
-
-    /* DATA */
-
-    .product-table td {
-        min-height: 52px;
+    .product-table td, .product-page table td {
+        height: 52px; /* Đã đổi min-height -> height chuẩn CSS Table */
         padding: 12px;
         border-bottom: 1px solid #eeeeee;
         color: #444;
         white-space: normal;
         overflow-wrap: break-word;
-        word-break: normal;
         vertical-align: middle;
     }
 
-
-    /* HOVER */
-
-    .product-table tbody tr:hover {
+    .product-table tbody tr:hover, .product-page table tbody tr:hover {
         background: #fafafa;
     }
 
+/* =========================
+   XỬ LÝ DỊCH CỘT TREELIST CẤP CON (SẢN PHẨM)
+   ========================= */
 
-    /* COLUMN*/
-    /* Mã sản phẩm */
-
-    .product-table th:nth-child(1),
-    .product-table td:nth-child(1) {
-        width: 130px;
-    }
-
-
-    /* Tên sản phẩm */
-
-    .product-table th:nth-child(2),
-    .product-table td:nth-child(2) {
-        width: 220px;
-    }
-
-
-    /* Hình ảnh */
-
-    .product-table th:nth-child(3),
-    .product-table td:nth-child(3) {
-        width: 120px;
-    }
-
-
-    /* Thương hiệu */
-
-    .product-table th:nth-child(4),
-    .product-table td:nth-child(4) {
-        width: 180px;
-    }
-
-
-    /* Danh mục */
-
-    .product-table th:nth-child(5),
-    .product-table td:nth-child(5) {
-        width: 190px;
-    }
-
-
-    /* Ngày tạo */
-
-    .product-table th:nth-child(6),
-    .product-table td:nth-child(6) {
-        width: 170px;
-    }
-
-
-    /* Thao tác */
-
-    .product-table th:nth-child(7),
-    .product-table td:nth-child(7) {
-        width: 170px;
-    }
-
-
-/* ACTION */
-
-.product-action-column {
-    width: 170px;
-    text-align: center !important;
+/* Khi hàng con chỉ có 3 ô <td>, tự động chèn 1 khoảng trống giả ở vị trí Cột 1 */
+.product-page tbody tr:not(.parent-row) td:first-child {
+    position: relative;
 }
 
-.product-actions {
-    text-align: center;
-    white-space: nowrap !important;
+/* Làm tàng hình dữ liệu ID nếu có truyền mỏ neo id ở cột 1 */
+.text-transparent, .hide-col-1 {
+    color: transparent !important;
+    user-select: none !important;
 }
 
-
-/* EMPTY */
-
+/* =========================
+   TRẠNG THÁI RỖNG (EMPTY STATE)
+   ========================= */
 .empty-row {
     height: 180px;
     text-align: center !important;

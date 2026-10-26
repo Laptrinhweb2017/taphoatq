@@ -1,1 +1,474 @@
-﻿
+﻿@page "/admin/san-pham"
+@using System.ComponentModel
+@using Application.Asset.FullDto
+@using Application.Asset.Interfaces
+@using Application.Asset.Dtos
+@using TestApp.Components.UC.DateEngine
+@using TestApp.Components.UC.NumberInput
+
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+
+@layout AdminLayout
+
+@implements IDisposable
+
+@inject ProductsViewModel vm
+@inject LoginViewModel login
+@inject NavigationManager NavMan
+@inject HeaderInfo header
+
+@inject IFileStorageService fileService
+
+<PageTitle>Sản phẩm</PageTitle>
+
+<div class="product-page">
+
+    <div class="page-header">
+        <div class="page-title">
+            <p>Quản Lý Sản Phẩm Của Cửa Hàng.</p>
+        </div>
+    </div>
+
+    <!-- TOOLBAR & VIEW MODE SWITCH -->
+
+    <div class="page-toolbar d-flex align-items-center justify-content-between mb-3">
+
+        <button class="btn btn-success" @onclick="AddProduct">
+            <i class="bi bi-plus-lg me-1"></i> Thêm Sản Phẩm
+        </button>
+        <div class="view-switch border rounded p-2 bg-light">
+            <span class="me-2 fw-semibold text-secondary">Chế độ xem:</span>
+
+            <div class="form-check form-check-inline mb-0">
+                <input class="form-check-input" type="radio" value="0" @onchange="() => vm.ViewBy = 0" checked="@(vm.ViewBy == 0)" name="viewMode" id="cateView" />
+                <label class="form-check-label fw-medium" for="cateView">Theo Nhóm Danh Mục</label>
+            </div>
+
+            <div class="form-check form-check-inline mb-0 ms-2">
+                <input class="form-check-input" type="radio" value="1" @onchange="() => vm.ViewBy = 1" checked="@(vm.ViewBy == 1)" name="viewMode" id="brandView" />
+
+                <label class="form-check-label fw-medium" for="brandView">Theo Thương Hiệu</label>
+            </div>
+        </div>
+    </div>
+
+    <TreeListComponent TItem="ViewDto<FullProduct>"
+                       Items="vm.ProductList"
+                       Headers="TreeHead"
+                       KeyFieldNames="TreeKeys"
+                       ColumnWidths="TreeCols"
+                       DisplayProperties="TreeProps"
+                       ExpanderWidth="30"
+                       TopPos="15px"
+                       ChildPropertyNames="childProps"
+                       TextCSS="BootStraps"
+                       Styles="CSS"
+                       SelectedRowBg="lightblue"
+                       ConditionalFormats="ConF"
+                       SetToFields="setToField"
+                       ShowEdit="ShowEdit"
+                       ShowDelete="ShowDelete"
+                       OnDeleteClicked="DeleteProductRow"
+                       OnEditClicked="OnEditItem"
+                       OnRowDbleClicked="OnEditItem" />
+
+    <ModalDialog TData="FullProduct"
+                 @ref="productDialog"
+                 Title="Thông Tin Sản Phẩm"
+                 DataObject="@vm.SelectedProduct"
+                 ShowDeleteButton="true"
+                 ShowConfirmButton="true"
+                 OnSaveClicked="SaveProduct"
+                 OnDeleteClicked="DeleteProduct"
+                 IsSucceed="false">
+
+        <FormTemplate Context="product">
+            <div class="p-1 p-md-3">
+                <div class="row mb-2">
+                    <div class="col-md-6 col-12 mb-2">
+                        <label for="productcode" class="form-label">Mã Sản Phẩm</label>
+                        <input type="text"
+                               class="form-control"
+                               autofocus
+                               id="productcode"
+                               placeholder="Nhập mã sản phẩm"
+                               @bind="product.ProductCode" />
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-2">
+                        <label for="productname" class="form-label">Tên Sản Phẩm</label>
+                        <input type="text"
+                               class="form-control"
+                               id="productname"
+                               placeholder="Nhập tên sản phẩm"
+                               @bind="product.ProductName" />
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-md-6 col-12 mb-2">
+                        <label for="category" class="form-label">Danh Mục</label>
+                        <select class="form-select" id="category" @bind="product.CateID">
+                            <option value="">-- Chọn Danh Mục --</option>
+                            @foreach (var cate in vm.CategoryList)
+                            {<option value="@cate.id">@cate.CateName</option>}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 col-12 mb-2">
+                        <label for="brand" class="form-label">Thương Hiệu</label>
+                        <select class="form-select" id="brand" @bind="product.BrandID">
+                            <option value="">-- Chọn Thương Hiệu --</option>
+                            @foreach (var brand in vm.BrandList)
+                            {<option value="@brand.id">@brand.BrandName</option>}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-12 mb-2">
+                        <label for="image" class="btn btn-success">
+                            Chọn Ảnh
+                        </label>
+                        <InputFile class="d-none" OnChange="LoadPicture" id="image" />
+                    </div>
+                </div>
+
+                @if (!string.IsNullOrEmpty(previewImg))
+                {
+                    string src = $"{previewImg}?ts={imgCache}";
+                    <img src=@src class="img-fluid" style="height:200px" />
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(product.Image))
+                    {
+                        string src = $"assets/img/product/{product.Image}?ts={imgCache}";
+                        <img src=@src class="img-fluid" style="height:200px" />
+                    }
+
+                }
+
+                <div class="row mb-2">
+                    <div class="col-12">
+                        <label for="descript" class="form-label">
+                            Mô Tả Sản Phẩm
+                        </label>
+                        <textarea class="form-control"
+                                  id="descript"
+                                  rows="3"
+                                  placeholder="Nhập mô tả chi tiết"
+                                  @bind="product.Descript"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            @*== chỗ áp dụng giá ==*@
+            <div class="border border-1 border-success bg-success-subtle rounded rounded-3 p-1 p-md-3">
+                <div class="p-3">
+                    <button class="btn btn-primary" @onclick="() =>AddNewPrice(product.id)">
+                        <i class="bi bi-plus-lg me-2"></i>Thêm Giá
+                        </button>
+                </div>
+                @foreach (DtoPrice dto in vm.SelectedPrices)
+                {
+                    <div class="row align-items-center mb-2">
+                        <div class="col-5">
+                            <VietDateInput DateType="VietDateInput.VietDateInputType.Date" @bind-Value="dto.AppliedDate" />
+                        </div>
+                        <div class="col-4">
+                            <VietNumberInput AppendText="VNĐ" TValue="decimal?" @bind-Value="dto.Price"
+                                             DisplayFormat="VI" />
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-primary" @onclick="() => SavePrice(dto)"><i class="bi bi-floppy me-2"></i>Lưu</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </FormTemplate>
+
+    </ModalDialog>
+
+</div>
+
+<PopupMessage Duration="5000"
+              Position="PopupMessage.PopupPosition.TopRight"
+              Style="PopupMessage.PopupMessageStyle.Green"
+              @ref="popup" />
+
+
+@code
+{
+    PopupMessage popup = default!;
+    ModalDialog<FullProduct> productDialog = default!;
+
+    private bool productSucceed = false;
+
+    // === BỔ SUNG CỘT "Giá Bán" VÀO HEADER TREELIST ===
+    private List<string> TreeHead = ["Danh Mục/Thương Hiệu", "Mã SP", "Tên Sản Phẩm", "Mô Tả"];
+    private List<string> TreeKeys = ["id", "id"];
+    private List<List<int>> TreeCols = [[100], [25, 15, 25, 35]];
+
+    private List<List<string>> BootStraps = [["fw-bold text-primary p-2"], ["p-2", "p-2 text-danger fw-semibold", "p-2 fw-medium", "p-2 text-muted"]];
+
+    private List<List<string>> CSS = [[], []];
+    private List<object> ShowEdit = [false, true];
+    private List<object> ShowDelete = [false, true];
+
+    // === BỔ SUNG FIELD "Price" VÀO TREEPROPS ===
+    public List<List<string>> TreeProps => [["DisplayText"],
+        [vm.ViewBy == 0 ? "BrandName" : "CateName", "ProductCode", "ProductName", "Descript"]];
+
+    private Dictionary<string, Dictionary<string, string>> ConF = new();
+    private List<string> setToField => [vm.ViewBy == 0 ? "BrandName" : "CateName", "ProductCode", "ProductName", "Descript"];
+    private List<string> childProps = ["Data"];
+
+    [CascadingParameter]
+    Task<AuthenticationState>? AuthStateTask { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthStateTask == null)
+            return;
+
+        var authState = await AuthStateTask;
+        var user = authState.User;
+
+        if (user.Identity == null || !user.Identity.IsAuthenticated)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+
+        var userID = user.FindFirst("ID");
+
+        if (userID == null)
+        {
+            NavMan.NavigateTo("/login?returnUrl=/", forceLoad: true);
+            return;
+        }
+
+        var userCode = user.FindFirst("UserID")?.Value;
+
+        if (!string.IsNullOrEmpty(userCode)
+            && (login.LoggedUser == null || login.LoggedUser.id == null))
+        {
+            await login.InitializeAsync();
+            login.LoggedUser = await login.GetLogin(userCode);
+        }
+
+        if (login.LoggedUser != null)
+        {
+            var userName = login.LoggedUser.LoginName;
+            header.SetUser(userName!);
+        }
+
+        header.SetTile("THÔNG TIN SẢN PHẨM");
+
+        vm.PropertyChanged += async (s, e) => await InvokeAsync(StateHasChanged);
+
+        await vm.InitializeAsync();
+
+        if (!string.IsNullOrWhiteSpace(vm.ErrMess))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+
+    private async void UpdateView(object sender, PropertyChangedEventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task AddProduct()
+    {
+        vm.SelectedProduct = new();
+
+        // === KHỞI TẠO GIÁ MỚI CHO SẢN PHẨM THÊM MỚI ===
+        vm.SelectedPrice = new DtoPrice();
+
+        productSucceed = false;
+
+        await productDialog.ShowAsync();
+    }
+
+
+    #region Dùng cho TreeList
+    private async Task OnEditItem(object item) // nút edit trên tree list
+    {
+        FullProduct product = (FullProduct)item;
+
+        vm.SelectedProduct = new()
+        {
+            id = product.id,
+            ProductCode = product.ProductCode,
+            ProductName = product.ProductName,
+            Image = product.Image,
+            Descript = product.Descript,
+            CreatedAt = product.CreatedAt,
+            BrandID = product.BrandID,
+            CateID = product.CateID
+        };
+
+        vm.SelectedPrices = [.. vm.PriceList.Where(x => x.ProdID == product.id).OrderByDescending(x=>x.AppliedDate)];
+
+
+        await productDialog.ShowAsync();
+    }
+
+    private async Task DeleteProductRow(object item) // nút delete trên treelist
+    {
+        FullProduct product = (FullProduct)item;
+
+        vm.SelectedProduct = new()
+        {
+            id = product.id,
+            ProductCode = product.ProductCode,
+            ProductName = product.ProductName,
+            Image = product.Image,
+            Descript = product.Descript,
+            CreatedAt = product.CreatedAt,
+            BrandID = product.BrandID,
+            CateID = product.CateID
+        };
+
+        await vm.DeleteProduct();
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+
+            await productDialog.CloseAsync();
+            await InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+    #endregion
+
+    #region Dùng cho Dialog
+
+    private async Task DeleteProduct() // nút xóa trên dialog
+    {
+        await vm.DeleteProduct();
+
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+            await InvokeAsync(StateHasChanged);
+            await productDialog.CloseAsync();
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+    }
+
+    //
+    private async Task SaveProduct()
+    {
+        await vm.SaveProduct(newImage);
+
+        if (vm.ErrMess.Contains("thành công"))
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Green
+            );
+            await InvokeAsync(StateHasChanged);
+            await productDialog.CloseAsync();
+        }
+        else
+        {
+            popup.ShowMessage(
+                vm.ErrMess,
+                PopupMessage.PopupMessageStyle.Red
+            );
+        }
+        previewImg = "";
+    }
+
+    public void Dispose()
+    {
+        vm.PropertyChanged -= async (s, e) => await InvokeAsync(StateHasChanged);
+    }
+
+    #endregion
+
+    //xử lý xem theo 
+    private void ViewByCate()
+    {
+        vm.ViewBy = 0;
+        StateHasChanged();
+    }
+
+    private void ViewByBrand()
+    {
+        vm.ViewBy = 1;
+        StateHasChanged();
+    }
+
+    private void ViewChange(EventArgs args)
+    {
+        throw new NotImplementedException();
+    }
+
+    // Xử lý ảnh 
+    IBrowserFile? newImage;
+    string previewImg = "";
+    private string imgCache = DateTime.Now.ToString("ddMMyyyyhhmmssfff");
+
+    private async Task LoadPicture(InputFileChangeEventArgs e)
+    {
+        newImage = e.File;
+        try
+        {
+            string rs = await fileService.SaveFileAsync(newImage, $"{vm.SelectedProduct.ProductCode}", "assets/img/preview");
+            previewImg = rs;
+            imgCache = DateTime.Now.ToString("ddMMyyyyhhmmssfff");
+        }
+        catch
+        {
+
+        }
+    }
+
+    //xử lý giá
+    private async Task SavePrice(DtoPrice dto)
+    {
+        await vm.SavePriceAsync(dto);
+    }
+
+    private void AddNewPrice(int? prodID)
+    {
+        if (prodID == null || vm.SelectedPrices.FirstOrDefault(x => x.id == 0) != null)
+            return;
+        DtoPrice newPrice = new()
+            {
+                AppliedDate = DateTime.Today,
+                ProdID = prodID,
+                Price = 0,
+                id = 0
+            };
+        vm.SelectedPrices.Add(newPrice);
+        vm.SelectedPrices = [.. vm.SelectedPrices.OrderByDescending(x => x.AppliedDate)];
+    }
+}

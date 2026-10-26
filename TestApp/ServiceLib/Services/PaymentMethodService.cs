@@ -83,7 +83,13 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoPaymentMethod>> UpdateAsync(DtoPaymentMethod dto)
+
+        public Task<DtoResult<DtoPaymentMethod>> SaveAsync(DtoPaymentMethod dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DtoResult<DtoPaymentMethod>> UpdateAsync(DtoPaymentMethod dto)
 		{
 			DtoResult<DtoPaymentMethod> result = new();
 			try

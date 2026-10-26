@@ -314,6 +314,7 @@
       },
       "ServiceLib/1.0.0": {
         "dependencies": {
+          "Application.Asset": "1.0.0",
           "ModelLib": "1.0.0"
         },
         "runtime": {

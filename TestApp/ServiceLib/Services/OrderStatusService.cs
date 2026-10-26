@@ -83,7 +83,13 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoOrderStatus>> UpdateAsync(DtoOrderStatus dto)
+
+        public Task<DtoResult<DtoOrderStatus>> SaveAsync(DtoOrderStatus dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<DtoResult<DtoOrderStatus>> UpdateAsync(DtoOrderStatus dto)
 		{
 			DtoResult<DtoOrderStatus> result = new();
 			try

@@ -1,13 +1,14 @@
 using Application.Asset.Dtos;
+using Application.Asset.FullDto;
 using Application.Asset.Interfaces;
 
 namespace ServiceLib.Services
 {
-	public class ProductsService(IRepository<DtoProducts> _repo) : IService<DtoProducts>
+	public class ProductsService(IRepository<FullProduct> _repo) : IService<FullProduct>
 	{
-		public async Task<DtoResult<DtoProducts>> AddAsync(DtoProducts dto)
+		public async Task<DtoResult<FullProduct>> AddAsync(FullProduct dto)
 		{
-			DtoResult<DtoProducts> result = new();
+			DtoResult<FullProduct> result = new();
 			try
 			{
 				result = await _repo.Add(dto);
@@ -18,15 +19,15 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-        public async Task<DtoResult<DtoProducts>> DeleteAsync(DtoProducts SelectedProducts)
+        public async Task<DtoResult<FullProduct>> DeleteAsync(FullProduct SelectedProducts)
         {
-            DtoResult<DtoProducts> rs = new();
+            DtoResult<FullProduct> rs = new();
             if (!SelectedProducts.id.HasValue || SelectedProducts.id.Value <= 0)
             {
                 rs.Message = "Vui lòng sản phẩm cần xóa!";
                 return rs;
             }
-            DtoResult<DtoProducts> result = new();
+            DtoResult<FullProduct> result = new();
             try
             {
                 result = await _repo.Delete(SelectedProducts);
@@ -38,9 +39,9 @@ namespace ServiceLib.Services
             }
             return result;
         }
-        public async Task<DtoResult<DtoProducts>> DeleteAsync(object Id)
+        public async Task<DtoResult<FullProduct>> DeleteAsync(object Id)
 		{
-			DtoResult<DtoProducts> result = new();
+			DtoResult<FullProduct> result = new();
 			try
 			{
 				result = await _repo.Delete(Id);
@@ -51,9 +52,9 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoProducts>> FindAsync(DtoProducts dto)
+		public async Task<DtoResult<FullProduct>> FindAsync(FullProduct dto)
 		{
-			DtoResult<DtoProducts> result = new();
+			DtoResult<FullProduct> result = new();
 			try
 			{
 				result = await _repo.Find(dto);
@@ -64,9 +65,9 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoProducts>> GetAllAsync()
+		public async Task<DtoResult<FullProduct>> GetAllAsync()
 		{
-			DtoResult<DtoProducts> result = new();
+			DtoResult<FullProduct> result = new();
 			try
 			{
 				result = await _repo.GetAll();
@@ -77,9 +78,9 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoProducts>> GetOneAsync(DtoProducts dto)
+		public async Task<DtoResult<FullProduct>> GetOneAsync(FullProduct dto)
 		{
-			DtoResult<DtoProducts> result = new();
+			DtoResult<FullProduct> result = new();
 			try
 			{
 				result = await _repo.GetOne(dto);
@@ -90,9 +91,42 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-		public async Task<DtoResult<DtoProducts>> UpdateAsync(DtoProducts dto)
+
+        public async Task<DtoResult<FullProduct>> SaveAsync(FullProduct dto)
+        {
+            DtoResult<FullProduct> rs = new();
+
+            // Kiểm tra mã sản phẩm
+            if (string.IsNullOrWhiteSpace(dto.ProductCode))
+            {
+                rs.Message = "Mã sản phẩm không được để trống!";
+                return rs;
+            }
+
+            // Kiểm tra tên sản phẩm
+            if (string.IsNullOrWhiteSpace(dto.ProductName))
+            {
+                rs.Message = "Tên sản phẩm không được để trống!";
+                return rs;
+            }
+
+            if (dto.id.HasValue && dto.id.Value > 0)
+            {
+                // Cập nhật sản phẩm
+                rs = await UpdateAsync(dto);
+            }
+            else
+            {
+                // Thêm sản phẩm
+                rs = await AddAsync(dto);
+            }
+
+            return rs;
+        }
+
+        public async Task<DtoResult<FullProduct>> UpdateAsync(FullProduct dto)
 		{
-			DtoResult<DtoProducts> result = new();
+			DtoResult<FullProduct> result = new();
 			try
 			{
 				result = await _repo.Update(dto);

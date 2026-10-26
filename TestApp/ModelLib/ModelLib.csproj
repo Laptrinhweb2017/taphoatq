@@ -6,9 +6,6 @@
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application.Asset\Application.Asset.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient">
       <Version>7.0.2</Version>
     </PackageReference>
@@ -18,11 +15,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore">
       <Version>10.2.3</Version>
     </PackageReference>
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="9.0.21" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="conf.cfg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\Application.Asset\Application.Asset.csproj" />
     <Reference Include="TextProcessing">
       <HintPath>TextProcessing.dll</HintPath>
     </Reference>

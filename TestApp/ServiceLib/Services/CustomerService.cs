@@ -102,5 +102,10 @@ namespace ServiceLib.Services
 			}
 			return result;
 		}
-	}
+
+        Task<DtoResult<DtoCustomer>> IService<DtoCustomer>.SaveAsync(DtoCustomer dto)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
