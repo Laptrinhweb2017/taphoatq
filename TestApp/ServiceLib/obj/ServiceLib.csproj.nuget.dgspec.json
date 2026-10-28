@@ -486,11 +486,6 @@
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
         }
-      },
-      "runtimes": {
-        "win-x64": {
-          "#import": []
-        }
       }
     },
     "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\ModelLib.csproj": {
@@ -854,11 +849,6 @@
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
         }
-      },
-      "runtimes": {
-        "win-x64": {
-          "#import": []
-        }
       }
     },
     "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ServiceLib\\ServiceLib.csproj": {
@@ -1212,11 +1202,6 @@
             "System.Xml.XPath": "(,4.3.32767]",
             "System.Xml.XPath.XDocument": "(,5.0.32767]"
           }
-        }
-      },
-      "runtimes": {
-        "win-x64": {
-          "#import": []
         }
       }
     }

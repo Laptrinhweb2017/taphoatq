@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\testapp\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A0A5516F-CF94-4F6B-6308-242CCA1A71A5}|TestApp\\TestApp.csproj|solutionrelative:testapp\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\modellib\\repositories\\customerrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|solutionrelative:modellib\\repositories\\customerrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\modellib\\note\\noterepo\\customerrepo.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|solutionrelative:modellib\\note\\noterepo\\customerrepo.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\modellib\\note\\noteproject.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6318F38B-AA23-BFBF-655F-798C582D3A25}|ModelLib\\ModelLib.csproj|solutionrelative:modellib\\note\\noteproject.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27B94C23-53EB-0E62-AD2E-EA33F26C84B6}|Application.Asset\\Application.Asset.csproj|d:\\laptrinh\\blazor\\github\\taphoatq\\testapp\\application.asset\\dtos\\dtocustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27B94C23-53EB-0E62-AD2E-EA33F26C84B6}|Application.Asset\\Application.Asset.csproj|solutionrelative:application.asset\\dtos\\dtocustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,15 +34,54 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomerRepo.txt",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\note\\noteRepo\\CustomerRepo.txt",
+              "RelativeDocumentMoniker": "ModelLib\\note\\noteRepo\\CustomerRepo.txt",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\note\\noteRepo\\CustomerRepo.txt",
+              "RelativeToolTip": "ModelLib\\note\\noteRepo\\CustomerRepo.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAHAQAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-10-27T08:03:08.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "_Imports.razor",
-              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\_Imports.razor",
-              "RelativeDocumentMoniker": "TestApp\\Components\\_Imports.razor",
-              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\TestApp\\Components\\_Imports.razor",
-              "RelativeToolTip": "TestApp\\Components\\_Imports.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-10-25T13:04:19.193Z",
+              "Title": "CustomerRepo.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\Repositories\\CustomerRepo.cs",
+              "RelativeDocumentMoniker": "ModelLib\\Repositories\\CustomerRepo.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\Repositories\\CustomerRepo.cs",
+              "RelativeToolTip": "ModelLib\\Repositories\\CustomerRepo.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAswEQAAACeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-27T03:22:39.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "noteproject.txt",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\note\\noteproject.txt",
+              "RelativeDocumentMoniker": "ModelLib\\note\\noteproject.txt",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\ModelLib\\note\\noteproject.txt",
+              "RelativeToolTip": "ModelLib\\note\\noteproject.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-10-27T08:01:45.771Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DtoCustomer.cs",
+              "DocumentMoniker": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\Application.Asset\\Dtos\\DtoCustomer.cs",
+              "RelativeDocumentMoniker": "Application.Asset\\Dtos\\DtoCustomer.cs",
+              "ToolTip": "D:\\LapTrinh\\Blazor\\GitHub\\taphoatq\\TestApp\\Application.Asset\\Dtos\\DtoCustomer.cs",
+              "RelativeToolTip": "Application.Asset\\Dtos\\DtoCustomer.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAzwAoAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-27T03:23:45.288Z",
               "EditorCaption": ""
             }
           ]

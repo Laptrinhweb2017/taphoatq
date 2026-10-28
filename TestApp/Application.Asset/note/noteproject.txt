@@ -1,1 +1,19 @@
-﻿
+﻿ Project Application.Asset đóng vai trò là tầng Core / Shared (dùng chung) cho toàn bộ dự án.   
+ Nó nằm ngang và phục vụ cho tất cả các tầng còn lại nhờ các thành phần quan trọng sau:
+	Interfaces (IRepository, IService): Định nghĩa "hợp đồng" để tầng Repository (ModelLib) và tầng Service (ServiceLib) thực thi, giúp áp dụng nguyên lý Dependency Inversion (tầng cao không phụ thuộc trực tiếp tầng thấp mà qua Interface).
+	DTOs (DtoCustomer, DtoProducts,...): Định nghĩa cấu trúc dữ liệu để vận chuyển giữa các tầng. Khi Repo lấy dữ liệu từ DB lên -> đóng gói vào DTO -> chuyển qua Service -> qua ViewModel -> render ra View UI.
+	Common & Hubs (ViewModelBase, RealtimeEventBus): Chứa class dùng chung và SignalR cho các sự kiện real-time hỗ trợ trực tiếp cho ViewModel và View.
+Vì tất cả 4 tầng kia đều cần dùng DTO và Interface, nên Application.Asset chính là "xương sống" kết nối, hỗ trợ dữ liệu cho cả hệ thống.
+
+Application.Asset (Core / Shared Layer): Chứa các Data Transfer Object (DTO), Enum, Interface dùng chung cho toàn bộ hệ thống để truyền tải dữ liệu giữa các tầng.
+
+Project Application.Asset (Tầng dữ liệu dùng chung - DTOs & Interfaces)
+	Dtos/: Chứa các DTO tương ứng với các bảng cơ sở dữ liệu (DtoProducts, DtoOrders, DtoCustomer, DtoEmployee, DtoWarehouses,...). Dùng để truyền dữ liệu giữa client và backend gọn nhẹ, an toàn.
+
+	ViewDtos/ & FullDto/: Các DTO mở rộng phục vụ cho góc nhìn UI complex (CartItem, HeaderInfo, RecentActivities, FullProduct).
+
+	Hubs/: Xử lý kết nối Realtime/SignalR (AppHub.cs, BlazorRealtimePublisher.cs, RealtimeEventBus.cs) giúp cập nhật dữ liệu tức thì lên màn hình khi có thay đổi.
+
+	Interfaces/: Định nghĩa các Hợp đồng (Contract) để Dependency Injection (IRepository.cs, IService.cs, IFileStorageService.cs, IRealtimePublisher.cs).
+
+	Common/: Các Helper và Enum chung (DataHelper.cs, ViewModelBase.cs, EnumCollection.cs).

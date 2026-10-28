@@ -17,7 +17,6 @@ D:\Programming\Blazors\TestApp\ServiceLib\obj\Debug\net10.0\ServiceLib.dll
 D:\Programming\Blazors\TestApp\ServiceLib\obj\Debug\net10.0\refint\ServiceLib.dll
 D:\Programming\Blazors\TestApp\ServiceLib\obj\Debug\net10.0\ServiceLib.pdb
 D:\Programming\Blazors\TestApp\ServiceLib\obj\Debug\net10.0\ref\ServiceLib.dll
-D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ServiceLib\bin\Debug\net10.0\conf.cfg
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ServiceLib\bin\Debug\net10.0\ServiceLib.deps.json
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ServiceLib\bin\Debug\net10.0\ServiceLib.dll
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ServiceLib\bin\Debug\net10.0\ServiceLib.pdb

@@ -19,7 +19,6 @@ D:\Programming\Blazors\TestApp\ViewModel\obj\Debug\net10.0\ViewModel.dll
 D:\Programming\Blazors\TestApp\ViewModel\obj\Debug\net10.0\refint\ViewModel.dll
 D:\Programming\Blazors\TestApp\ViewModel\obj\Debug\net10.0\ViewModel.pdb
 D:\Programming\Blazors\TestApp\ViewModel\obj\Debug\net10.0\ref\ViewModel.dll
-D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ViewModel\bin\Debug\net10.0\conf.cfg
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ViewModel\bin\Debug\net10.0\ViewModel.deps.json
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ViewModel\bin\Debug\net10.0\ViewModel.dll
 D:\LapTrinh\Blazor\GitHub\taphoatq\TestApp\ViewModel\bin\Debug\net10.0\ViewModel.pdb
